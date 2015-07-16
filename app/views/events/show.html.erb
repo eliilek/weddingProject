@@ -1,0 +1,86 @@
+<div id="content-wrap">
+	<div class="title">
+	<h1>
+		<%= @event.client_first_name %>
+		<%= @event.client_last_name %>'s Event
+	</h1>
+</div>
+	<div id="info-wrap">
+		<div class="info">
+			<h2>Event Details</h2>
+			<p><strong>Client First Name:</strong> <%= @event.client_first_name %></p>
+			<p><strong>Client Last Name:</strong> <%= @event.client_last_name %></p>
+			<p><strong>Event Planning Date:</strong> <%= @event.planning_date %></p>
+			<p><strong>Event Job ID:</strong> <%= @event.job_identification_number %> </p>
+			<p><strong>Status:</strong> <%= @event.status %></p>
+			<p><strong>Final Date:</strong><%= @event.final_date%></p>
+			<p><strong>Primary Contact:</strong> <%= @event.primary_contact %></p>
+			<p><strong>Secondary Contact:</strong> <%= @event.secondary_contact %></p>
+			<p><strong>Primary Contact Phone Number:</strong> <%= @event.primary_contact_phone %></p>
+			<p><strong>Secondary Contact Phone Number:</strong> <%= @event.secondary_contact_phone %></p>
+			<p><strong>Primary Contact Email:</strong> <%= @event.primary_contact_email %></p>
+			<p><strong>Secondary Contact Email:</strong> <%= @event.secondary_contact_email %></p>
+			<p><strong>Guests:</strong> <%= @event.guests %></p>
+			<div class="button-holder">
+				<%= link_to 'Edit Details', edit_event_path(@event), :class=> "edit button"%>
+			</div>
+			<div class="button-holder">
+				<%= link_to 'Create Notification', new_event_notification_path(@event), :class=> "add button"%>
+			</div>
+		</div>
+		<div class="info">
+			<h2>Documents</h2>
+			<% @documents.each do |document| %>
+			<% if document.data.url.include?(".pdf") %>
+			<li>
+				<%= link_to "#{document.title}", document.data.url %>
+
+				<%= image_tag "pdf_thumbnail.jpg" %>
+			</li>
+			<% else %>
+			<li>
+				<%= link_to "#{document.title}", document.data.url %>
+
+				<%= image_tag "word.jpg" %>
+			</li>
+			<% end %>
+			<% end %>
+			<div class="button-holder">
+				<%= link_to 'Upload Document', new_event_document_path(@event), :class=> "add button"%>
+			</div>
+		</div>
+	</div>
+	<div class="bands">
+		<% if @event.final_date != nil %>
+			<h2>Band Availability</h2>
+				<% @bands.each do |band| %>
+			<p><%= band.name  %></p>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="bottom">
+		<h2>Communications</h2>
+
+		<% if @contacts.length == 0 %>
+
+		<p>There are no communications for this event</p>
+
+		<% else  %>
+		<div class='contacts'>
+			<% counter = 1 %>
+			<% @contacts.each do |contact| %>
+			<p><strong>Communication <%=counter%></strong></p>
+			<p><strong>Date:</strong> <%= contact.date %></p>
+			<p><strong>Notes:</strong></p>
+			<p><%= contact.notes %></p>
+			<% counter += 1 %>
+			<% end %>
+		</div>
+
+		<% end %>
+		<div class="button-holder">
+			<%= link_to 'Add Communication', new_event_contact_path(@event), :class=> "add button"%>
+		</div>
+	</div>
+</div>
+

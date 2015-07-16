@@ -1,0 +1,10 @@
+<%= form_for [@event, @contact] do |f| %>
+
+<p><%= f.label :notes %></p>
+<p><%= f.text_area :notes %></p>
+
+<p><%= f.label :date %></p>
+<p><%= f.date_field :date %></p>
+
+<p><%= f.submit %></p>
+<% end %>
