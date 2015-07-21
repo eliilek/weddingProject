@@ -11,8 +11,11 @@ Rails.application.routes.draw do
     resources :contacts
     resources :documents
     resources :notifications
+    resources :bookings
   end
   resources :bands
+
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

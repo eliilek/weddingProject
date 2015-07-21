@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20150715024806) do
     t.integer  "band_id"
     t.integer  "event_id"
     t.date     "date"
+    t.string   "kind"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

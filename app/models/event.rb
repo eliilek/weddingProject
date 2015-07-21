@@ -4,5 +4,5 @@ class Event < ActiveRecord::Base
 	has_many :contacts
 	has_many :documents
 	has_many :notifications
-
+	has_many :bookings
 end

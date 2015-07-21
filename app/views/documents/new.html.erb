@@ -1,6 +1,11 @@
-<%= form_for([@event, @document]) do |f| %>
-<%= f.label :title %>
-<%= f.text_field :title %>
-<%= f.file_field :data %>
-<%= f.submit %>
-<% end %>
+<div class="content">
+	<h1>Add Document</h1>
+</div>
+<div class="content">
+	<%= form_for([@event, @document]) do |f| %>
+	<strong><%= f.label :title %>: </strong> <%= f.text_field :title %><%= f.file_field :data %>
+	<div class="button-holder">
+		<%= f.submit "Add Document", :class => "button-inner" %>
+	</div>
+	<% end %>
+</div>

@@ -1,43 +1,36 @@
-<%= form_for @event do |f| %>
+<div class="content">
+<h1>New Event</h2>
+<div class="content">
+<%= form_for(@event) do |f| %>
+	<p><strong><%= f.label :client_first_name, :class=>"event" %></strong> <%= f.text_field :client_first_name %></p>
 
-<p><%= f.label :client_first_name %></p>
-<p><%= f.text_field :client_first_name %></p>
+	<p><strong><%= f.label :client_last_name, :class=>"event" %></strong> <%= f.text_field :client_last_name %></p>
 
-<p><%= f.label :client_last_name %></p>
-<p><%= f.text_field :client_last_name %></p>
+	<p><strong><%= f.label :planning_date, :class=>"event" %></strong> <%= f.text_field :planning_date %></p>
 
-<p><%= f.label :planning_date %></p>
-<p><%= f.text_field :planning_date %></p>
+	<p><strong><%= f.label :job_identification_number, :class=>"event" %></strong> <%= f.text_field(:job_identification_number, :value => @job_id) %></p>
 
-<p><%= f.label :job_identification_number %></p>
-<p><%= f.text_area(:job_identification_number, :value => @job_id) %></p>
+	<p><strong><%= f.label :final_date, :class=>"event" %></strong>
+		<%= f.date_field :final_date %></p>
 
-<p><%= f.label :status %></p>
-<p><%= f.select(:status, options_for_select([["FIRST CONTACT", "FIRST CONTACT"],["CALLED BACK", "CALLED BACK"],["PROPOSAL GENERATED", "PROPOSAL GENERATED"],["SALES MEETING SCHEDULED", "SALES MEETING SCHEDULED"], ["CONTRACT GENERATED", "CONTRACT GENERATED"], ["DEFINITE", "DEFINITE"], ["RELEASED", "RELEASED"], ["RELEASED-BAB", "RELEASED-BAB"], ["RELEASED-BADJ", "RELEASED-BADJ"]])) %>
+	<p><strong><%= f.label :primary_contact, :class=>"event" %></strong> <%= f.text_field :primary_contact %></p>
 
-<p><%= f.label :final_date %></p>
-<p><%= f.date_field :final_date %></p>
+	<p><strong><%= f.label :secondary_contact, :class=>"event" %></strong> <%= f.text_field :secondary_contact %></p>
 
-<p><%= f.label :primary_contact %></p>
-<p><%= f.text_field :primary_contact %></p>
+	<p><strong><%= f.label :primary_contact_phone, :class=>"event" %></strong> <%= f.text_field :primary_contact_phone %></p>
 
-<p><%= f.label :secondary_contact %></p>
-<p><%= f.text_field :secondary_contact %></p>
+	<p><strong><%= f.label :secondary_contact_phone, :class=>"event" %></strong> <%= f.text_field :secondary_contact_phone %></p>
 
-<p><%= f.label :primary_contact_phone %></p>
-<p><%= f.text_field :primary_contact_phone %></p>
+	<p><strong><%= f.label :primary_contact_email, :class=>"event" %></strong> <%= f.text_field :primary_contact_email %></p>
 
-<p><%= f.label :secondary_contact_phone %></p>
-<p><%= f.text_field :secondary_contact_phone %></p>
+	<p><strong><%= f.label :secondary_contact_email, :class=>"event" %></strong> <%= f.text_field :secondary_contact_email %></p>
 
-<p><%= f.label :primary_contact_email %></p>
-<p><%= f.text_field :primary_contact_email %></p>
+	<p><strong><%= f.label :guests, :class=>"event" %></strong> <%= f.number_field :guests %></p>
 
-<p><%= f.label :secondary_contact_email %></p>
-<p><%= f.text_field :secondary_contact_email %></p>
-
-<p><%= f.label :guests %></p>
-<p><%= f.number_field :guests %></p>
-
-<p><%= f.submit %></p>
-<% end %>
+	<p><strong><%= f.label :status, :class=>"event" %></strong> <%= f.select(:status, options_for_select([["FIRST CONTACT", "FIRST CONTACT"],["CALLED BACK", "CALLED BACK"],["PROPOSAL GENERATED", "PROPOSAL GENERATED"],["SALES MEETING SCHEDULED", "SALES MEETING SCHEDULED"], ["CONTRACT GENERATED", "CONTRACT GENERATED"], ["DEFINITE", "DEFINITE"], ["RELEASED", "RELEASED"], ["RELEASED-BAB", "RELEASED-BAB"], ["RELEASED-BADJ", "RELEASED-BADJ"]])) %>
+	<div class="button-holder">
+		<p><%= f.submit :class => "button-inner" %></p>
+	</div>
+		<% end %>
+	</div>
+	</div>

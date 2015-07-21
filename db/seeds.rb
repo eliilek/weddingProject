@@ -1,8 +1,8 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
+
 # Examples:
-#
+
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 user = User.new
@@ -40,36 +40,79 @@ f.name = "Velocity"
 f.band_leader = "Erik Martinez"
 f.save!
 
-event = Event.new
-event.client_first_name = "Shea"
-event.client_last_name = "Strausman"
-event.planning_date = "Tommorow"
-event.final_date = ""
-event.job_identification_number = 5001
-event.status = "FIRST CONTACT"
-event.primary_contact = "Jesse Reynolds"
-event.secondary_contact = "Shea Strausman"
-event.primary_contact_phone = "111-222-3333"
-event.secondary_contact_phone = '222-333-444'
-event.primary_contact_email = "jesse@kleintech.com"
-event.secondary_contact_email = "sstrausman@gmail.com"
-event.guests = 150
-event.save!
+counter = 5004 
+20.times do
+	e = Event.new
+	e.client_first_name = Faker::Name.first_name
+	e.client_last_name = Faker::Name.last_name
+	e.planning_date = Faker::Lorem.sentence
+	e.final_date = Faker::Date.forward(23)
+	e.job_identification_number = counter
+	e.status = ["FIRST CONTACT","CALLED BACK", "PROPOSAL GENERATED","SALES MEETING SCHEDULED", "CONTRACT GENERATED", "RELEASED", "RELEASED-BAB", "RELEASED-BADJ"].sample
+	e.primary_contact = Faker::Name.name
+	e.secondary_contact = Faker::Name.name
+	e.primary_contact_phone = Faker::PhoneNumber.phone_number
+	e.secondary_contact_phone = Faker::PhoneNumber.phone_number
+	e.primary_contact_email = Faker::Internet.email
+	e.secondary_contact_email = Faker::Internet.email
+	e.guests = rand(1..1000)
+	e.save!
+	counter += 1
+end
 
-e = Event.new
-e.client_first_name = "Eli"
-e.client_last_name = "Klein"
-e.planning_date = "Sometime"
-e.final_date = ""
-e.job_identification_number = 5002
-e.status = "FIRST CONTACT"
-e.primary_contact = "Jesse Reynolds"
-e.secondary_contact = "Shea Strausman"
-e.primary_contact_phone = "111-222-3333"
-e.secondary_contact_phone = '222-333-444'
-e.primary_contact_email = "jesse@kleintech.com"
-e.secondary_contact_email = "sstrausman@gmail.com"
-e.guests = 150
-e.save!
-e.record_timestamps = false
-e.updated_at = 10.days.ago
+20.times do
+	e = Event.new
+	e.client_first_name = Faker::Name.first_name
+	e.client_last_name = Faker::Name.last_name
+	e.planning_date = Faker::Lorem.sentence
+	e.final_date = ""
+	e.job_identification_number = counter
+	e.status = ["FIRST CONTACT","CALLED BACK", "PROPOSAL GENERATED","SALES MEETING SCHEDULED", "CONTRACT GENERATED", "RELEASED", "RELEASED-BAB", "RELEASED-BADJ"].sample
+	e.primary_contact = Faker::Name.name
+	e.secondary_contact = Faker::Name.name
+	e.primary_contact_phone = Faker::PhoneNumber.phone_number
+	e.secondary_contact_phone = Faker::PhoneNumber.phone_number
+	e.primary_contact_email = Faker::Internet.email
+	e.secondary_contact_email = Faker::Internet.email
+	e.guests = rand(1..1000)
+	e.save!
+	counter += 1
+end
+
+5.times do
+	n = Notification.new
+	n.name = Faker::Lorem.sentence
+	n.notification_date = Faker::Date.forward(23)
+	n.event_id = rand(1..40)
+	n.save
+end
+
+2.times do
+	n = Notification.new
+	n.name = Faker::Lorem.sentence
+	n.notification_date = Date.today
+	n.event_id = rand(1..40)
+	n.save
+end
+
+b = Booking.new
+b.event_id = 1
+b.band_id = 1
+b.date = Date.today
+b.kind = "HOLD"
+b.save
+
+c = Booking.new
+c.event_id = 1
+c.band_id = 1
+c.date = Date.today
+c.kind = "BOOKED"
+c.save
+
+
+45.times do 
+	b = Contact.new
+	b.event_id = rand(1..40)
+	b.notes = Faker::Lorem.sentence
+	b.date = Faker::Date.backward(23)
+end

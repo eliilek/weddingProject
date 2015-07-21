@@ -1,10 +1,14 @@
-<%= form_for [@event, @contact] do |f| %>
-
-<p><%= f.label :notes %></p>
-<p><%= f.text_area :notes %></p>
-
-<p><%= f.label :date %></p>
-<p><%= f.date_field :date %></p>
-
-<p><%= f.submit %></p>
-<% end %>
+<div class="content">
+	<H1>Add Communication</h1>
+	</div>
+	<div class="content">
+	<%= form_for [@event, @contact] do |f| %>
+	<p><strong><%= f.label :date %>:</strong><%= f.date_field :date %></p>
+	<p><strong><%= f.label :notes %>:</strong></p>
+	<p> <%= f.text_area :notes, :cols => 40, :rows => 15 %></p>
+	<div class="button-holder">
+		<p><%= f.submit "Create", :class => "add button" %></p>
+	</div>
+	<% end %>
+</div>
+</div>

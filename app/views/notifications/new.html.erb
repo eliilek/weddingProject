@@ -1,7 +1,13 @@
-<%= form_for([@event, @notification]) do |f| %>
-<%= f.label :notes %>
-<%= f.text_area :name %>
-<%= f.label :notifcation_date %>
-<%= f.date_field :notification_date %>
-<%= f.submit %>
-<% end %>
+<div class="content">
+	<H1>Add Notification</h1>
+</div>
+<div class="content">
+	<%= form_for [@event, @notification] do |f| %>
+	<p><strong><%= f.label :notification_date %>:</strong><%= f.date_field :notification_date %></p>
+	<p><strong><%= f.label :notes %>:</strong></p>
+	<p> <%= f.text_area :name, :cols => 40, :rows => 15 %></p>
+	<div class="button-holder">
+		<p><%= f.submit "Create", :class => "add button-inner" %></p>
+	</div>
+	<% end %>
+</div>

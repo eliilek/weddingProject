@@ -1,10 +1,10 @@
 <div id="content-wrap">
 	<div class="title">
-	<h1>
-		<%= @event.client_first_name %>
-		<%= @event.client_last_name %>'s Event
-	</h1>
-</div>
+		<h1>
+			<%= @event.client_first_name %>
+			<%= @event.client_last_name %>'s Event
+		</h1>
+	</div>
 	<div id="info-wrap">
 		<div class="info">
 			<h2>Event Details</h2>
@@ -22,65 +22,82 @@
 			<p><strong>Secondary Contact Email:</strong> <%= @event.secondary_contact_email %></p>
 			<p><strong>Guests:</strong> <%= @event.guests %></p>
 			<div class="button-holder">
-				<%= link_to 'Edit Details', edit_event_path(@event), :class=> "edit button"%>
+				<%= link_to 'Edit Details', edit_event_path(@event), :class=> "edit button-inner"%>
 			</div>
 			<div class="button-holder">
-				<%= link_to 'Create Notification', new_event_notification_path(@event), :class=> "add button"%>
+				<%= link_to 'Create Notification', new_event_notification_path(@event), :class=> "add button-inner"%>
 			</div>
 		</div>
 		<div class="info">
-			<h2>Documents</h2>
-			<% @documents.each do |document| %>
-			<% if document.data.url.include?(".pdf") %>
-			<li>
-				<%= link_to "#{document.title}", document.data.url %>
-
-				<%= image_tag "pdf_thumbnail.jpg" %>
-			</li>
-			<% else %>
-			<li>
-				<%= link_to "#{document.title}", document.data.url %>
-
-				<%= image_tag "word.jpg" %>
-			</li>
+			<% if @event.final_date != nil %>
+				<% if @event.bookings.length == 0 %>
+				<h2>Band Availability</h2>
+				<table style="border:none">
+					<tr>
+						<th>Band Name</th>
+						<th>Band Leader</th>
+						<th>Book Band</th>
+						<th>Holds</th>
+					</tr>
+					<% @bands.each do |band| %>
+						<% if band.is_free?(@event.final_date)%>
+							<tr>
+								<td><%= band.name %></td>
+								<td><%= band.band_leader%></td>
+								<td><%= link_to 'Link', new_event_booking_path(@event, :band_id => band.id)%></td>
+								<td><%= band.how_many_holds %></td>
+							</tr>
+						<% end %>
+					<% end %>
+				<% end%>
+				</table>
 			<% end %>
-			<% end %>
-			<div class="button-holder">
-				<%= link_to 'Upload Document', new_event_document_path(@event), :class=> "add button"%>
+			<div class="documents">
+				<h2>Documents</h2>
+				<% @documents.each do |document| %>
+					<% if document.data.url.include?(".pdf") %>
+						<li>
+							<%= link_to "#{document.title}", document.data.url %>
+
+							<%= image_tag "pdf_thumbnail.jpg" %>
+						</li>
+					<% else %>
+						<li>
+							<%= link_to "#{document.title}", document.data.url %>
+
+							<%= image_tag "word.jpg" %>
+						</li>
+					<% end %>
+				<% end %>
+				<div class="button-holder">
+					<%= link_to 'Upload Document', new_event_document_path(@event), :class=> "add button-inner"%>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="bands">
-		<% if @event.final_date != nil %>
-			<h2>Band Availability</h2>
-				<% @bands.each do |band| %>
-			<p><%= band.name  %></p>
-			<% end %>
-		<% end %>
 	</div>
 	<div class="bottom">
 		<h2>Communications</h2>
 
 		<% if @contacts.length == 0 %>
 
-		<p>There are no communications for this event</p>
+			<p>There are no communications for this event</p>
 
 		<% else  %>
-		<div class='contacts'>
-			<% counter = 1 %>
-			<% @contacts.each do |contact| %>
-			<p><strong>Communication <%=counter%></strong></p>
-			<p><strong>Date:</strong> <%= contact.date %></p>
-			<p><strong>Notes:</strong></p>
-			<p><%= contact.notes %></p>
-			<% counter += 1 %>
-			<% end %>
-		</div>
-
+			<div class='contacts'>
+				<% counter = 1 %>
+				<% @contacts.each do |contact| %>
+					<p><strong>Communication <%=counter%></strong></p>
+					<p><strong>Date:</strong> <%= contact.date %></p>
+					<p><strong>Notes:</strong></p>
+					<p><%= contact.notes %></p>
+					<% counter += 1 %>
+				<% end %>
 		<% end %>
 		<div class="button-holder">
-			<%= link_to 'Add Communication', new_event_contact_path(@event), :class=> "add button"%>
+			<%= link_to 'Add Communication', new_event_contact_path(@event), :class=> "add button-inner"%>
 		</div>
+		</div>
+		
 	</div>
 </div>
 

@@ -1,0 +1,18 @@
+<div class="content">
+<h2>Create a Booking</h2>
+<p><strong>Band:</strong> <%= @band.name %>(<%= @band.band_leader %>)
+<p><strong>Client:</strong> <%= @event.client_first_name %> <%= @event.client_last_name %></p>
+<p><strong>Job #:</strong> <%= @event.job_identification_number %></p>
+<%= form_for [@event, @booking] do |f| %>
+
+<p><%= f.hidden_field :band_id, :value => @band.id %></p>
+
+<p><strong><%= f.label :date %>:</strong> <%= f.date_field :date %></p>
+
+
+<p><strong><%= f.label :type %>:</strong><%= f.select(:kind, options_for_select([["HOLD", "HOLD"],["BOOKED", "BOOKED"]])) %></p>
+<div class="button-holder"
+<p><%= f.submit :class => "button" %></p>
+<% end %>
+</div>
+</div>
