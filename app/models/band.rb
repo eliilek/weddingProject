@@ -10,8 +10,9 @@ class Band < ActiveRecord::Base
 			false
 		end
 	end
-	def how_many_holds
-		self.bookings.select {|booking| booking.kind == "HOLD"}.length
+	def how_many_holds(check_date)
+		total_hold = self.bookings.select {|booking| booking.kind == "HOLD"}
+		total_hold.select {|booking| booking.date == check_date}.length
 	end
 	
 end
