@@ -45,7 +45,7 @@
 								<td><%= band.name %></td>
 								<td><%= band.band_leader%></td>
 								<td><%= link_to 'Link', new_event_booking_path(@event, :band_id => band.id)%></td>
-								<td><%= band.how_many_holds %></td>
+								<td><%= band.how_many_holds(@event.final_date) %></td>
 							</tr>
 						<% end %>
 					<% end %>
