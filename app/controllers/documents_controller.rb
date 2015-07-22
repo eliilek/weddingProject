@@ -10,7 +10,9 @@ class DocumentsController < ApplicationController
 		@event = Event.find(params[:event_id])
 		@document = @event.documents.new(document_params)
 		if @document.save 
-			redirect_to event_path(@event) 
+			redirect_to event_path(@event)
+		else 
+			redirect_to root_path 
 		end
 	end
 
