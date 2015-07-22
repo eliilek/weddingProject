@@ -14,13 +14,13 @@
 			<p><strong>Event Job ID:</strong> <%= @event.job_identification_number %> </p>
 			<p><strong>Status:</strong> <%= @event.status %></p>
 			<p><strong>Final Date:</strong><%= @event.final_date%></p>
+			<p><strong>Guests:</strong> <%= @event.guests %></p></br>
 			<p><strong>Primary Contact:</strong> <%= @event.primary_contact %></p>
-			<p><strong>Secondary Contact:</strong> <%= @event.secondary_contact %></p>
 			<p><strong>Primary Contact Phone Number:</strong> <%= @event.primary_contact_phone %></p>
+			<p><strong>Primary Contact Email:</strong> <%= @event.primary_contact_email %></p></br>
+			<p><strong>Secondary Contact:</strong> <%= @event.secondary_contact %></p>
 			<p><strong>Secondary Contact Phone Number:</strong> <%= @event.secondary_contact_phone %></p>
-			<p><strong>Primary Contact Email:</strong> <%= @event.primary_contact_email %></p>
 			<p><strong>Secondary Contact Email:</strong> <%= @event.secondary_contact_email %></p>
-			<p><strong>Guests:</strong> <%= @event.guests %></p>
 			<div class="button-holder">
 				<%= link_to 'Edit Details', edit_event_path(@event), :class=> "edit button-inner"%>
 			</div>
