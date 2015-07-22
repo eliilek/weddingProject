@@ -13,8 +13,8 @@
 			<p><strong>Event Planning Date:</strong> <%= @event.planning_date %></p>
 			<p><strong>Event Job ID:</strong> <%= @event.job_identification_number %> </p>
 			<p><strong>Status:</strong> <%= @event.status %></p>
-			<p><strong>Final Date:</strong><%= @event.final_date%></p>
-			<p><strong>Guests:</strong> <%= @event.guests %></p></br>
+			<p><strong>Final Date:</strong><%= @event.final_date%></p></br>
+
 			<p><strong>Primary Contact:</strong> <%= @event.primary_contact %></p>
 			<p><strong>Primary Contact Phone Number:</strong> <%= @event.primary_contact_phone %></p>
 			<p><strong>Primary Contact Email:</strong> <%= @event.primary_contact_email %></p></br>
@@ -31,8 +31,8 @@
 		<div class="info">
 			<% if @event.final_date != nil %>
 				<% if @event.bookings.length == 0 %>
-				<h2>Band Availability</h2>
-				<table style="border:none">
+					<h2>Band Availability</h2>
+					<table style="border:none">
 					<tr>
 						<th>Band Name</th>
 						<th>Band Leader</th>

@@ -11,6 +11,7 @@ class EventsController < ApplicationController
 		@contacts = Contact.where("event_id = #{@event.id}")
 		@documents = Document.where("event_id = #{@event.id}")
 		@bands = Band.all
+		@contact = Contact.new
 	end
 
 	def new

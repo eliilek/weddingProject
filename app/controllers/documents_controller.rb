@@ -21,3 +21,5 @@ class DocumentsController < ApplicationController
 	end
 
 end
+
+k6qTTJV3D+S6mem/ywjv2V1EdqiyCb1n10ZusVr7f69amGgD9TUkbai+zZdIDdh4IFirwlbQeazTdgsOLQZ9pg==
