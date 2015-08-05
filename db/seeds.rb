@@ -40,79 +40,79 @@ f.name = "Velocity"
 f.band_leader = "Erik Martinez"
 f.save!
 
-counter = 5004 
-20.times do
-	e = Event.new
-	e.client_first_name = Faker::Name.first_name
-	e.client_last_name = Faker::Name.last_name
-	e.planning_date = Faker::Lorem.sentence
-	e.final_date = Faker::Date.forward(23)
-	e.job_identification_number = counter
-	e.status = ["FIRST CONTACT","CALLED BACK", "PROPOSAL GENERATED","SALES MEETING SCHEDULED", "CONTRACT GENERATED", "RELEASED", "RELEASED-BAB", "RELEASED-BADJ"].sample
-	e.primary_contact = Faker::Name.name
-	e.secondary_contact = Faker::Name.name
-	e.primary_contact_phone = Faker::PhoneNumber.phone_number
-	e.secondary_contact_phone = Faker::PhoneNumber.phone_number
-	e.primary_contact_email = Faker::Internet.email
-	e.secondary_contact_email = Faker::Internet.email
-	e.guests = rand(1..1000)
-	e.save!
-	counter += 1
-end
+# counter = 5004 
+# 20.times do
+# 	e = Event.new
+# 	e.client_first_name = Faker::Name.first_name
+# 	e.client_last_name = Faker::Name.last_name
+# 	e.planning_date = Faker::Lorem.sentence
+# 	e.final_date = Faker::Date.forward(23)
+# 	e.job_identification_number = counter
+# 	e.status = ["FIRST CONTACT","CALLED BACK", "PROPOSAL GENERATED","SALES MEETING SCHEDULED", "CONTRACT GENERATED", "RELEASED", "RELEASED-BAB", "RELEASED-BADJ"].sample
+# 	e.primary_contact = Faker::Name.name
+# 	e.secondary_contact = Faker::Name.name
+# 	e.primary_contact_phone = Faker::PhoneNumber.phone_number
+# 	e.secondary_contact_phone = Faker::PhoneNumber.phone_number
+# 	e.primary_contact_email = Faker::Internet.email
+# 	e.secondary_contact_email = Faker::Internet.email
+# 	e.guests = rand(1..1000)
+# 	e.save!
+# 	counter += 1
+# end
 
-20.times do
-	e = Event.new
-	e.client_first_name = Faker::Name.first_name
-	e.client_last_name = Faker::Name.last_name
-	e.planning_date = Faker::Lorem.sentence
-	e.final_date = ""
-	e.job_identification_number = counter
-	e.status = ["FIRST CONTACT","CALLED BACK", "PROPOSAL GENERATED","SALES MEETING SCHEDULED", "CONTRACT GENERATED", "RELEASED", "RELEASED-BAB", "RELEASED-BADJ"].sample
-	e.primary_contact = Faker::Name.name
-	e.secondary_contact = Faker::Name.name
-	e.primary_contact_phone = Faker::PhoneNumber.phone_number
-	e.secondary_contact_phone = Faker::PhoneNumber.phone_number
-	e.primary_contact_email = Faker::Internet.email
-	e.secondary_contact_email = Faker::Internet.email
-	e.guests = rand(1..1000)
-	e.save!
-	counter += 1
-end
+# 20.times do
+# 	e = Event.new
+# 	e.client_first_name = Faker::Name.first_name
+# 	e.client_last_name = Faker::Name.last_name
+# 	e.planning_date = Faker::Lorem.sentence
+# 	e.final_date = ""
+# 	e.job_identification_number = counter
+# 	e.status = ["FIRST CONTACT","CALLED BACK", "PROPOSAL GENERATED","SALES MEETING SCHEDULED", "CONTRACT GENERATED", "RELEASED", "RELEASED-BAB", "RELEASED-BADJ"].sample
+# 	e.primary_contact = Faker::Name.name
+# 	e.secondary_contact = Faker::Name.name
+# 	e.primary_contact_phone = Faker::PhoneNumber.phone_number
+# 	e.secondary_contact_phone = Faker::PhoneNumber.phone_number
+# 	e.primary_contact_email = Faker::Internet.email
+# 	e.secondary_contact_email = Faker::Internet.email
+# 	e.guests = rand(1..1000)
+# 	e.save!
+# 	counter += 1
+# end
 
-5.times do
-	n = Notification.new
-	n.name = Faker::Lorem.sentence
-	n.notification_date = Faker::Date.forward(23)
-	n.event_id = rand(1..40)
-	n.save
-end
+# 5.times do
+# 	n = Notification.new
+# 	n.name = Faker::Lorem.sentence
+# 	n.notification_date = Faker::Date.forward(23)
+# 	n.event_id = rand(1..40)
+# 	n.save
+# end
 
-2.times do
-	n = Notification.new
-	n.name = Faker::Lorem.sentence
-	n.notification_date = Date.today
-	n.event_id = rand(1..40)
-	n.save
-end
+# 2.times do
+# 	n = Notification.new
+# 	n.name = Faker::Lorem.sentence
+# 	n.notification_date = Date.today
+# 	n.event_id = rand(1..40)
+# 	n.save
+# end
 
-b = Booking.new
-b.event_id = 1
-b.band_id = 1
-b.date = Date.today
-b.kind = "HOLD"
-b.save
+# b = Booking.new
+# b.event_id = 1
+# b.band_id = 1
+# b.date = Date.today
+# b.kind = "HOLD"
+# b.save
 
-c = Booking.new
-c.event_id = 1
-c.band_id = 1
-c.date = Date.today
-c.kind = "BOOKED"
-c.save
+# c = Booking.new
+# c.event_id = 1
+# c.band_id = 1
+# c.date = Date.today
+# c.kind = "BOOKED"
+# c.save
 
 
-45.times do 
-	b = Contact.new
-	b.event_id = rand(1..40)
-	b.notes = Faker::Lorem.sentence
-	b.date = Faker::Date.backward(23)
-end
+# 45.times do 
+# 	b = Contact.new
+# 	b.event_id = rand(1..40)
+# 	b.notes = Faker::Lorem.sentence
+# 	b.date = Faker::Date.backward(23)
+# end

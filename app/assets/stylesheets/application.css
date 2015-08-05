@@ -17,6 +17,9 @@
     height:100%;
     font-family: arial;
     overflow-x: hidden;
+    min-height:100%;
+    background: #fdfaf6;
+
 }
 
 
@@ -210,9 +213,6 @@ li {
     list-style-type: none;
 }
 
-.contacts {
-    width: 55%;
-}
 
 #main-wrap {
     /* overflow to handle inner floating block */
@@ -384,4 +384,12 @@ label.event{
   text-align: left;
   margin-right: 0.5em;
   display: block
+}
+
+.communications-stuff {
+    padding-top: 20px;
+}
+
+.notes {
+    padding:20px;
 }

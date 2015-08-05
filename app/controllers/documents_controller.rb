@@ -1,5 +1,4 @@
 class DocumentsController < ApplicationController
-	skip_before_action :verify_authenticity_token
 	
 	def new
 		@event = Event.find(params[:event_id])
@@ -11,9 +10,8 @@ class DocumentsController < ApplicationController
 		@document = @event.documents.new(document_params)
 		if @document.save 
 			redirect_to event_path(@event)
-		else 
-			redirect_to root_path 
 		end
+			redirect_to event_path(@event)
 	end
 
 	private

@@ -1,0 +1,12 @@
+<h1>Edit Booking</h1>
+<%= form_for(@event, html: {method: "patch"}) do |f| %>
+
+<p><%= f.hidden_field :band_id, :value => @band.id %></p>
+
+<p><strong><%= f.label :date %>:</strong> <%= f.date_field :date, :value => @event.final_date %></p>
+
+
+<p><strong><%= f.label :type %>:</strong><%= f.select(:kind, options_for_select([["HOLD", "HOLD"],["BOOKED", "BOOKED"]])) %></p>
+<div class="button-holder">
+<p><%= f.submit :class => "button-inner" %></p>
+<% end %>

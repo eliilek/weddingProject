@@ -2,13 +2,16 @@
 <h1>Events</h1>
 
 <h2> Current Active Events</h2>
-<table class="t02 sortable">
+<table class="t02 tablesorter" id="mytable">
+	<thead>
 	<tr>
 		<th>Job Number</th>
 		<th>Client Name</th>		
 		<th>Status</th>
 		<th>Link</th>
 	</tr>
+	</thead>
+	<tbody>
 	<% @events.each do |event| %>
 		<% if event.status == "FIRST CONTACT" || event.status == "CALLED BACK" || event.status == "PROPOSAL GENERATED" || event.status == "SALES MEETING SCHEDULED" || event.status == "CONTRACT GENERATED" || event.status == "DEFINITE" %>
 			<tr>
@@ -19,6 +22,7 @@
 			</tr>
 		<% end %>
 	<% end %>
+</tbody>
 </table>
 <H2>Closed Events</h2>
 <table class="t02 sortable">
