@@ -1,0 +1,25 @@
+<div class = "content"><h1>Meetings Scheduled</h1>
+	<br>
+<table class="t02 tablesorter" id="mytable">
+	<thead>
+	<tr>
+		<th>Job Number</th>
+		<th>Client Name</th>		
+		<th>Status</th>
+		<th>Link</th>
+	</tr>
+	</thead>
+	<tbody>
+	<% @events.each do |event| %>
+		<% if event.status == "FIRST CONTACT" || event.status == "CALLED BACK" || event.status == "PROPOSAL GENERATED" || event.status == "SALES MEETING SCHEDULED" || event.status == "CONTRACT GENERATED" || event.status == "DEFINITE" %>
+			<tr>
+				<td> <%= event.job_identification_number %></td>
+				<td> <%= event.client_first_name%> <%= event.client_last_name %></td>
+				<td> <%= event.status %></td>
+				<td> <%= link_to "View", event_path(event.id) %>
+			</tr>
+		<% end %>
+	<% end %>
+</tbody>
+</table>
+</div>

@@ -14,5 +14,11 @@ class Band < ActiveRecord::Base
 		total_hold = self.bookings.select {|booking| booking.kind == "HOLD"}
 		total_hold.select {|booking| booking.date == check_date}.length
 	end
+
+
+	def holds(check_date)
+		total_hold = self.bookings.select {|booking| booking.kind == "HOLD"}
+		total_hold.select {|booking| booking.date == check_date}
+	end
 	
 end

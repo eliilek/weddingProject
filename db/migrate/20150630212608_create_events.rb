@@ -37,6 +37,7 @@ class CreateEvents < ActiveRecord::Migration
         t.string :planner_name
         t.string :planner_email
         t.string :planner_phone
+        t.boolean :sales_meeting_box, :default => false
     	
     	t.timestamps
     end

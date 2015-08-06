@@ -13,26 +13,20 @@
 			<p><strong>Event Planning Date:</strong> <%= @event.planning_date %></p>
 			<p><strong>Event Job ID:</strong> <%= @event.job_identification_number %> </p>
 			<p><strong>Status:</strong> <%= @event.status %></p>
-			<p><strong>Final Date:</strong><%= @event.final_date%></p></br>
-
-			<p><strong>Primary Contact:</strong> <%= @event.primary_contact %></p>
-			<p><strong>Primary Contact Phone Number:</strong> <%= @event.primary_contact_phone %></p>
-			<p><strong>Primary Contact Email:</strong> <%= @event.primary_contact_email %></p></br>
-			<p><strong>Secondary Contact:</strong> <%= @event.secondary_contact %></p>
-			<p><strong>Secondary Contact Phone Number:</strong> <%= @event.secondary_contact_phone %></p>
-			<p><strong>Secondary Contact Email:</strong> <%= @event.secondary_contact_email %></p>
-			<% if @event.third_contact != "" %>
-				</br>
-				<p><strong>Third Contact:</strong> <%= @event.third_contact %></p>
-				<p><strong>Third Contact Phone Number:</strong> <%= @event.third_contact_phone %></p>
-				<p><strong>Third Contact Email:</strong> <%= @event.third_contact_email %></p>
-			<% end %>
-			<% if @event.fourth_contact != "" %>
-				</br>
-				<p><strong>Fourth Contact:</strong> <%= @event.fourth_contact %></p>
-				<p><strong>Fourth Contact Phone Number:</strong> <%= @event.fourth_contact_phone %></p>
-				<p><strong>Fourth Contact Email:</strong> <%= @event.fourth_contact_email %></p>
-			<% end %>
+			<p><strong>Final Date:</strong> <%= @event.final_date%></p>
+			<p><strong>Guests:</strong> <%= @event.guests %></p>
+			<p><strong>Inquiry Date:</strong> <%= @event.inquiry_date %></p>
+			<p><strong>Event Type:</strong> <%= @event.event_type %></p>
+			<p><strong>Referred By:</strong> <%= @event.referred_by %></p>
+			<p><strong>Venue:</strong> <%= @event.venue %></p>
+			<p><strong>Start Time:</strong> <%= @event.start_time %></p>
+			<p><strong>End Time:</strong> <%= @event.end_time %></p>
+			<p><strong>Continuous:</strong> <%= @event.continuous %></p>
+			<p><strong>Contract Price:</strong> <%= @event.contract_price %></p>
+			<p><strong>Overtime Rate:</strong> <%= @event.ot_price %></p>
+			<p><strong>Musicians:</strong> <%= @event.number_of_musicians %></p>
+			<p><strong>Vocalists:</strong> <%= @event.number_of_vocalists %></p>
+			<p><strong>Sold By:</strong> <%= @event.sold_by %></p><br>
 
 			<div class="button-holder">
 				<%= link_to 'Edit Details', edit_event_path(@event), :class=> "edit button-inner"%>
@@ -42,8 +36,9 @@
 			</div>
 		</div>
 		<div class="info">
+
 			<% if @event.final_date != nil %>
-				<% if @event.bookings.length == 0 %>
+				<% if @event.bookings_only.length == 0 %>
 					<h2>Band Availability</h2>
 					<table style="border:none">
 					<tr>
@@ -60,7 +55,26 @@
 								<td><%= link_to 'Link', new_event_booking_path(@event, :band_id => band.id)%></td>
 								<td><%= band.how_many_holds(@event.final_date) %></td>
 							</tr>
+							<% if band.holds(@event.final_date).length > 0 %>
+								<% band.holds(@event.final_date).each do |hold| %>
+									<tr>
+										<td>
+											Job #: <%= hold.event.job_identification_number %>
+										</td>
+										<td>
+											Client: <%= hold.event.client_first_name %> <%= hold.event.client_last_name %>
+										</td>
+										<td>
+											Venue: <%= hold.event.venue %> <%= hold.event.client_last_name %>
+										</td>
+										<td>
+											<%= link_to 'Link', event_path(hold.event_id)%>
+										</td>
+									</tr>
+								<% end %>
+							<% end %>
 						<% end %>
+
 					<% end %>
 				<% end%>
 				</table>
@@ -111,6 +125,8 @@
 		</div>
 	</div>
 	<div class="bottom">
+		<div class="communications-stuff info">
+
 		<h2>Communications</h2>
 
 		<% if @contacts.length == 0 %>
@@ -127,7 +143,6 @@
 				<% counter += 1 %>
 			<% end %>
 		<% end %>
-		<div class="communications-stuff">
 			<%= form_for [@event, @contact] do |f| %>
 			<p><strong><%= f.label :date %>:</strong><%= f.date_field :date, :value=>Date.today %></p>
 			<p><strong><%= f.label :notes %>:</strong></p>
@@ -135,6 +150,31 @@
 			<div class="button-holder">
 				<p><%= f.submit "Create", :class => "add button" %></p>
 			</div>
+			<% end %>
+		</div>
+		<div class="contact-information info">
+			<h2>Contact Information</h2>
+			<p><strong>Planner Name:</strong> <%= @event.planner_name%></p>
+			<p><strong>Planner Email:</strong> <%= @event.planner_email%></p>
+			<p><strong>Planner Phone:</strong> <%= @event.planner_phone%></p></br>
+
+			<p><strong>Primary Contact:</strong> <%= @event.primary_contact %></p>
+			<p><strong>Primary Contact Phone Number:</strong> <%= @event.primary_contact_phone %></p>
+			<p><strong>Primary Contact Email:</strong> <%= @event.primary_contact_email %></p></br>
+			<p><strong>Secondary Contact:</strong> <%= @event.secondary_contact %></p>
+			<p><strong>Secondary Contact Phone Number:</strong> <%= @event.secondary_contact_phone %></p>
+			<p><strong>Secondary Contact Email:</strong> <%= @event.secondary_contact_email %></p>
+			<% if @event.third_contact != "" && @event.third_contact != nil %>
+				</br>
+				<p><strong>Third Contact:</strong> <%= @event.third_contact %></p>
+				<p><strong>Third Contact Phone Number:</strong> <%= @event.third_contact_phone %></p>
+				<p><strong>Third Contact Email:</strong> <%= @event.third_contact_email %></p>
+			<% end %>
+			<% if @event.fourth_contact != "" && @event.fourth_contact != nil %>
+				</br>
+				<p><strong>Fourth Contact:</strong> <%= @event.fourth_contact %></p>
+				<p><strong>Fourth Contact Phone Number:</strong> <%= @event.fourth_contact_phone %></p>
+				<p><strong>Fourth Contact Email:</strong> <%= @event.fourth_contact_email %></p>
 			<% end %>
 		</div>
 	</div>	

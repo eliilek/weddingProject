@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20150715024806) do
     t.string   "planner_name"
     t.string   "planner_email"
     t.string   "planner_phone"
+    t.boolean  "sales_meeting_box",         default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

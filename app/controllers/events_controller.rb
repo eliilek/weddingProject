@@ -1,9 +1,11 @@
 class EventsController < ApplicationController
 	
 	def index
-		events = Event.all
-		@events = events.order('job_identification_number ASC')
-
+		@events = Event.all
+		@ordered_events = @events.order('job_identification_number ASC')
+		if params[:search]
+	    	@results = Event.search(params[:search]).order("created_at DESC")
+		end
 	end
 
 	def show
@@ -49,5 +51,6 @@ class EventsController < ApplicationController
 	def event_params
 		params.require(:event).permit(:client_first_name, :client_last_name, :planning_date, :final_date, :job_identification_number, :status, :primary_contact, :secondary_contact, :primary_contact_phone, :secondary_contact_phone, :primary_contact_email, :secondary_contact_email, :guests, :inquiry_date, :event_type, :referred_by, :venue, :third_contact, :third_contact_phone, :third_contact_email, :fourth_contact, :fourth_contact_phone, :fourth_contact_email, :start_time, :end_time, :continuous, :contract_price, :ot_rate, :sold_by, :number_of_musicians, :number_of_vocalists, :hours, :notes, :planner_name, :planner_email, :planner_phone )
 	end
+
 end
 

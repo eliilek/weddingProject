@@ -1,7 +1,41 @@
 <div class="content">
 <h1>Events</h1>
 
-<h2> Current Active Events</h2>
+<h2>Search</h2>
+
+<%= form_tag(events_path, :method => "get", id: "search-form") do %>
+<%= text_field_tag :search, params[:search], placeholder: "Search Events" %>
+<%= submit_tag "Search" %>
+<% end %>
+
+<% if @results.present?%>
+	<br>
+  <table class="t02 tablesorter" id="mytable">
+	<thead>
+	<tr>
+		<th>Job Number</th>
+		<th>Client Name</th>		
+		<th>Status</th>
+		<th>Link</th>
+	</tr>
+	</thead>
+  <% @results.each do |result| %>
+	<tr>
+		<td> <%= result.job_identification_number %></td>
+		<td> <%= result.client_first_name%> <%= result.client_last_name %></td>
+		<td> <%= result.status %></td>
+		<td> <%= link_to "View", event_path(result.id) %>
+	</tr>
+	  <% end %>
+	</table>
+<% else %>
+	<br>
+  <p>There are no posts containing the term(s) <%= params[:search] %>.</p>
+<% end %>
+
+<br>
+
+<h2> All Active Events</h2>
 <table class="t02 tablesorter" id="mytable">
 	<thead>
 	<tr>
@@ -24,26 +58,6 @@
 	<% end %>
 </tbody>
 </table>
-<H2>Closed Events</h2>
-<table class="t02 sortable">
-	<tr>
-		<th>Job Number</th>
-		<th>Client Name</th>		
-		<th>Status</th>
-		<th>Link</th>
-	</tr>
-	<% @events.each do |event| %>
-		<% if event.status == "RELEASED" || event.status == "RELEASED-BAB" || event.status == "RELEASED-BADJ" %>
-		<tr>
-			<td> <%= event.job_identification_number %></td>
-			<td> <%= event.client_first_name%> <%= event.client_last_name %></td>
-			<td> <%= event.status %></td>
-			<td> <%= link_to "View", event_path(event.id) %>
-		</tr>
-		<% end %>
-	<% end %>
-</table>
-<br>
 <div class="button-holder">
 	<%= link_to "New Event", new_event_path, :class=>'add button-inner' %>
 </div>

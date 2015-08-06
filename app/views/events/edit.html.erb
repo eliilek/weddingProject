@@ -4,11 +4,11 @@
 <div class="content">
 	<%= form_for(@event, html: {method: "patch"}) do |f| %>
 
+	<p><strong><%= f.label :client_first_name, :class=>"event" %></strong> <%= f.text_field :client_first_name %></p>
+
 	<p><strong><%= f.label :client_last_name, :class=>"event" %></strong> <%= f.text_field :client_last_name %></p>
 
 	<p><strong><%= f.label :planning_date, :class=>"event" %></strong> <%= f.text_field :planning_date %></p>
-
-	<p><strong><%= f.label :job_identification_number, :class=>"event" %></strong> <%= f.text_field(:job_identification_number, :value => @job_id) %></p>
 
 	<p><strong><%= f.label :final_date, :class=>"event" %></strong>
 		<%= f.text_field :final_date %></p>
