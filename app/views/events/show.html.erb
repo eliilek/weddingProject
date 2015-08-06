@@ -79,6 +79,26 @@
 				<% end%>
 				</table>
 			<% end %>
+				<% if @event.bookings.length > 0 %>
+				<h2>Booking Information</h2>
+				<table style="border:none">
+					<tr>
+						<th>Band</th>
+						<th>Band Leader</th>
+						<th>Type</th>
+						<th>Delete</th>
+					</tr>
+					<% @event.bookings.each do |booking| %>
+					<tr>
+						<td><%= booking.band.name %></td>
+						<td><%= booking.band.band_leader %></td>
+						<td><%= booking.kind %></td>
+						<td><%= link_to raw("&#10006"), event_booking_path(@event, booking), data: { confirm: 'Are you sure you want to delete this alert?' }, :method => :delete, :class => 'delete-button' %></td>
+
+					</tr>
+					<% end %>
+			<% end %>
+			</table>
 			<div class="documents">
 				<h2>Documents</h2>
 				<% @documents.each do |document| %>
@@ -100,28 +120,7 @@
 					<%= link_to 'Upload Document', new_event_document_path(@event), :class=> "add button-inner"%>
 				</div>
 			</div>
-			<% if @event.bookings.length > 0 %>
-				<h2>Booking Information</h2>
-				<table style="border:none">
-					<tr>
-						<th>Band</th>
-						<th>Band Leader</th>
-						<th>Type</th>
-						<th>Delete</th>
-					</tr>
-					<% @event.bookings.each do |booking| %>
-					<tr>
-						<td><%= booking.band.name %></td>
-						<td><%= booking.band.band_leader %></td>
-						<td><%= booking.kind %></td>
-						<td><%= link_to raw("&#10006"), event_booking_path(@event, booking), data: { confirm: 'Are you sure you want to delete this alert?' }, :method => :delete, :class => 'delete-button' %></td>
-
-					</tr>
-					<% end %>
-
-
-				<% end %>
-			</table>
+		
 		</div>
 	</div>
 	<div class="bottom">

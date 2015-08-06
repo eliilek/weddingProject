@@ -10,8 +10,9 @@ class DocumentsController < ApplicationController
 		@document = @event.documents.new(document_params)
 		if @document.save 
 			redirect_to event_path(@event)
-		end
+		else
 			redirect_to event_path(@event)
+		end
 	end
 
 	private
