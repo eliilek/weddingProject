@@ -393,3 +393,12 @@ label.event{
 .notes {
     padding:20px;
 }
+
+.event-notes {
+    width: 13em;
+  float: left;
+  text-align: left;
+  margin-right: 0.5em;
+  display: block;
+  font-size: 18px
+}

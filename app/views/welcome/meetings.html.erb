@@ -1,11 +1,13 @@
-<div class = "content"><h1>Meetings Scheduled</h1>
+<div class="content"><h1>Meetings Scheduled</h1>
 	<br>
-<table class="t02 tablesorter" id="mytable">
+<table class="t02 sortable" id="mytable">
 	<thead>
 	<tr>
 		<th>Job Number</th>
 		<th>Client Name</th>		
 		<th>Status</th>
+		<th>Sold By</th>
+		<th>Final Date</th>
 		<th>Link</th>
 	</tr>
 	</thead>
@@ -16,7 +18,9 @@
 				<td> <%= event.job_identification_number %></td>
 				<td> <%= event.client_first_name%> <%= event.client_last_name %></td>
 				<td> <%= event.status %></td>
-				<td> <%= link_to "View", event_path(event.id) %>
+				<td> <%= event.sold_by %> </td>
+				<td> <%= event.final_date %> </td>
+				<td> <%= link_to "View", event_path(event.id) %></td>
 			</tr>
 		<% end %>
 	<% end %>

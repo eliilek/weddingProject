@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
 	
 	def index
-		@events = Event.all
+		@events = Event.where("status != ?", "DEFINITE")
 		@ordered_events = @events.order('job_identification_number ASC')
 		if params[:search]
 	    	@results = Event.search(params[:search]).order("created_at DESC")

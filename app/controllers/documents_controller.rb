@@ -8,10 +8,11 @@ class DocumentsController < ApplicationController
 	def create
 		@event = Event.find(params[:event_id])
 		@document = @event.documents.new(document_params)
-		if @document.save 
+		if @document.save
 			redirect_to event_path(@event)
 		else
-			redirect_to event_path(@event)
+      		@fail = "Please enter a title"
+      		render :new
 		end
 	end
 

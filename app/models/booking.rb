@@ -33,7 +33,6 @@ class Booking < ActiveRecord::Base
 			elsif self.band.id == 2 && self.kind == "BOOKED"
 				booking = Booking.find_by(["band_id = ? and date = ?", 1, self.date])
 				Booking.destroy(booking.id)
-
 			end
 		end
 	end

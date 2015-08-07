@@ -10,7 +10,7 @@
 
 <% if @results.present?%>
 	<br>
-  <table class="t02 tablesorter" id="mytable">
+  <table class="t02 sortable" id="mytable">
 	<thead>
 	<tr>
 		<th>Job Number</th>
@@ -36,12 +36,14 @@
 <br>
 
 <h2> All Active Events</h2>
-<table class="t02 tablesorter" id="mytable">
+<table class="t02 sortable" id="mytable">
 	<thead>
 	<tr>
 		<th>Job Number</th>
 		<th>Client Name</th>		
 		<th>Status</th>
+		<th>Final Date</th>
+		<th>Venue</th>
 		<th>Link</th>
 	</tr>
 	</thead>
@@ -52,12 +54,15 @@
 				<td> <%= event.job_identification_number %></td>
 				<td> <%= event.client_first_name%> <%= event.client_last_name %></td>
 				<td> <%= event.status %></td>
-				<td> <%= link_to "View", event_path(event.id) %>
+				<td> <%= event.final_date %></td>
+				<td> <%= event.venue %></td>
+				<td> <%= link_to "View", event_path(event.id) %></td>
 			</tr>
 		<% end %>
 	<% end %>
 </tbody>
 </table>
+<br>
 <div class="button-holder">
 	<%= link_to "New Event", new_event_path, :class=>'add button-inner' %>
 </div>

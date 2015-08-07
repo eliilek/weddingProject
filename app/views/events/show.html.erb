@@ -10,15 +10,15 @@
 			<h2>Event Details</h2>
 			<p><strong>Client First Name:</strong> <%= @event.client_first_name %></p>
 			<p><strong>Client Last Name:</strong> <%= @event.client_last_name %></p>
-			<p><strong>Event Planning Date:</strong> <%= @event.planning_date %></p>
 			<p><strong>Event Job ID:</strong> <%= @event.job_identification_number %> </p>
-			<p><strong>Status:</strong> <%= @event.status %></p>
+			<p><strong>Event Type:</strong> <%= @event.event_type %></p></br>
 			<p><strong>Final Date:</strong> <%= @event.final_date%></p>
-			<p><strong>Guests:</strong> <%= @event.guests %></p>
-			<p><strong>Inquiry Date:</strong> <%= @event.inquiry_date %></p>
-			<p><strong>Event Type:</strong> <%= @event.event_type %></p>
+			<p><strong>Event Planning Date:</strong> <%= @event.planning_date %></p></br>
 			<p><strong>Referred By:</strong> <%= @event.referred_by %></p>
-			<p><strong>Venue:</strong> <%= @event.venue %></p>
+			<p><strong>Guests:</strong> <%= @event.guests %></p>
+			<p><strong>Venue:</strong> <%= @event.venue %></p></br>
+			<p><strong>Status:</strong> <%= @event.status %></p>
+			<p><strong>Inquiry Date:</strong> <%= @event.inquiry_date %></p>
 			<p><strong>Start Time:</strong> <%= @event.start_time %></p>
 			<p><strong>End Time:</strong> <%= @event.end_time %></p>
 			<p><strong>Continuous:</strong> <%= @event.continuous %></p>
@@ -48,12 +48,13 @@
 						<th>Holds</th>
 					</tr>
 					<% @bands.each do |band| %>
-						<% if band.is_free?(@event.final_date)%>
+						<% if band.is_free?(@event.final_date, @event) && band.already_booked(@event) %>
+
 							<tr>
-								<td><%= band.name %></td>
-								<td><%= band.band_leader%></td>
-								<td><%= link_to 'Link', new_event_booking_path(@event, :band_id => band.id)%></td>
-								<td><%= band.how_many_holds(@event.final_date) %></td>
+								<td><strong><%= band.name %></strong></td>
+								<td><strong><%= band.band_leader%></strong></td>
+								<td><strong><%= link_to 'Link', new_event_booking_path(@event, :band_id => band.id)%></strong></td>
+								<td><strong><%= band.how_many_holds(@event.final_date) %></strong></td>
 							</tr>
 							<% if band.holds(@event.final_date).length > 0 %>
 								<% band.holds(@event.final_date).each do |hold| %>
@@ -104,18 +105,25 @@
 				<% @documents.each do |document| %>
 					<% if document.data.url.include?(".pdf") %>
 						<li>
+							<%= image_tag "pdf_thumbnail.jpg" %>
 							<%= link_to "#{document.title}", document.data.url %>
 
-							<%= image_tag "pdf_thumbnail.jpg" %>
+						</li>
+					<% elsif document.data.url.include?(".msg") %>
+						<li>
+							<%= image_tag "message-32.jpg" %>
+							<%= link_to "#{document.title}", document.data.url %>
+
 						</li>
 					<% else %>
 						<li>
+							<%= image_tag "word.jpg" %>
 							<%= link_to "#{document.title}", document.data.url %>
 
-							<%= image_tag "word.jpg" %>
 						</li>
 					<% end %>
 				<% end %>
+				<br>
 				<div class="button-holder">
 					<%= link_to 'Upload Document', new_event_document_path(@event), :class=> "add button-inner"%>
 				</div>
