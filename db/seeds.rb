@@ -45,7 +45,7 @@ counter = 5004
 	e = Event.new
 	e.client_first_name = Faker::Name.first_name
 	e.client_last_name = Faker::Name.last_name
-	e.planning_date = Faker::Lorem.sentence
+	e.planning_date = Some date
 	e.final_date = Faker::Date.forward(23)
 	e.job_identification_number = counter
 	e.status = ["FIRST CONTACT","CALLED BACK", "PROPOSAL GENERATED","SALES MEETING SCHEDULED", "CONTRACT GENERATED", "RELEASED", "RELEASED-BAB", "RELEASED-BADJ"].sample
@@ -64,7 +64,7 @@ end
 	e = Event.new
 	e.client_first_name = Faker::Name.first_name
 	e.client_last_name = Faker::Name.last_name
-	e.planning_date = Faker::Lorem.sentence
+	e.planning_date = Some Other Date
 	e.final_date = ""
 	e.job_identification_number = counter
 	e.status = ["FIRST CONTACT","CALLED BACK", "PROPOSAL GENERATED","SALES MEETING SCHEDULED", "CONTRACT GENERATED", "RELEASED", "RELEASED-BAB", "RELEASED-BADJ"].sample
