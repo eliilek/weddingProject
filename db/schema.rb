@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150808233912) do
+ActiveRecord::Schema.define(version: 20150901230753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,14 @@ ActiveRecord::Schema.define(version: 20150808233912) do
     t.string   "secondary_contact_title"
     t.string   "third_contact_title"
     t.string   "fourth_contact_title"
+    t.text     "linked_events",             default: [],    array: true
+  end
+
+  create_table "links", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "linked_event_job_number"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "notifications", force: :cascade do |t|

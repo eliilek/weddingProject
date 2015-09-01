@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'welcome/index'
   get '/meetings' => 'welcome#meetings', :as => 'meetings' 
+  get '/bands' => 'welcome#bands', :as => 'bands' 
+
 
 
   devise_for :users

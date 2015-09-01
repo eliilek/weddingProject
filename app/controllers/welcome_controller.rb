@@ -8,4 +8,10 @@ class WelcomeController < ApplicationController
   def meetings
   	@events = Event.where("sales_meeting_box = ?", true)
   end
+
+  def bands
+  	@saturdays = saturdays
+  	@events = Event.all
+
+  end
 end

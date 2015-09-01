@@ -1,5 +1,6 @@
 class Band < ActiveRecord::Base
 	has_many :bookings
+	has_many :events, through: :bookings
 
 	def is_free?(check_date, event)
 		band_total_bookings = self.bookings.select { |booking| booking.kind == 'BOOKED' }

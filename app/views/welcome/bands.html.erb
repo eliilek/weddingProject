@@ -1,0 +1,36 @@
+<div class="content">
+	<h1>Events Calendar </h1>
+		<br>
+	<table class="t02 sortable" id="mytable">
+		<thead>
+		<tr>
+			<th>Date</th>
+			<th>Client Name, Band, Venue, Link </th>		
+		</tr>
+		</thead>
+	  <% @saturdays.each do |saturday_date| %>
+		<tr>
+			<td> <%= saturday_date %></td>
+			<td>
+				<% date_array = [] %>
+				<% @events.each do |event|%>
+					<% if event.final_date == saturday_date %>
+						<%= event.client_first_name %> <%= event.client_last_name %>, 
+						<% if event.band == nil or event.band == "" %>
+						No Booking,
+						<% else %>
+						<%= event.band.name %>,
+						<% end %> 
+						<% if event.venue == nil or event.venue == ""%>
+						No Venue Scheduled,
+						<% else %> 
+						<%= event.venue %>,
+						<% end %>
+						<%= link_to "View", event_path(event)%><br>
+					<% end %>
+				<% end %>
+			</td>
+		</tr>
+		<% end %>
+	</table>
+</div>

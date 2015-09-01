@@ -14,6 +14,7 @@ class EventsController < ApplicationController
 		@documents = Document.where("event_id = #{@event.id}")
 		@bands = Band.all
 		@contact = Contact.new
+		@linked_event = Link.new
 	end
 
 	def new

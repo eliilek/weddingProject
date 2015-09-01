@@ -5,6 +5,7 @@ class Event < ActiveRecord::Base
 	has_many :documents
 	has_many :notifications
 	has_many :bookings
+	has_many :bands, through: :bookings
 	before_save :check_sales_meeting_box
 
 
@@ -21,6 +22,12 @@ class Event < ActiveRecord::Base
 
 	def bookings_only
 		self.bookings.select {|booking| booking.kind == "BOOKED"}	
+	end
+
+	def band
+		if self.bookings.length == 1
+			self.bookings.first.band
+		end
 	end
 
 	def check_sales_meeting_box
