@@ -389,9 +389,13 @@
   </div>
   <div>
           <h2>Linked Events</h2>
+          <% @links.each do |link| %>
+          <%= link_to "#{link.linked_event_job_number}", event_path(link.event_id), :target => "_blank" %>
+          <%= link_to raw("&#10006"), event_link_path(@event, link), data: { confirm: 'Are you sure you want to delete this link?' }, :method => :delete, :class => 'delete-button' %><br>
+          <% end %>
                <div class="padding">
                <%= form_for [@event, @linked_event] do |f| %>
-               <p><strong><%= f.label :job_identification_number %>:</strong><%= f.integer_field :linked_event_job_number %></p>
+               <p><strong><%= f.label :job_identification_number %>:</strong><%= f.number_field :linked_event_job_number %></p>
                <div class="button-holder">
                     <p><%= f.submit "Create", :class => "add button" %></p>
                </div>

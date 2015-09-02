@@ -95,7 +95,6 @@ ActiveRecord::Schema.define(version: 20150901230753) do
     t.string   "secondary_contact_title"
     t.string   "third_contact_title"
     t.string   "fourth_contact_title"
-    t.text     "linked_events",             default: [],    array: true
   end
 
   create_table "links", force: :cascade do |t|

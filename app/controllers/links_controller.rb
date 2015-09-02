@@ -1,20 +1,24 @@
-class LinkedEventsController < ApplicationController
+class LinksController < ApplicationController
 
 	def new 
 		@event = Event.find(params[:event_id])
-		@linked_event = @event.links.new(linked_event_params)
+		@linked_event = @event.links.new(links_params)
 	end
 	def create
 		@event = Event.find(params[:event_id])
-		@linked_event = @event.links.new(linked_event_params)
-		if @contact.save 
+		@linked_event = @event.links.new(links_params)
+		if @linked_event.save 
 			redirect_to event_path(@event) 
 		end
+	end
+	def destroy
+		Link.find(params[:id]).destroy
+		redirect_to :back
 	end
 
 	private
 
-	def linked_event_params
-		params.require(:links).permit(:event_id, :linked_event_job_number)
+	def links_params
+		params.require(:link).permit(:linked_event_job_number)
 	end
 end

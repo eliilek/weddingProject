@@ -15,6 +15,7 @@ class EventsController < ApplicationController
 		@bands = Band.all
 		@contact = Contact.new
 		@linked_event = Link.new
+		@links = Link.where("event_id = #{@event.id}")
 	end
 
 	def new

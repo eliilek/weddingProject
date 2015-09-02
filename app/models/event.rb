@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
 	has_many :bookings
 	has_many :bands, through: :bookings
 	before_save :check_sales_meeting_box
+	has_many :links
 
 
 	def self.search(search)

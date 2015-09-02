@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   resources :events do
     resources :contacts
+    resources :links
     resources :documents
     resources :notifications
     resources :bookings
