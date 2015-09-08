@@ -12,6 +12,5 @@ class WelcomeController < ApplicationController
   def bands
   	@saturdays = saturdays
   	@events = Event.all
-
   end
 end

@@ -6,17 +6,22 @@
 		<% else %>
 			<table class="t02 sortable">
 				<tr>
-					<th>Client Name</th>
-					<th>Event Status</th>		
-					<th>Last Updated</th>
+					<th>Job Number</th>
+					<th>Client Name</th>		
+					<th>Status</th>
+					<th>Final Date</th>
+					<th>Venue</th>
 					<th>Link</th>
 				</tr>
 				<% @notifications_check.each do |event| %>
 					<% if event.updated_at <= 3.days.ago and event.notifications.length == 0  %>
 						<tr>
+							<td><%= event.job_identification_number %></td>
 							<td><%= event.client_first_name %> <%= event.client_last_name %></td>
-							<td><%= event.status %></td>		
-							<td><%= distance_of_time_in_words(event.updated_at, Time.now) %></td>
+							<td><%= event.status %></td>
+							<td><%= event.final_date unless event.final_date == nil || event.final_date == ""%></td>
+							<td><%= event.venue %>	
+							<!-- <td><%= distance_of_time_in_words(event.updated_at, Time.now) %></td> -->
 							<td><%= link_to 'View', event_path(event)%>
 							</td>
 						</tr>
@@ -34,18 +39,25 @@
 
 	<table class="t02">
 		<tr>
+			<th>Job Number</th>
 			<th>Client Name</th>
-			<th>Event Status</th>		
+			<th>Status</th>
+			<th>Final Date</th>
+			<th>venue</th>		
 			<th>Notes</th>
+
 			<th></th>
 			<th></th>
 		</tr>
 		<% @notifications.each do |notification| %>
 		<% @notification_event = notification.find_event %>
 			<tr>
+				<td><%= @notification_event.job_identification_number %></td>
 				<td><%= @notification_event.client_first_name %> 
 					<%= @notification_event.client_last_name %></td>
-				<td><%= @notification_event.status %></td>		
+				<td><%= @notification_event.status %></td>
+				<td><%= @notification_event.final_date unless @notification_event.final_date == nil || @notification_event.final_date == ""%></td>
+				<td><%= @notification_event.venue %></td>		
 				<td><%= notification.name %></td>
 				<td><%= link_to 'View', event_path(@notification_event) %>
 				</td>
