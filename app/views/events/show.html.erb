@@ -16,7 +16,7 @@
      	</ul>
      	<ul class="second-ul">
      		<li>
-     				<%= @event.planning_date %>/<%= @event.final_date.strftime("%m-%d-%Y") unless @event.final_date == nil or @event.final_date == "" %>
+     				<%= @event.planning_date %>/<%= @event.final_date.strftime("%A %m-%d-%Y") unless @event.final_date == nil or @event.final_date == "" %>
      		</li>
      		<li>
      			<%if @event.venue == "" or @event.venue == nil%>
@@ -116,7 +116,7 @@
 					<% if document.data.url.include?(".pdf") %>
 						<li>
 							<%= image_tag "pdf_thumbnail.jpg" %>
-							<%= link_to "#{document.title} #{document.created_at.strftime("%m-%d-%Y %I:%M %p")} ", document.data.url, :target => "_blank" %>
+							<%= link_to "#{document.title} #{document.created_at.strftime("%A %m-%d-%Y %I:%M %p")} ", document.data.url, :target => "_blank" %>
 							<%= link_to raw("&#10006"), event_document_path(@event, document), data: { confirm: 'Are you sure you want to delete this docume?' }, :method => :delete, :class => 'delete-button' %>
 
 						</li>
