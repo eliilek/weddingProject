@@ -28,6 +28,10 @@ class Event < ActiveRecord::Base
 	def band
 		if self.bookings.length == 1
 			self.bookings.first.band
+		elsif self.bookings.length == 0
+			nil
+		else
+			self.bookings
 		end
 	end
 

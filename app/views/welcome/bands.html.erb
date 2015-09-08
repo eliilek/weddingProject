@@ -15,20 +15,32 @@
 				<% date_array = [] %>
 				<% @events.each do |event|%>
 					<% if event.final_date == saturday_date %>
-						<%= event.client_first_name %> <%= event.client_last_name %>, 
-						<% if event.band == nil or event.band == "" %>
-						No Booking,
-						<% else %>
-						<%= event.band.name %>,
-						<% end %> 
-						<% if event.venue == nil or event.venue == ""%>
-						No Venue Scheduled,
-						<% else %> 
-						<%= event.venue %>,
+						<% check = true %>
+						<% event.bookings.each do |booking| %>
+							<% if booking.kind == "BOOKED" %>
+								<% check = false %>
+							<% end %>
 						<% end %>
-						<%= link_to "View", event_path(event)%><br>
+						<% if check == true %>
+							<%= event.client_first_name %> <%= event.client_last_name %>, 
+							<% if event.band == nil or event.band == "" %>
+							No Booking,
+							<% else %>
+							<% strang = "" %>
+							<% event.bookings.each do |booking| %>
+								<% strang += booking.band.name + ", " %>
+								<% end %>
+								<%= strang %>
+							<% end %> 
+							<% if event.venue == nil or event.venue == ""%>
+							No Venue Scheduled,
+							<% else %> 
+							<%= event.venue %>,
+							<% end %>
+							<%= link_to "View", event_path(event)%><br>
+							<% end %>
+						<% end %>
 					<% end %>
-				<% end %>
 			</td>
 		</tr>
 		<% end %>
