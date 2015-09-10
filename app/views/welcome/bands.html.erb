@@ -40,8 +40,11 @@
 						</tr>
 					<% else %>
 						<% event.bookings.each do |booking| %>
-							#I'm really sorry, please don't show this to Steph.
-							<tr <%= '"style = "background: green;"' if booking.kind == "BOOKED" %> >
+							<% if booking.kind == "BOOKED" %>
+								<tr style="background:green;">
+							<% else %>
+							<tr>
+							<% end %>
 							<td> <%= saturday_date.strftime("%A, %m/%d/%Y") %> </td>
 							<td>
 							<%= event.client_first_name %> <%= event.client_last_name %>, 
