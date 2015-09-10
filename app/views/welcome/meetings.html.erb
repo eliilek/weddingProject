@@ -20,7 +20,7 @@
 				<td> <%= event.status %></td>
 				<td> <%= event.sold_by %> </td>
 				<% if event.final_date != "" && event.final_date != nil %>
-					<td> <%= event.final_date.strftime("%A %m-%d-%Y") %></td>
+					<td> <%= event.final_date.strftime("%A, %m/%d/%Y") %></td>
 				<% else %>
 					<td> <%= event.final_date %></td>
 				<% end %>

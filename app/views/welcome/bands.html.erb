@@ -5,44 +5,61 @@
 		<thead>
 		<tr>
 			<th>Date</th>
-			<th>Client Name, Band, Venue, Link </th>		
+			<th>Client Name, Venue, Link </th>
+			<th>Band</th>
 		</tr>
 		</thead>
 	  <% @saturdays.each do |saturday_date| %>
-		<tr>
-			<td> <%= saturday_date %></td>
-			<td>
-				<% date_array = [] %>
-				<% @events.each do |event|%>
-					<% if event.final_date == saturday_date %>
-						<% check = true %>
-						<% event.bookings.each do |booking| %>
-							<% if booking.kind == "BOOKED" %>
-								<% check = false %>
-							<% end %>
+			<% saturday_events = [] %>
+			<% @events.each do |event|%>
+				<% if event.final_date == saturday_date %>
+					<% saturday_events << event %>
+					<% end %>
+				<% end %>
+			<% if saturday_events.length == 0 %>
+				<tr>
+				<td> <%= saturday_date.strftime("%A, %m/%d/%Y") %></td>
+				<td></td>
+				<td></td>
+				</tr>
+				<% else %>
+				<% saturday_events.each do |event| %>
+					<% if event.band == nil or event.band == "" %>
+						<tr>
+						<td> <%= saturday_date.strftime("%A, %m/%d/%Y") %> </td>
+						<td>
+						<%= event.client_first_name %> <%= event.client_last_name %>, 
+						<% if event.venue == nil or event.venue == ""%>
+						No Venue Scheduled, 
+						<% else %> 
+						<%= event.venue %>, 
 						<% end %>
-						<% if check == true %>
+						<%= link_to "View", event_path(event)%>
+						</td>
+						<td> No Booking </td>
+						</tr>
+					<% else %>
+						<% event.bookings.each do |booking| %>
+							#I'm really sorry, please don't show this to Steph.
+							<tr <%= '"style = "background: green;"' if booking.kind == "BOOKED" %> >
+							<td> <%= saturday_date.strftime("%A, %m/%d/%Y") %> </td>
+							<td>
 							<%= event.client_first_name %> <%= event.client_last_name %>, 
-							<% if event.band == nil or event.band == "" %>
-							No Booking,
-							<% else %>
-							<% strang = "" %>
-							<% event.bookings.each do |booking| %>
-								<% strang += booking.band.name + ", " %>
-								<% end %>
-								<%= strang %>
-							<% end %> 
 							<% if event.venue == nil or event.venue == ""%>
-							No Venue Scheduled,
+							No Venue Scheduled, 
 							<% else %> 
-							<%= event.venue %>,
+							<%= event.venue %>, 
 							<% end %>
-							<%= link_to "View", event_path(event)%><br>
+							<%= link_to "View", event_path(event) %>
+							</td>
+							<td>
+							<%= booking.band.name %>
+							</td>
+							</tr>
 							<% end %>
 						<% end %>
 					<% end %>
-			</td>
-		</tr>
+			<% end %>
 		<% end %>
 	</table>
 </div>
