@@ -327,11 +327,10 @@
 	     		<li><%= @event.fourth_contact_phone %></li>
 	     		<li>
      			<%if @event.fourth_contact_title == "" or @event.fourth_contact_title == nil%>
-     				<br>
      			<% else %>
      				<%= @event.fourth_contact_title %>
      			<% end %>
-     		</li>
+     		</li><br>
 	     	<% end %>
                          <li>
                     <%if @event.planner_name == "" or @event.planner_name == nil%>
