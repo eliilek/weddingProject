@@ -12,7 +12,7 @@
 	  <% @saturdays.each do |saturday_date| %>
 			<% saturday_events = [] %>
 			<% @events.each do |event|%>
-				<% if event.final_date == saturday_date %>
+				<% if event.final_date == saturday_date and event.status != "RELEASED" and event.status != "RELEASED-BAB" and event.status != "RELEASED-BADJ" %>
 					<% saturday_events << event %>
 					<% end %>
 				<% end %>
