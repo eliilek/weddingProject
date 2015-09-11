@@ -95,19 +95,7 @@ end
 	n.save
 end
 
-b = Booking.new
-b.event_id = 1
-b.band_id = 1
-b.date = Date.today
-b.kind = "HOLD"
-b.save
 
-c = Booking.new
-c.event_id = 1
-c.band_id = 1
-c.date = Date.today
-c.kind = "BOOKED"
-c.save
 
 
 45.times do 
