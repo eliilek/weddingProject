@@ -20,21 +20,21 @@
      		</li>
      		<li>
      			<%if @event.venue == "" or @event.venue == nil%>
-     				<br>
+     				</br>
      			<% else %>
      				<%= @event.venue %>
      			<% end %>
      		</li>
      		<li>
      			<%if @event.referred_by == "" or @event.referred_by == nil%>
-     				<br>
+     				</br>
      			<% else %>
      				<%= @event.referred_by %>
      			<% end %>
      		</li>
 			<li>
      			<%if @event.guests == "" or @event.guests == nil%>
-     				<br>
+     				</br>
      			<% else %>
      				<%= @event.guests %>
      			<% end %>
@@ -163,56 +163,56 @@
      	<ul>
      		<li>
      			<%if @event.start_time == "" or @event.start_time == nil%>
-     				<br>
+     				</br>
      			<% else %>
      				<%= @event.start_time %>
      			<% end %>
      		</li>
      		<li>
      			<%if @event.end_time == "" or @event.end_time == nil%>
-     				<br>
+     				</br>
      			<% else %>
      				<%= @event.end_time %>
      			<% end %>
      		</li>
      		<li>
      			<%if @event.continuous == "" or @event.continuous == nil%>
-     				<br>
+     				</br>
      			<% else %>
      				<%= @event.continuous %>
      			<% end %>
      		</li>
      		<li>
      			<%if @event.contract_price == "" or @event.contract_price == nil%>
-     				<br>
+     				</br>
      			<% else %>
      				<%= @event.contract_price %>
      			<% end %>
      		</li>
      		<li>
      			<%if @event.ot_price == "" or @event.ot_price == nil%>
-     				<br>
+     				</br>
      			<% else %>
      				<%= @event.ot_price %>
      			<% end %>
      		</li>
      		<li>
      			<%if @event.number_of_musicians == "" or @event.number_of_musicians == nil%>
-     				<br>
+     				</br>
      			<% else %>
      				<%= @event.number_of_musicians %>
      			<% end %>
      		</li>
      		<li>
      			<%if @event.number_of_vocalists == "" or @event.number_of_vocalists == nil%>
-     				<br>
+     				</br>
      			<% else %>
      				<%= @event.number_of_vocalists %>
      			<% end %>
      		</li>
      		<li>
      			<%if @event.sold_by == "" or @event.sold_by == nil%>
-     				<br>
+     				</br>
      			<% else %>
      				<%= @event.sold_by %>
      			<% end %>
@@ -235,14 +235,14 @@
      		<li><%= @event.job_identification_number %></li>
      		<li>
      			<%if @event.inquiry_date == "" or @event.inquiry_date == nil%>
-     				<br>
+     				</br>
      			<% else %>
      				<%= @event.inquiry_date.strftime("%m/%d/%Y") %>
      			<% end %>
      		</li>
      		<li>
      			<%if @event.event_type == "" or @event.event_type == nil%>
-     				<br>
+     				</br>
      			<% else %>
      				<%= @event.event_type %>
      			<% end %>
@@ -258,28 +258,31 @@
      	<ul>
 
      		<li><strong>Primary Contact:</strong></li>
+               <li><strong>Primary Contact Title:</strong></li>
      		<li><strong>Primary Contact Email:</strong> </li>
-     		<li><strong>Primary Contact Phone:</strong></li>
-     		<li><strong>Primary Contact Title:</strong></li><br>
+     		<li><strong>Primary Contact Phone:</strong></li><br>
 
      		<li><strong>Secondary Contact:</strong></li>
+               <li><strong>Secondary Contact Title:</strong></li>
      		<li><strong>Secondary Contact Email :</strong> </li>
-     		<li><strong>Secondary Contact Phone:</strong></li>
-     		<li><strong>Secondary Contact Title:</strong></li><br>
+     		<li><strong>Secondary Contact Phone:</strong></li><br>
+
      		<% if @event.third_contact != "" && @event.third_contact != nil %>
 
 	     		<li><strong>Third Contact:</strong></li>
+                    <li><strong>Third Contact Title:</strong></li>
 	     		<li><strong>Third Contact Email:</strong> </li>
 	     		<li><strong>Third Contact Phone:</strong></li>
-	     		<li><strong>Third Contact Title:</strong></li><br>
+	     		<br>
 
 	     	<% end %>
 	     	<% if @event.fourth_contact != "" && @event.fourth_contact != nil %>
 
 	     		<li><strong>Fourth Contact:</strong></li>
+                    <li><strong>Fourth Contact Title:</strong></li>
 	     		<li><strong>Fourth Contact Email:</strong> </li>
 	     		<li><strong>Fourth Contact Phone:</strong></li>
-	     		<li><strong>Fourth Contact Title:</strong></li><br>
+	     		<br>
 
 	     	<% end %>
                <li><strong>Planner Name:</strong></li>
@@ -287,68 +290,141 @@
                <li><strong>Planner Phone:</strong></li>
      	</ul>
      	<ul class="second-ul">
-     		<li><%= @event.primary_contact %></li>
-     		<li><%= @event.primary_contact_email %></li>
-     		<li><%= @event.primary_contact_phone %></li>
+     		<li><%if @event.primary_contact == "" or @event.primary_contact == nil%>
+                         </br>
+                    <% else %>
+                         <%= @event.primary_contact %>
+                    <% end %>
+               </li>
+               <li>
+                    <%if @event.primary_contact_title == "" or @event.primary_contact_title == nil%>
+               </br>
+                    <% else %>
+                         <%= @event.primary_contact_title %>
+                    <% end %>
+               </li>
+               <li>
+     		<%if @event.primary_contact_email == "" or @event.primary_contact_email == nil%>
+                    </br>
+                    <% else %>
+                         <%= @event.primary_contact_email %>
+                    <% end %>
+               </li>
      		<li>
-     			<%if @event.primary_contact_title == "" or @event.primary_contact_title == nil%>
-     				<br>
-     			<% else %>
-     				<%= @event.primary_contact_title %>
-     			<% end %>
-     		</li>
-     		<br>
-     		<li><%= @event.secondary_contact %></li>
-     		<li><%= @event.secondary_contact_email %></li>
-     		<li><%= @event.secondary_contact_phone %></li>
-     		<li>
-     			<%if @event.secondary_contact_title == "" or @event.secondary_contact_title == nil%>
-     				<br>
-     			<% else %>
-     				<%= @event.secondary_contact_title %>
-     			<% end %>
-     		</li><br>
+               <%if @event.primary_contact_phone == "" or @event.primary_contact_phone == nil%>
+                    </br>
+                    <% else %>
+                         <%= @event.primary_contact_phone %>
+                    <% end %>
+               </li>
+     		</br>
+
+     		<li><%if @event.secondary_contact == "" or @event.secondary_contact == nil%>
+                         </br>
+                    <% else %>
+                         <%= @event.secondary_contact %>
+                    <% end %>
+               </li>
+               <li>
+                    <%if @event.secondary_contact_title == "" or @event.secondary_contact_title == nil%>
+               </br>
+                    <% else %>
+                         <%= @event.secondary_contact_title %>
+                    <% end %>
+               </li>
+               <li>
+               <%if @event.secondary_contact_email == "" or @event.secondary_contact_email == nil%>
+                    </br>
+                    <% else %>
+                         <%= @event.secondary_contact_email %>
+                    <% end %>
+               </li>
+               <li>
+               <%if @event.secondary_contact_phone == "" or @event.secondary_contact_phone == nil%>
+                    </br>
+                    <% else %>
+                         <%= @event.secondary_contact_phone %>
+                    <% end %>
+               </li>
+     	</br>
      		<% if @event.third_contact != "" && @event.third_contact != nil %>
-	     		<li><%= @event.third_contact %></li>
-	     		<li><%= @event.third_contact_email %></li>
-	     		<li><%= @event.third_contact_phone %></li>
-	     		<li>
-     			<%if @event.third_contact_title == "" or @event.third_contact_title == nil%>
-     				<br>
-     			<% else %>
-     				<%= @event.third_contact_title %>
-     			<% end %>
-     		</li>
-	     		<br>
+	     		<li><%if @event.third_contact == "" or @event.third_contact == nil%>
+                         </br>
+                    <% else %>
+                         <%= @event.third_contact %>
+                    <% end %>
+               </li>
+               <li>
+                    <%if @event.third_contact_title == "" or @event.third_contact_title == nil%>
+               </br>
+                    <% else %>
+                         <%= @event.third_contact_title %>
+                    <% end %>
+               </li>
+               <li>
+               <%if @event.third_contact_email == "" or @event.third_contact_email == nil%>
+                    </br>
+                    <% else %>
+                         <%= @event.third_contact_email %>
+                    <% end %>
+               </li>
+               <li>
+               <%if @event.third_contact_phone == "" or @event.third_contact_phone == nil%>
+                    </br>
+                    <% else %>
+                         <%= @event.third_contact_phone %>
+                    <% end %>
+               </li>
+
+	     		</br>
 	     	<% end %>
 	     	<% if @event.fourth_contact != "" && @event.fourth_contact != nil %>
-	     		<li><%= @event.fourth_contact %></li>
-	     		<li><%= @event.fourth_contact_email %></li>
-	     		<li><%= @event.fourth_contact_phone %></li>
-	     		<li>
-     			<%if @event.fourth_contact_title == "" or @event.fourth_contact_title == nil%>
-     			<% else %>
-     				<%= @event.fourth_contact_title %>
-     			<% end %>
-     		</li><br>
+	     		<li><%if @event.fourth_contact == "" or @event.fourth_contact == nil%>
+                         </br>
+                    <% else %>
+                         <%= @event.fourth_contact %>
+                    <% end %>
+               </li>
+               <li>
+                    <%if @event.fourth_contact_title == "" or @event.fourth_contact_title == nil%>
+               </br>
+                    <% else %>
+                         <%= @event.fourth_contact_title %>
+                    <% end %>
+               </li>
+               <li>
+               <%if @event.fourth_contact_email == "" or @event.fourth_contact_email == nil%>
+                    </br>
+                    <% else %>
+                         <%= @event.fourth_contact_email %>
+                    <% end %>
+               </li>
+               <li>
+               <%if @event.fourth_contact_phone == "" or @event.fourth_contact_phone == nil%>
+                    </br>
+                    <% else %>
+                         <%= @event.fourth_contact_phone %>
+                    <% end %>
+               </li>
+	     		</br>
 	     	<% end %>
                          <li>
                     <%if @event.planner_name == "" or @event.planner_name == nil%>
-                         <br>
+                         </br>
                     <% else %>
                          <%= @event.planner_name %>
                     <% end %>
                </li>
                <li>
                     <%if @event.planner_email == "" or @event.planner_email == nil%>
-                         <br>
+                         </br>
                     <% else %>
                          <%= @event.planner_email %>
                     <% end %>
                </li>
                <li>
                     <%if @event.planner_phone == "" or @event.planner_phone == nil%>
-                         <br>
+                         </br>
                     <% else %>
                          <%= @event.planner_phone %>
                     <% end %>
