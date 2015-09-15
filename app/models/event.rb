@@ -8,6 +8,8 @@ class Event < ActiveRecord::Base
 	has_many :bands, through: :bookings
 	before_save :check_sales_meeting_box
 	has_many :links
+	before_validation :deal_with_blank_client
+
 
 
 	def self.search(search)
@@ -40,6 +42,16 @@ class Event < ActiveRecord::Base
 		self.sales_meeting_box = true
 		end
 	end
+	
+	def deal_with_blank_client
+    	if self.client_first_name == "" and self.client_last_name == ""
+    		name_array = primary_contact.split(" ")
+    		first_name = name_array[0]
+    		second_name = name_array[-1]
+    		self.client_first_name = first_name
+    		self.client_last_name = second_name
+    	end
+    end
 
 end
 

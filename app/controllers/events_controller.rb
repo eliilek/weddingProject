@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-	
+
 	def index
 		@events = Event.where("status != ?", "DEFINITE")
 		@ordered_events = @events.order('job_identification_number ASC')
