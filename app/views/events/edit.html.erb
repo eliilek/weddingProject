@@ -2,7 +2,7 @@
 	<h1>Edit Event</h1>
 </div>
 <div class="content form-columns">
-	<%= form_for(@event, html: {method: "patch"}) do |f| %>
+	<%= form_for(@event, html: {method: "put"}) do |f| %>
 
 	<p><strong><%= f.label :event_type, :class=>"event" %></strong> <%= f.text_field :event_type %></p>
 
