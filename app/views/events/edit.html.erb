@@ -63,7 +63,7 @@
 	<p><strong><%= f.label :planner_phone, :class=>"event" %></strong>
 		<%= f.text_field :planner_phone %></p><br>
 
-	<p><strong><%= f.label :inquiry_date, :class=>"event" %></strong> <%= f.date_field :inquiry_date, :value => Date.today %></p>
+	<p><strong><%= f.label :inquiry_date, :class=>"event" %></strong> <%= f.date_field :inquiry_date, :value => @event.inquiry_date %></p>
 
 	<p><strong><%= f.label :referred_by, :class=>"event" %></strong> <%= f.text_field :referred_by %></p>
 
