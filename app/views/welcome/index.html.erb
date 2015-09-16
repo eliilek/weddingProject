@@ -14,7 +14,7 @@
 					<th>Link</th>
 				</tr>
 				<% @notifications_check.each do |event| %>
-					<% if event.updated_at <= 3.days.ago and event.notifications.length == 0 and event.status != "RELEASED" and event.status != "RELEASED-BAB" and event.status != "RELEASED-BADJ"  %>
+					<% if event.updated_at <= 3.days.ago and event.notifications.length == 0 and event.status != "RELEASED" and event.status != "RELEASED-BAB" and event.status != "RELEASED-BADJ" and event.status != "DEFINITE"  %>
 						<tr>
 							<td><%= event.job_identification_number %></td>
 							<td><%= event.client_first_name %> <%= event.client_last_name %></td>
