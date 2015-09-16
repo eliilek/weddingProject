@@ -10,7 +10,7 @@ class EventsController < ApplicationController
 
 	def show
 		@event = Event.find(params[:id])
-		@contacts = Contact.where("event_id = #{@event.id}")
+		@contacts = Contact.where("event_id = #{@event.id}").order(created_at: :desc)
 		@documents = Document.where("event_id = #{@event.id}")
 		@bands = Band.all
 		@contact = Contact.new
