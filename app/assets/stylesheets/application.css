@@ -456,3 +456,8 @@ div.form-columns{
   column-count: 2;
   height: 34em;
   }
+
+  .bands-tr {
+    height: 2em;
+    
+  }

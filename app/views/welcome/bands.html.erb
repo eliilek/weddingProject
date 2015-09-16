@@ -1,12 +1,13 @@
 <div class="content">
 	<h1>Events Calendar </h1>
 		<br>
-	<table class="t02 sortable" id="mytable">
+	<table class="t02 sortable" id="mytable" style="width:75%" >
 		<thead>
 		<tr>
 			<th>Day</th>
 			<th>Date</th>
-			<th>Client Name, Venue, Link </th>
+			<th>Status</th>
+			<th>Client Name, Venue, Link</th>
 			<th>Band</th>
 		</tr>
 		</thead>
@@ -30,6 +31,7 @@
 					<td> <%= saturday_date.strftime("%m/%d/%Y") %></td>
 					<td></td>
 					<td></td>
+					<td></td>
 				</tr>
 				<% else %>
 				<% saturday_events.each do |event| %>
@@ -37,6 +39,7 @@
 						<tr>
 						<td> <%= saturday_date.strftime("%A") %> </td>
 						<td> <%= saturday_date.strftime("%m/%d/%Y") %></td>
+						<td> <%= event.status %></td>
 						<td>
 						<%= event.client_first_name %> <%= event.client_last_name %>, 
 						<% if event.venue == nil or event.venue == ""%>
@@ -57,6 +60,7 @@
 							<% end %>
 							<td> <%= saturday_date.strftime("%A") %> </td>
 							<td> <%= saturday_date.strftime("%m/%d/%Y") %></td>
+							<td><%= event.status%> </td>
 							<td>
 							<%= event.client_first_name %> <%= event.client_last_name %>, 
 							<% if event.venue == nil or event.venue == ""%>
