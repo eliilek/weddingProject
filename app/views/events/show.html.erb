@@ -307,7 +307,7 @@
      		<%if @event.primary_contact_email == "" or @event.primary_contact_email == nil%>
                     </br>
                     <% else %>
-                         <%= @event.primary_contact_email %>
+                         <%= mail_to(@event.primary_contact_email) %>
                     <% end %>
                </li>
      		<li>
@@ -336,7 +336,7 @@
                <%if @event.secondary_contact_email == "" or @event.secondary_contact_email == nil%>
                     </br>
                     <% else %>
-                         <%= @event.secondary_contact_email %>
+                         <%= mail_to(@event.secondary_contact_email) %>
                     <% end %>
                </li>
                <li>
@@ -365,7 +365,7 @@
                <%if @event.third_contact_email == "" or @event.third_contact_email == nil%>
                     </br>
                     <% else %>
-                         <%= @event.third_contact_email %>
+                         <%= mail_to(@event.third_contact_email) %>
                     <% end %>
                </li>
                <li>
@@ -389,7 +389,7 @@
                     <%if @event.fourth_contact_title == "" or @event.fourth_contact_title == nil%>
                </br>
                     <% else %>
-                         <%= @event.fourth_contact_title %>
+                         <%= mail_to(@event.fourth_contact_title) %>
                     <% end %>
                </li>
                <li>
@@ -419,7 +419,7 @@
                     <%if @event.planner_email == "" or @event.planner_email == nil%>
                          </br>
                     <% else %>
-                         <%= @event.planner_email %>
+                         <%= mail_to(@event.planner_email) %>
                     <% end %>
                </li>
                <li>
