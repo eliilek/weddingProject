@@ -1,13 +1,18 @@
 <div class="content">
 	<% if @bands_param %>
 		<h1><%= @band.name %> Events</h1>
+	</br>
 	<% else %>
 		<h1>Events Calendar </h1>
+	</br>
 	<% end %>
-		<br>
-		<%= form_tag(bands_path, :method => "get") %>
+	
+		<%= form_tag(bands_path, :method => "get") do %>
 			<%= select_tag "band_id", options_from_collection_for_select(Band.all, "id", "name") %>
 		<%= submit_tag 'Search' %>
+		<% end %>
+	</br>
+	
 
 	<table class="t02 sortable" id="mytable" style="width:75%" >
 		<thead>
@@ -65,7 +70,7 @@
 						<% end %>
 					<% else %>
 						<% event.bookings.each do |booking| %>
-							<% if @bands_param && (booking.band_id == @bands_param.to_i || (booking.band_id == 1 && @bands_param.to_i == 2) || (booking.band_id == 2 && @bands_param.to_i == 1))%>
+							<% if @bands_param && (booking.band_id == @bands_param.to_i || (((booking.band_id == 1 && @bands_param.to_i == 2) || (booking.band_id == 2 && @bands_param.to_i == 1)) && booking.kind == "BOOKED"))%>
 								<% x = true %>
 
 							<% end %>
