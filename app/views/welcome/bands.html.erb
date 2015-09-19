@@ -65,8 +65,9 @@
 						<% end %>
 					<% else %>
 						<% event.bookings.each do |booking| %>
-							<% if @bands_param && booking.band_id == @bands_param.to_i %>
+							<% if @bands_param && (booking.band_id == @bands_param.to_i || (booking.band_id == 1 && @bands_param.to_i == 2) || (booking.band_id == 2 && @bands_param.to_i == 1))%>
 								<% x = true %>
+
 							<% end %>
 							<% if !@bands_param || (booking.band.id == @bands_param.to_i && booking.kind != "BOOKED") %>
 								<% if booking.kind == "BOOKED" %>
