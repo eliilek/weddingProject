@@ -24,6 +24,7 @@
 				<% @bookings << saturday_date %>
 			<% end %>
 		<% end %>
+		<% @real_saturdays = @saturdays %>
 		<% @saturdays = @bookings %>
 			<% @saturdays.sort! %>
 	  <% @saturdays.each do |saturday_date| %>
@@ -42,6 +43,7 @@
 					<td></td>
 				</tr>
 				<% else %>
+				<% x = false %>
 				<% saturday_events.each do |event| %>
 					<% if event.band == nil or event.band == "" %>
 						<% unless @bands_param %>
@@ -63,6 +65,9 @@
 						<% end %>
 					<% else %>
 						<% event.bookings.each do |booking| %>
+							<% if @bands_param && booking.band_id == @bands_param.to_i %>
+								<% x = true %>
+							<% end %>
 							<% if !@bands_param || (booking.band.id == @bands_param.to_i && booking.kind != "BOOKED") %>
 								<% if booking.kind == "BOOKED" %>
 									<tr style="background:green;">
@@ -88,6 +93,15 @@
 								<% end %>
 							<% end %>
 						<% end %>
+					<% end %>
+					<% if x == false && @real_saturdays.include?(saturday_date) %>
+						<tr>
+							<td> <%= saturday_date.strftime("%A") %></td>
+							<td> <%= saturday_date.strftime("%m/%d/%Y") %></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
 					<% end %>
 			<% end %>
 		<% end %>
