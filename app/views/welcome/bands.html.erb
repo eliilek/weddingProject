@@ -1,6 +1,14 @@
 <div class="content">
-	<h1>Events Calendar </h1>
+	<% if @bands_param %>
+		<h1><%= @band.name %> Events</h1>
+	<% else %>
+		<h1>Events Calendar </h1>
+	<% end %>
 		<br>
+		<%= form_tag(bands_path, :method => "get") %>
+			<%= select_tag "band_id", options_from_collection_for_select(Band.all, "id", "name") %>
+		<%= submit_tag 'Search' %>
+
 	<table class="t02 sortable" id="mytable" style="width:75%" >
 		<thead>
 		<tr>
@@ -36,31 +44,11 @@
 				<% else %>
 				<% saturday_events.each do |event| %>
 					<% if event.band == nil or event.band == "" %>
-						<tr>
-						<td> <%= saturday_date.strftime("%A") %> </td>
-						<td> <%= saturday_date.strftime("%m/%d/%Y") %></td>
-						<td> <%= event.status %></td>
-						<td>
-						<%= event.client_first_name %> <%= event.client_last_name %>, 
-						<% if event.venue == nil or event.venue == ""%>
-						No Venue Scheduled, 
-						<% else %> 
-						<%= event.venue %>, 
-						<% end %>
-						<%= link_to "View", event_path(event)%>
-						</td>
-						<td> No Booking </td>
-						</tr>
-					<% else %>
-						<% event.bookings.each do |booking| %>
-							<% if booking.kind == "BOOKED" %>
-								<tr style="background:green;">
-							<% else %>
+						<% unless @bands_param %>
 							<tr>
-							<% end %>
 							<td> <%= saturday_date.strftime("%A") %> </td>
 							<td> <%= saturday_date.strftime("%m/%d/%Y") %></td>
-							<td><%= event.status%> </td>
+							<td> <%= event.status %></td>
 							<td>
 							<%= event.client_first_name %> <%= event.client_last_name %>, 
 							<% if event.venue == nil or event.venue == ""%>
@@ -68,12 +56,36 @@
 							<% else %> 
 							<%= event.venue %>, 
 							<% end %>
-							<%= link_to "View", event_path(event) %>
+							<%= link_to "View", event_path(event)%>
 							</td>
-							<td>
-							<%= booking.band.name %>
-							</td>
+							<td> No Booking </td>
 							</tr>
+						<% end %>
+					<% else %>
+						<% event.bookings.each do |booking| %>
+							<% if !@bands_param || (booking.band.id == @bands_param.to_i && booking.kind != "BOOKED") %>
+								<% if booking.kind == "BOOKED" %>
+									<tr style="background:green;">
+								<% else %>
+									<tr>
+								<% end %>
+								<td> <%= saturday_date.strftime("%A") %> </td>
+								<td> <%= saturday_date.strftime("%m/%d/%Y") %></td>
+								<td><%= event.status%> </td>
+								<td>
+								<%= event.client_first_name %> <%= event.client_last_name %>, 
+								<% if event.venue == nil or event.venue == ""%>
+								No Venue Scheduled, 
+								<% else %> 
+								<%= event.venue %>, 
+								<% end %>
+								<%= link_to "View", event_path(event) %>
+								</td>
+								<td>
+								<%= booking.band.name %>
+								</td>
+								</tr>
+								<% end %>
 							<% end %>
 						<% end %>
 					<% end %>

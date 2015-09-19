@@ -10,6 +10,10 @@ class WelcomeController < ApplicationController
   end
 
   def bands
+    if params[:band_id]
+      @bands_param = params[:band_id]
+      @band = Band.find(params[:band_id])
+    end
   	@saturdays = saturdays
   	@events = Event.all
     bookings = Booking.order('date')
@@ -20,9 +24,5 @@ class WelcomeController < ApplicationController
       end
     end
     @bookings = good_bookings 
-
-
-
-
   end
 end
