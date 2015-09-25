@@ -8,8 +8,11 @@ class LinksController < ApplicationController
 		@event = Event.find(params[:event_id])
 		@linked_event = @event.links.new(links_params)
 		if @linked_event.save 
-			redirect_to event_path(@event) 
+			redirect_to event_path(@event)
+		else 
+			redirect_to event_path(@event)
 		end
+
 	end
 	def destroy
 		Link.find(params[:id]).destroy

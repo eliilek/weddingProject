@@ -10,6 +10,9 @@ class ContactsController < ApplicationController
 		@event = Event.find(params[:event_id])
 		@contact = @event.contacts.new(contact_params)
 		if @contact.save 
+			redirect_to event_path(@event)
+		else
+			@errors = "Please include a date"
 			redirect_to event_path(@event) 
 		end
 	end
