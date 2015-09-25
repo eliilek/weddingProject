@@ -124,21 +124,21 @@
 						<li>
 							<%= image_tag "message-32.jpg" %>
 							<%= link_to "#{document.title} #{document.created_at.strftime("%A, %m/%d/%Y %I:%M %p")} ", document.data.url, :target => "_blank" %>
-                                   <%= link_to raw("&#10006"), event_document_path(@event, document), data: { confirm: 'Are you sure you want to delete this docume?' }, :method => :delete, :class => 'delete-button' %>
+                                   <%= link_to raw("&#10006"), event_document_path(@event, document), data: { confirm: 'Are you sure you want to delete this document?' }, :method => :delete, :class => 'delete-button' %>
 
 						</li>
                          <% elsif document.data.url.include?(".jpg") %>
                               <li>
                                    <%= image_tag "color-swatch.jpg" %>
                                    <%= link_to "#{document.title} #{document.created_at.strftime("%A, %m/%d/%Y %I:%M %p")} ", document.data.url, :target => "_blank" %>
-                                   <%= link_to raw("&#10006"), event_document_path(@event, document), data: { confirm: 'Are you sure you want to delete this docume?' }, :method => :delete, :class => 'delete-button' %>
+                                   <%= link_to raw("&#10006"), event_document_path(@event, document), data: { confirm: 'Are you sure you want to delete this document?' }, :method => :delete, :class => 'delete-button' %>
 
                               </li>
 					<% else %>
 						<li>
 							<%= image_tag "word.jpg" %>
 							<%= link_to "#{document.title} #{document.created_at.strftime("%A, %m/%d/%Y %I:%M %p")} ", document.data.url, :target => "_blank" %>
-                                   <%= link_to raw("&#10006"), event_document_path(@event, document), data: { confirm: 'Are you sure you want to delete this docume?' }, :method => :delete, :class => 'delete-button' %>
+                                   <%= link_to raw("&#10006"), event_document_path(@event, document), data: { confirm: 'Are you sure you want to delete this document?' }, :method => :delete, :class => 'delete-button' %>
 
 						</li>
 					<% end %>
