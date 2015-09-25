@@ -21,7 +21,9 @@
 			<th>Date</th>
 			<th>Status</th>
 			<th>Client Name, Venue, Link</th>
-			<th>Band</th>
+			<% if !@bands_param %>
+				<th>Band</th>
+			<% end %>
 		</tr>
 		</thead>
 		<% @saturdays.each do |saturday_date| %>
@@ -45,7 +47,9 @@
 					<td> <%= saturday_date.strftime("%m/%d/%Y") %></td>
 					<td></td>
 					<td></td>
-					<td></td>
+					<% if !@bands_param %>
+						<td></td>
+					<% end %>
 				</tr>
 				<% else %>
 				<% x = false %>
@@ -65,7 +69,9 @@
 							<% end %>
 							<%= link_to "View", event_path(event)%>
 							</td>
-							<td> No Booking </td>
+							<% if !@bands_param %>
+								<td> No Booking </td>
+							<% end %>
 							</tr>
 						<% end %>
 					<% else %>
@@ -92,9 +98,11 @@
 								<% end %>
 								<%= link_to "View", event_path(event) %>
 								</td>
+								<% if !@bands_param %>
 								<td>
-								<%= booking.band.name %>
+									<%= booking.band.name %>
 								</td>
+								<% end %>
 								</tr>
 								<% end %>
 							<% end %>
@@ -106,7 +114,9 @@
 							<td> <%= saturday_date.strftime("%m/%d/%Y") %></td>
 							<td></td>
 							<td></td>
-							<td></td>
+							<% if !@bands_param %>
+								<td></td>
+							<% end %>
 						</tr>
 					<% end %>
 			<% end %>
