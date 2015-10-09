@@ -49,42 +49,36 @@
      <div class="object2">
 			<% if @event.bookings_only.length == 0 %>
 				<table style="border:none">
-					<tr>
-						<th>Band Name</th>
-						<th>Band Leader</th>
-						<th>Book Band</th>
-						<th>Holds</th>
-					</tr>
-				<% @bands.each do |band| %>
-					<% if band.is_free?(@event.final_date, @event) && band.already_booked(@event) %>
-					<tr>
-						<td><strong><%= band.name %></strong></td>
-						<td><strong><%= band.band_leader%></strong></td>
-						<td><strong><%= link_to 'Link', new_event_booking_path(@event, :band_id => band.id)%></strong></td>
-						<td><strong><%= band.how_many_holds(@event.final_date) %></strong></td>
-					</tr>
-					<% if band.holds(@event.final_date).length > 0 %>
-								<% band.holds(@event.final_date).each do |hold| %>
-									<tr>
-										<td>
-											Job #: <%= hold.event.job_identification_number %>
-										</td>
-										<td>
-											Contract Signer: <%= hold.event.client_first_name %> <%= hold.event.client_last_name %>
-										</td>
-										<td>
-											Venue: <%= hold.event.venue %>
-										</td>
-										<td>
-											<%= link_to 'Link', event_path(hold.event_id)%>
-										</td>
-									</tr>
-								<% end %>
-					     <% end %>
-					<% end %>
-
-					<% end %>
-				</table>
+     <tr>
+          <th>Band Name</th>
+          <th>Job ID #</th>
+          <th>Client Name</th>
+          <th>Venue</th>
+          <th>Status</th>
+     </tr>
+     <% @bands.each do |band| %>
+          <% if band.is_free?(@event.final_date, @event) && band.already_booked(@event) %>
+               <tr>
+                    <td><strong><%= link_to band.name, new_event_booking_path(@event, :band_id => band.id) %></strong></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+               </tr>
+               <% if band.holds(@event.final_date).length > 0 %>
+                    <% band.holds(@event.final_date).each do |hold| %>
+                         <tr>
+                              <td></td>
+                              <td><%= link_to hold.event.job_identification_number, event_path(hold.event_id) %></td>
+                              <td><%= hold.event.client_first_name %> <%= hold.event.client_last_name %></td>
+                              <td><%= hold.event.venue %></td>
+                              <td><%= hold.event.status %></td>
+                         </tr>
+                    <% end %>
+               <% end %>
+          <% end %>
+     <% end %>
+</table>
                     <% end%>
                                    <% if @event.bookings.length > 0 %>
                     <h2>Booking Information</h2>
