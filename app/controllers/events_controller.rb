@@ -16,7 +16,9 @@ class EventsController < ApplicationController
 		@contact = Contact.new
 		@linked_event = Link.new
 		@links = Link.where("event_id = #{@event.id}")
-		@date_param = params[:event][:final_date]
+		if params[:event]
+			@date_param = params[:event][:final_date]
+		end
 	end
 
 	def new

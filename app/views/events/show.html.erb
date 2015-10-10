@@ -3,517 +3,527 @@
 		<%= @event.client_first_name %>
 		<%= @event.client_last_name %>'s Event
 	</h1>
-  <div class="left-inner">
-  	<h2>Info Cont.</h2>
-     <div class="object3">
-     	<ul>
-     		<li>
-     		   <strong>Planning Date/Final Date:</strong>
-     		</li>
-     		<li><strong>Venue:</strong></li>
-     		<li><strong>Referred By:</strong></li>
-     		<li><strong>Number of Guests:</strong></li>
-     	</ul>
-     	<ul class="second-ul">
-     		<li>
-     				<%= @event.planning_date %>/<%= @event.final_date.strftime("%A, %m/%d/%Y") unless @event.final_date == nil or @event.final_date == "" %>
-     		</li>
-     		<li>
-     			<%if @event.venue == "" or @event.venue == nil%>
-     				</br>
-     			<% else %>
-     				<%= @event.venue %>
-     			<% end %>
-     		</li>
-     		<li>
-     			<%if @event.referred_by == "" or @event.referred_by == nil%>
-     				</br>
-     			<% else %>
-     				<%= @event.referred_by %>
-     			<% end %>
-     		</li>
-			<li>
-     			<%if @event.guests == "" or @event.guests == nil%>
-     				</br>
-     			<% else %>
-     				<%= @event.guests %>
-     			<% end %>
-     		</li>     	
-     	</ul>
-     	<div class="button-holder">
-			<%= link_to 'Create Notification', new_event_notification_path(@event), :class=> "add button-inner"%>
-		</div>
-     </div>
-     <%= form_tag(event_path, :method => "get") do %>
-               <%= date_field "event", "final_date" %>
-               <%= submit_tag 'Search' %>
-     <% end %>
-     <h2>Band Availability</h2>
-     <div class="object2">
+   <div class="left-inner">
+       <h2>Info Cont.</h2>
+       <div class="object3">
+         <ul>
+             <li>
+               <strong>Planning Date/Final Date:</strong>
+          </li>
+          <li><strong>Venue:</strong></li>
+          <li><strong>Referred By:</strong></li>
+          <li><strong>Number of Guests:</strong></li>
+     </ul>
+     <ul class="second-ul">
+        <li>
+           <%= @event.planning_date %>/<%= @event.final_date.strftime("%A, %m/%d/%Y") unless @event.final_date == nil or @event.final_date == "" %>
+      </li>
+      <li>
+       <%if @event.venue == "" or @event.venue == nil%>
+  </br>
+  <% else %>
+  <%= @event.venue %>
+  <% end %>
+</li>
+<li>
+  <%if @event.referred_by == "" or @event.referred_by == nil%>
+</br>
+<% else %>
+<%= @event.referred_by %>
+<% end %>
+</li>
+<li>
+  <%if @event.guests == "" or @event.guests == nil%>
+</br>
+<% else %>
+<%= @event.guests %>
+<% end %>
+</li>     	
+</ul>
+<div class="button-holder">
+  <%= link_to 'Create Notification', new_event_notification_path(@event), :class=> "add button-inner"%>
+</div>
+</div>
+</br>
+<%= form_tag(event_path, :method => "get") do %>
+<%= date_field "event", "final_date", value: @date_param %>
+<%= submit_tag 'Search' %>
+<% end %>
+<div class="object2">
 	<% if @event.bookings_only.length == 0 %>
-	<table style="border:none">
-     <tr>
-          <th>Band Name</th>
-          <th>Job ID #</th>
-          <th>Client Name</th>
-          <th>Venue</th>
-          <th>Status</th>
-     </tr>
-     <% @bands.each do |band| %>
-          <% if band.is_free?(@event.final_date, @event) && band.already_booked(@event) %>
-               <tr>
-                    <td><strong><%= link_to band.name, new_event_booking_path(@event, :band_id => band.id) %></strong></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-               </tr>
-               <% if band.holds(@event.final_date).length > 0 %>
-                    <% band.holds(@event.final_date).each do |hold| %>
-                         <tr>
-                              <td></td>
-                              <td><%= link_to hold.event.job_identification_number, event_path(hold.event_id) %></td>
-                              <td><%= hold.event.client_first_name %> <%= hold.event.client_last_name %></td>
-                              <td><%= hold.event.venue %></td>
-                              <td><%= hold.event.status %></td>
-                         </tr>
-                    <% end %>
-               <% end %>
+     <% if (@date_param != nil && @date_param != "") or (@event.final_date != nil && @event.final_date != "") %>
+     <h2>Band Availability</h2>
+
+     <table style="border:none">
+          <tr>
+               <th>Band Name</th>
+               <th>Job ID #</th>
+               <th>Client Name</th>
+               <th>Venue</th>
+               <th>Status</th>
+          </tr>
+          <% if @event.final_date != nil && @event.final_date != "" %>
+               <% group_time = @event.final_date %>
+          <% else %>
+               <% group_time = Date.parse(@date_param) %>
           <% end %>
-     <% end %>
-</table>
+          <% @bands.each do |band| %>
+          <% if band.is_free?(group_time, @event) && band.already_booked(@event) %>
+          <tr>
+               <td><strong><%= link_to band.name, new_event_booking_path(@event, :band_id => band.id, :planning => group_time ) %></strong></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+          </tr>
+          <% if band.holds(group_time).length > 0 %>
+          <% band.holds(group_time).each do |hold| %>
+          <tr>
+               <td></td>
+               <td><%= link_to hold.event.job_identification_number, event_path(hold.event_id) %></td>
+               <td><%= hold.event.client_first_name %> <%= hold.event.client_last_name %></td>
+               <td><%= hold.event.venue %></td>
+               <td><%= hold.event.status %></td>
+          </tr>
+          <% end %>
+          <% end %>
+          <% end %>
+          <% end %>
+     </table>
      <% if @event.bookings.length > 0 %>
-          <h2>Booking Information</h2>
-                    <table style="border:none">
-                         <tr>
-                              <th>Band</th>
-                              <th>Band Leader</th>
-                              <th>Type</th>
-                              <th>Delete</th>
-                         </tr>
-                         <% @event.bookings.each do |booking| %>
-                         <tr>
-                              <td><%= booking.band.name %></td>
-                              <td><%= booking.band.band_leader %></td>
-                              <td><%= booking.kind %></td>
-                              <td><%= link_to raw("&#10006"), event_booking_path(@event, booking), data: { confirm: 'Are you sure you want to delete this alert?' }, :method => :delete, :class => 'delete-button' %></td>
+     <h2>Booking Information</h2>
+     <table style="border:none">
+          <tr>
+               <th>Band</th>
+               <th>Band Leader</th>
+               <th>Type</th>
+               <th>Delete</th>
+          </tr>
+          <% @event.bookings.each do |booking| %>
+          <tr>
+               <td><%= booking.band.name %></td>
+               <td><%= booking.band.band_leader %></td>
+               <td><%= booking.kind %></td>
+               <td><%= link_to raw("&#10006"), event_booking_path(@event, booking), data: { confirm: 'Are you sure you want to delete this alert?' }, :method => :delete, :class => 'delete-button' %></td>
 
-                         </tr>
-                         <% end %>
-               </table>
-
-			<% end %>
-     </div>
+          </tr>
+          <% end %>
+     </table>
      <% end %>
 
-     <div class="object4">
-     	<h2>Documents</h2>
-				<% @documents.each do |document| %>
-					<% if document.data.url.include?(".pdf") %>
-						<li>
-							<%= image_tag "pdf_thumbnail.jpg" %>
-							<%= link_to "#{document.title} #{document.created_at.strftime("%A, %m/%d/%Y %I:%M %p")} ", document.data.url, :target => "_blank" %>
-							<%= link_to raw("&#10006"), event_document_path(@event, document), data: { confirm: 'Are you sure you want to delete this document?' }, :method => :delete, :class => 'delete-button' %>
 
-						</li>
-					<% elsif document.data.url.include?(".msg") %>
-						<li>
-							<%= image_tag "message-32.jpg" %>
-							<%= link_to "#{document.title} #{document.created_at.strftime("%A, %m/%d/%Y %I:%M %p")} ", document.data.url, :target => "_blank" %>
-                                   <%= link_to raw("&#10006"), event_document_path(@event, document), data: { confirm: 'Are you sure you want to delete this document?' }, :method => :delete, :class => 'delete-button' %>
+     <% end %>
+</div>
+<% end %>
 
-						</li>
-                         <% elsif document.data.url.include?(".jpg") %>
-                              <li>
-                                   <%= image_tag "color-swatch.jpg" %>
-                                   <%= link_to "#{document.title} #{document.created_at.strftime("%A, %m/%d/%Y %I:%M %p")} ", document.data.url, :target => "_blank" %>
-                                   <%= link_to raw("&#10006"), event_document_path(@event, document), data: { confirm: 'Are you sure you want to delete this document?' }, :method => :delete, :class => 'delete-button' %>
+<div class="object4">
+    <h2>Documents</h2>
+    <% @documents.each do |document| %>
+    <% if document.data.url.include?(".pdf") %>
+    <li>
+        <%= image_tag "pdf_thumbnail.jpg" %>
+        <%= link_to "#{document.title} #{document.created_at.strftime("%A, %m/%d/%Y %I:%M %p")} ", document.data.url, :target => "_blank" %>
+        <%= link_to raw("&#10006"), event_document_path(@event, document), data: { confirm: 'Are you sure you want to delete this document?' }, :method => :delete, :class => 'delete-button' %>
 
-                              </li>
-					<% else %>
-						<li>
-							<%= image_tag "word.jpg" %>
-							<%= link_to "#{document.title} #{document.created_at.strftime("%A, %m/%d/%Y %I:%M %p")} ", document.data.url, :target => "_blank" %>
-                                   <%= link_to raw("&#10006"), event_document_path(@event, document), data: { confirm: 'Are you sure you want to delete this document?' }, :method => :delete, :class => 'delete-button' %>
+   </li>
+   <% elsif document.data.url.include?(".msg") %>
+   <li>
+        <%= image_tag "message-32.jpg" %>
+        <%= link_to "#{document.title} #{document.created_at.strftime("%A, %m/%d/%Y %I:%M %p")} ", document.data.url, :target => "_blank" %>
+        <%= link_to raw("&#10006"), event_document_path(@event, document), data: { confirm: 'Are you sure you want to delete this document?' }, :method => :delete, :class => 'delete-button' %>
 
-						</li>
-					<% end %>
-				<% end %>
-				<br>
-				<div class="button-holder">
-					<%= link_to 'Upload Document', new_event_document_path(@event), :class=> "add button-inner"%>
-				</div>
-     </div>
-     <div>
-     	<h2>Contract Details</h2>
-     	<ul>
-     		<li><strong>Start Time:</strong></li>
-     		<li><strong>End Time:</strong></li>
-     		<li><strong>Continuous:</strong> </li>
-     		<li><strong>Contract Price:</strong></li>
-     		<li><strong>Overtime Price:</strong></li>
-     		<li><strong>Musicians:</strong></li>
-     		<li><strong>Vocalists:</strong></li>
-     		<li><strong>Sold By:</strong></li>
-     	</ul>
-     	<ul>
-     		<li>
-     			<%if @event.start_time == "" or @event.start_time == nil%>
-     				</br>
-     			<% else %>
-     				<%= @event.start_time %>
-     			<% end %>
-     		</li>
-     		<li>
-     			<%if @event.end_time == "" or @event.end_time == nil%>
-     				</br>
-     			<% else %>
-     				<%= @event.end_time %>
-     			<% end %>
-     		</li>
-     		<li>
-     			<%if @event.continuous == "" or @event.continuous == nil%>
-     				</br>
-     			<% else %>
-     				<%= @event.continuous %>
-     			<% end %>
-     		</li>
-     		<li>
-     			<%if @event.contract_price == "" or @event.contract_price == nil%>
-     				</br>
-     			<% else %>
-     				<%= @event.contract_price %>
-     			<% end %>
-     		</li>
-     		<li>
-     			<%if @event.ot_price == "" or @event.ot_price == nil%>
-     				</br>
-     			<% else %>
-     				<%= @event.ot_price %>
-     			<% end %>
-     		</li>
-     		<li>
-     			<%if @event.number_of_musicians == "" or @event.number_of_musicians == nil%>
-     				</br>
-     			<% else %>
-     				<%= @event.number_of_musicians %>
-     			<% end %>
-     		</li>
-     		<li>
-     			<%if @event.number_of_vocalists == "" or @event.number_of_vocalists == nil%>
-     				</br>
-     			<% else %>
-     				<%= @event.number_of_vocalists %>
-     			<% end %>
-     		</li>
-     		<li>
-     			<%if @event.sold_by == "" or @event.sold_by == nil%>
-     				</br>
-     			<% else %>
-     				<%= @event.sold_by %>
-     			<% end %>
-     		</li>
+   </li>
+   <% elsif document.data.url.include?(".jpg") %>
+   <li>
+     <%= image_tag "color-swatch.jpg" %>
+     <%= link_to "#{document.title} #{document.created_at.strftime("%A, %m/%d/%Y %I:%M %p")} ", document.data.url, :target => "_blank" %>
+     <%= link_to raw("&#10006"), event_document_path(@event, document), data: { confirm: 'Are you sure you want to delete this document?' }, :method => :delete, :class => 'delete-button' %>
 
-     	</ul>
-     </div>
+</li>
+<% else %>
+<li>
+   <%= image_tag "word.jpg" %>
+   <%= link_to "#{document.title} #{document.created_at.strftime("%A, %m/%d/%Y %I:%M %p")} ", document.data.url, :target => "_blank" %>
+   <%= link_to raw("&#10006"), event_document_path(@event, document), data: { confirm: 'Are you sure you want to delete this document?' }, :method => :delete, :class => 'delete-button' %>
 
-  </div>
-  <div class="right-inner">
-  	<h2>Info</h2>
-  	<div class="object3">
-     	<ul>
-     		<li><strong>Event Job ID:</strong></li>
-     		<li><strong>Inquiry Date:</strong></li>
-     		<li><strong>Event Type:</strong></li>
-     		<li><strong>Status:</strong></li>
-     	</ul>
-     	<ul class="second-ul">
-     		<li><%= @event.job_identification_number %></li>
-     		<li>
-     			<%if @event.inquiry_date == "" or @event.inquiry_date == nil%>
-     				</br>
-     			<% else %>
-     				<%= @event.inquiry_date.strftime("%m/%d/%Y") %>
-     			<% end %>
-     		</li>
-     		<li>
-     			<%if @event.event_type == "" or @event.event_type == nil%>
-     				</br>
-     			<% else %>
-     				<%= @event.event_type %>
-     			<% end %>
-     		</li>
-     		<li><%= @event.status %></li>
-     	</ul>
-     	<div class="button-holder">
-			<%= link_to 'Edit Details', edit_event_path(@event), :class=> "edit button-inner"%>
-		</div>
-     </div>
-     <div class="object4">
-     	<h2>Contacts</h2>
-     	<ul>
+</li>
+<% end %>
+<% end %>
+<br>
+<div class="button-holder">
+     <%= link_to 'Upload Document', new_event_document_path(@event), :class=> "add button-inner"%>
+</div>
+</div>
+<div>
+    <h2>Contract Details</h2>
+    <ul>
+        <li><strong>Start Time:</strong></li>
+        <li><strong>End Time:</strong></li>
+        <li><strong>Continuous:</strong> </li>
+        <li><strong>Contract Price:</strong></li>
+        <li><strong>Overtime Price:</strong></li>
+        <li><strong>Musicians:</strong></li>
+        <li><strong>Vocalists:</strong></li>
+        <li><strong>Sold By:</strong></li>
+   </ul>
+   <ul>
+        <li>
+            <%if @event.start_time == "" or @event.start_time == nil%>
+       </br>
+       <% else %>
+       <%= @event.start_time %>
+       <% end %>
+  </li>
+  <li>
+       <%if @event.end_time == "" or @event.end_time == nil%>
+  </br>
+  <% else %>
+  <%= @event.end_time %>
+  <% end %>
+</li>
+<li>
+  <%if @event.continuous == "" or @event.continuous == nil%>
+</br>
+<% else %>
+<%= @event.continuous %>
+<% end %>
+</li>
+<li>
+  <%if @event.contract_price == "" or @event.contract_price == nil%>
+</br>
+<% else %>
+<%= @event.contract_price %>
+<% end %>
+</li>
+<li>
+  <%if @event.ot_price == "" or @event.ot_price == nil%>
+</br>
+<% else %>
+<%= @event.ot_price %>
+<% end %>
+</li>
+<li>
+  <%if @event.number_of_musicians == "" or @event.number_of_musicians == nil%>
+</br>
+<% else %>
+<%= @event.number_of_musicians %>
+<% end %>
+</li>
+<li>
+  <%if @event.number_of_vocalists == "" or @event.number_of_vocalists == nil%>
+</br>
+<% else %>
+<%= @event.number_of_vocalists %>
+<% end %>
+</li>
+<li>
+  <%if @event.sold_by == "" or @event.sold_by == nil%>
+</br>
+<% else %>
+<%= @event.sold_by %>
+<% end %>
+</li>
 
-     		<li><strong>Contract Signer:</strong></li>
-               <li><strong>Contract Signer Title:</strong></li>
-     		<li><strong>Contract Signer Email:</strong> </li>
-     		<li><strong>Contract Signer Phone:</strong></li>
-               <li><strong>Address 1:</strong></li>
-               <li><strong>Address 2:</strong></li>
-               <li><strong>City:</strong></li>
-               <li><strong>State:</strong></li>
-               <li><strong>Zip:</strong></li>
-               <br>
+</ul>
+</div>
 
-     		<li><strong>Secondary Contact:</strong></li>
-               <li><strong>Secondary Contact Title:</strong></li>
-     		<li><strong>Secondary Contact Email :</strong> </li>
-     		<li><strong>Secondary Contact Phone:</strong></li><br>
+</div>
+<div class="right-inner">
+  <h2>Info</h2>
+  <div class="object3">
+    <ul>
+        <li><strong>Event Job ID:</strong></li>
+        <li><strong>Inquiry Date:</strong></li>
+        <li><strong>Event Type:</strong></li>
+        <li><strong>Status:</strong></li>
+   </ul>
+   <ul class="second-ul">
+        <li><%= @event.job_identification_number %></li>
+        <li>
+            <%if @event.inquiry_date == "" or @event.inquiry_date == nil%>
+       </br>
+       <% else %>
+       <%= @event.inquiry_date.strftime("%m/%d/%Y") %>
+       <% end %>
+  </li>
+  <li>
+       <%if @event.event_type == "" or @event.event_type == nil%>
+  </br>
+  <% else %>
+  <%= @event.event_type %>
+  <% end %>
+</li>
+<li><%= @event.status %></li>
+</ul>
+<div class="button-holder">
+  <%= link_to 'Edit Details', edit_event_path(@event), :class=> "edit button-inner"%>
+</div>
+</div>
+<div class="object4">
+    <h2>Contacts</h2>
+    <ul>
 
-     		<% if @event.third_contact != "" && @event.third_contact != nil %>
+        <li><strong>Contract Signer:</strong></li>
+        <li><strong>Contract Signer Title:</strong></li>
+        <li><strong>Contract Signer Email:</strong> </li>
+        <li><strong>Contract Signer Phone:</strong></li>
+        <li><strong>Address 1:</strong></li>
+        <li><strong>Address 2:</strong></li>
+        <li><strong>City:</strong></li>
+        <li><strong>State:</strong></li>
+        <li><strong>Zip:</strong></li>
+        <br>
 
-	     		<li><strong>Third Contact:</strong></li>
-                    <li><strong>Third Contact Title:</strong></li>
-	     		<li><strong>Third Contact Email:</strong> </li>
-	     		<li><strong>Third Contact Phone:</strong></li>
-	     		<br>
+        <li><strong>Secondary Contact:</strong></li>
+        <li><strong>Secondary Contact Title:</strong></li>
+        <li><strong>Secondary Contact Email :</strong> </li>
+        <li><strong>Secondary Contact Phone:</strong></li><br>
 
-	     	<% end %>
-	     	<% if @event.fourth_contact != "" && @event.fourth_contact != nil %>
+        <% if @event.third_contact != "" && @event.third_contact != nil %>
 
-	     		<li><strong>Fourth Contact:</strong></li>
-                    <li><strong>Fourth Contact Title:</strong></li>
-	     		<li><strong>Fourth Contact Email:</strong> </li>
-	     		<li><strong>Fourth Contact Phone:</strong></li>
-	     		<br>
+        <li><strong>Third Contact:</strong></li>
+        <li><strong>Third Contact Title:</strong></li>
+        <li><strong>Third Contact Email:</strong> </li>
+        <li><strong>Third Contact Phone:</strong></li>
+        <br>
 
-	     	<% end %>
-               <li><strong>Planner Name:</strong></li>
-               <li><strong>Planner Email:</strong> </li>
-               <li><strong>Planner Phone:</strong></li>
-     	</ul>
-     	<ul class="second-ul">
-     		<li><%if @event.primary_contact == "" or @event.primary_contact == nil%>
-                         </br>
-                    <% else %>
-                         <%= @event.primary_contact %>
-                    <% end %>
-               </li>
-               <li>
-                    <%if @event.primary_contact_title == "" or @event.primary_contact_title == nil%>
-               </br>
-                    <% else %>
-                         <%= @event.primary_contact_title %>
-                    <% end %>
-               </li>
-               <li>
-     		<%if @event.primary_contact_email == "" or @event.primary_contact_email == nil%>
-                    </br>
-                    <% else %>
-                         <%= mail_to(@event.primary_contact_email) %>
-                    <% end %>
-               </li>
-     		<li>
-               <%if @event.primary_contact_phone == "" or @event.primary_contact_phone == nil%>
-                    </br>
-                    <% else %>
-                         <%= @event.primary_contact_phone %>
-                    <% end %>
-               </li>
-               <li>
-               <%if @event.address_one == "" or @event.address_one == nil%>
-                    </br>
-                    <% else %>
-                         <%= @event.address_one %>
-                    <% end %>
-               </li>
-               <li>
-               <%if @event.address_two == "" or @event.address_two == nil%>
-                    </br>
-                    <% else %>
-                         <%= @event.address_two %>
-                    <% end %>
-               </li>
-               <li>
-               <%if @event.city == "" or @event.city == nil%>
-                    </br>
-                    <% else %>
-                         <%= @event.city %>
-                    <% end %>
-               </li>
-               <li>
-               <%if @event.state == "" or @event.state == nil%>
-                    </br>
-                    <% else %>
-                         <%= @event.state %>
-                    <% end %>
-               </li>
-               <li>
-               <%if @event.zip == "" or @event.zip == nil%>
-                    </br>
-                    <% else %>
-                         <%= @event.zip %>
-                    <% end %>
-               </li>
-     		</br>
+        <% end %>
+        <% if @event.fourth_contact != "" && @event.fourth_contact != nil %>
 
-     		<li><%if @event.secondary_contact == "" or @event.secondary_contact == nil%>
-                         </br>
-                    <% else %>
-                         <%= @event.secondary_contact %>
-                    <% end %>
-               </li>
-               <li>
-                    <%if @event.secondary_contact_title == "" or @event.secondary_contact_title == nil%>
-               </br>
-                    <% else %>
-                         <%= @event.secondary_contact_title %>
-                    <% end %>
-               </li>
-               <li>
-               <%if @event.secondary_contact_email == "" or @event.secondary_contact_email == nil%>
-                    </br>
-                    <% else %>
-                         <%= mail_to(@event.secondary_contact_email) %>
-                    <% end %>
-               </li>
-               <li>
-               <%if @event.secondary_contact_phone == "" or @event.secondary_contact_phone == nil%>
-                    </br>
-                    <% else %>
-                         <%= @event.secondary_contact_phone %>
-                    <% end %>
-               </li>
-     	</br>
-     		<% if @event.third_contact != "" && @event.third_contact != nil %>
-	     		<li><%if @event.third_contact == "" or @event.third_contact == nil%>
-                         </br>
-                    <% else %>
-                         <%= @event.third_contact %>
-                    <% end %>
-               </li>
-               <li>
-                    <%if @event.third_contact_title == "" or @event.third_contact_title == nil%>
-               </br>
-                    <% else %>
-                         <%= @event.third_contact_title %>
-                    <% end %>
-               </li>
-               <li>
-               <%if @event.third_contact_email == "" or @event.third_contact_email == nil%>
-                    </br>
-                    <% else %>
-                         <%= mail_to(@event.third_contact_email) %>
-                    <% end %>
-               </li>
-               <li>
-               <%if @event.third_contact_phone == "" or @event.third_contact_phone == nil%>
-                    </br>
-                    <% else %>
-                         <%= @event.third_contact_phone %>
-                    <% end %>
-               </li>
+        <li><strong>Fourth Contact:</strong></li>
+        <li><strong>Fourth Contact Title:</strong></li>
+        <li><strong>Fourth Contact Email:</strong> </li>
+        <li><strong>Fourth Contact Phone:</strong></li>
+        <br>
 
-	     		</br>
-	     	<% end %>
-	     	<% if @event.fourth_contact != "" && @event.fourth_contact != nil %>
-	     		<li><%if @event.fourth_contact == "" or @event.fourth_contact == nil%>
-                         </br>
-                    <% else %>
-                         <%= @event.fourth_contact %>
-                    <% end %>
-               </li>
-               <li>
-                    <%if @event.fourth_contact_title == "" or @event.fourth_contact_title == nil%>
-               </br>
-                    <% else %>
-                         <%= mail_to(@event.fourth_contact_title) %>
-                    <% end %>
-               </li>
-               <li>
-               <%if @event.fourth_contact_email == "" or @event.fourth_contact_email == nil%>
-                    </br>
-                    <% else %>
-                         <%= @event.fourth_contact_email %>
-                    <% end %>
-               </li>
-               <li>
-               <%if @event.fourth_contact_phone == "" or @event.fourth_contact_phone == nil%>
-                    </br>
-                    <% else %>
-                         <%= @event.fourth_contact_phone %>
-                    <% end %>
-               </li>
-	     		</br>
-	     	<% end %>
-                         <li>
-                    <%if @event.planner_name == "" or @event.planner_name == nil%>
-                         </br>
-                    <% else %>
-                         <%= @event.planner_name %>
-                    <% end %>
-               </li>
-               <li>
-                    <%if @event.planner_email == "" or @event.planner_email == nil%>
-                         </br>
-                    <% else %>
-                         <%= mail_to(@event.planner_email) %>
-                    <% end %>
-               </li>
-               <li>
-                    <%if @event.planner_phone == "" or @event.planner_phone == nil%>
-                         </br>
-                    <% else %>
-                         <%= @event.planner_phone %>
-                    <% end %>
-               </li>
-     	</ul>
-    </div>
-    <div>
-   	<h2>Communications</h2>
-   		<div class="padding">
+        <% end %>
+        <li><strong>Planner Name:</strong></li>
+        <li><strong>Planner Email:</strong> </li>
+        <li><strong>Planner Phone:</strong></li>
+   </ul>
+   <ul class="second-ul">
+        <li><%if @event.primary_contact == "" or @event.primary_contact == nil%>
+        </br>
+        <% else %>
+        <%= @event.primary_contact %>
+        <% end %>
+   </li>
+   <li>
+     <%if @event.primary_contact_title == "" or @event.primary_contact_title == nil%>
+</br>
+<% else %>
+<%= @event.primary_contact_title %>
+<% end %>
+</li>
+<li>
+   <%if @event.primary_contact_email == "" or @event.primary_contact_email == nil%>
+</br>
+<% else %>
+<%= mail_to(@event.primary_contact_email) %>
+<% end %>
+</li>
+<li>
+     <%if @event.primary_contact_phone == "" or @event.primary_contact_phone == nil%>
+</br>
+<% else %>
+<%= @event.primary_contact_phone %>
+<% end %>
+</li>
+<li>
+     <%if @event.address_one == "" or @event.address_one == nil%>
+</br>
+<% else %>
+<%= @event.address_one %>
+<% end %>
+</li>
+<li>
+     <%if @event.address_two == "" or @event.address_two == nil%>
+</br>
+<% else %>
+<%= @event.address_two %>
+<% end %>
+</li>
+<li>
+     <%if @event.city == "" or @event.city == nil%>
+</br>
+<% else %>
+<%= @event.city %>
+<% end %>
+</li>
+<li>
+     <%if @event.state == "" or @event.state == nil%>
+</br>
+<% else %>
+<%= @event.state %>
+<% end %>
+</li>
+<li>
+     <%if @event.zip == "" or @event.zip == nil%>
+</br>
+<% else %>
+<%= @event.zip %>
+<% end %>
+</li>
+</br>
 
-		<% if @contacts.length == 0 %>
+<li><%if @event.secondary_contact == "" or @event.secondary_contact == nil%>
+</br>
+<% else %>
+<%= @event.secondary_contact %>
+<% end %>
+</li>
+<li>
+     <%if @event.secondary_contact_title == "" or @event.secondary_contact_title == nil%>
+</br>
+<% else %>
+<%= @event.secondary_contact_title %>
+<% end %>
+</li>
+<li>
+     <%if @event.secondary_contact_email == "" or @event.secondary_contact_email == nil%>
+</br>
+<% else %>
+<%= mail_to(@event.secondary_contact_email) %>
+<% end %>
+</li>
+<li>
+     <%if @event.secondary_contact_phone == "" or @event.secondary_contact_phone == nil%>
+</br>
+<% else %>
+<%= @event.secondary_contact_phone %>
+<% end %>
+</li>
+</br>
+<% if @event.third_contact != "" && @event.third_contact != nil %>
+<li><%if @event.third_contact == "" or @event.third_contact == nil%>
+</br>
+<% else %>
+<%= @event.third_contact %>
+<% end %>
+</li>
+<li>
+     <%if @event.third_contact_title == "" or @event.third_contact_title == nil%>
+</br>
+<% else %>
+<%= @event.third_contact_title %>
+<% end %>
+</li>
+<li>
+     <%if @event.third_contact_email == "" or @event.third_contact_email == nil%>
+</br>
+<% else %>
+<%= mail_to(@event.third_contact_email) %>
+<% end %>
+</li>
+<li>
+     <%if @event.third_contact_phone == "" or @event.third_contact_phone == nil%>
+</br>
+<% else %>
+<%= @event.third_contact_phone %>
+<% end %>
+</li>
 
-			<p>There are no communications for this event</p>
+</br>
+<% end %>
+<% if @event.fourth_contact != "" && @event.fourth_contact != nil %>
+<li><%if @event.fourth_contact == "" or @event.fourth_contact == nil%>
+</br>
+<% else %>
+<%= @event.fourth_contact %>
+<% end %>
+</li>
+<li>
+     <%if @event.fourth_contact_title == "" or @event.fourth_contact_title == nil%>
+</br>
+<% else %>
+<%= mail_to(@event.fourth_contact_title) %>
+<% end %>
+</li>
+<li>
+     <%if @event.fourth_contact_email == "" or @event.fourth_contact_email == nil%>
+</br>
+<% else %>
+<%= @event.fourth_contact_email %>
+<% end %>
+</li>
+<li>
+     <%if @event.fourth_contact_phone == "" or @event.fourth_contact_phone == nil%>
+</br>
+<% else %>
+<%= @event.fourth_contact_phone %>
+<% end %>
+</li>
+</br>
+<% end %>
+<li>
+     <%if @event.planner_name == "" or @event.planner_name == nil%>
+</br>
+<% else %>
+<%= @event.planner_name %>
+<% end %>
+</li>
+<li>
+     <%if @event.planner_email == "" or @event.planner_email == nil%>
+</br>
+<% else %>
+<%= mail_to(@event.planner_email) %>
+<% end %>
+</li>
+<li>
+     <%if @event.planner_phone == "" or @event.planner_phone == nil%>
+</br>
+<% else %>
+<%= @event.planner_phone %>
+<% end %>
+</li>
+</ul>
+</div>
+<div>
+ <h2>Communications</h2>
+ <div class="padding">
 
-		<% else  %>
-			<% counter = @contacts.length %>
-			<% @contacts.each do |contact| %>
-				<p><strong>Communication <%=counter%></strong>
-				<%= link_to raw("&#10006"), event_contact_path(@event, contact), data: { confirm: 'Are you sure you want to delete this contact?' }, :method => :delete, :class => 'delete-button' %></p>
-				<p><strong>Date:</strong> <%= contact.date.strftime("%m/%d/%Y") %></p>
-				<p><strong>Notes:</strong></p>
-				<p><%= contact.notes %></p>
-				<% counter -= 1 %>
-			<% end %>
-		<% end %>
-		<br>
-			<%= form_for [@event, @contact] do |f| %>
-			<p><strong><%= f.label :date %>:</strong><%= f.date_field :date, :value=>Date.today %></p>
-			<p><strong><%= f.label :notes %>:</strong></p>
-			<p> <%= f.text_area :notes, :cols => 40, :rows => 15 %></p>
-			<div class="button-holder">
-				<p><%= f.submit "Create", :class => "add button" %></p>
-			</div>
-			<% end %>
-		</div>
-	</div>
-  </div>
-  <div>
-          <h2>Linked Events</h2>
-          <% @links.each do |link| %>
-          <% linked_event = Event.find_by(job_identification_number: link.linked_event_job_number) %>
-          <%= link_to "#{link.linked_event_job_number}", event_path(linked_event.id), :target => "_blank" if linked_event != nil  %>
-          <%= link_to raw("&#10006"), event_link_path(@event, link), data: { confirm: 'Are you sure you want to delete this link?' }, :method => :delete, :class => 'delete-button' %><br>
-          <% end %>
-               <div class="padding">
-               <%= form_for [@event, @linked_event] do |f| %>
-               <p><strong><%= f.label :job_identification_number %>:</strong><%= f.number_field :linked_event_job_number %></p>
-               <div class="button-holder">
-                    <p><%= f.submit "Create", :class => "add button" %></p>
-               </div>
-               <% end %>
+   <% if @contacts.length == 0 %>
+
+   <p>There are no communications for this event</p>
+
+   <% else  %>
+   <% counter = @contacts.length %>
+   <% @contacts.each do |contact| %>
+   <p><strong>Communication <%=counter%></strong>
+      <%= link_to raw("&#10006"), event_contact_path(@event, contact), data: { confirm: 'Are you sure you want to delete this contact?' }, :method => :delete, :class => 'delete-button' %></p>
+      <p><strong>Date:</strong> <%= contact.date.strftime("%m/%d/%Y") %></p>
+      <p><strong>Notes:</strong></p>
+      <p><%= contact.notes %></p>
+      <% counter -= 1 %>
+      <% end %>
+      <% end %>
+      <br>
+      <%= form_for [@event, @contact] do |f| %>
+      <p><strong><%= f.label :date %>:</strong><%= f.date_field :date, :value=>Date.today %></p>
+      <p><strong><%= f.label :notes %>:</strong></p>
+      <p> <%= f.text_area :notes, :cols => 40, :rows => 15 %></p>
+      <div class="button-holder">
+           <p><%= f.submit "Create", :class => "add button" %></p>
+      </div>
+      <% end %>
+ </div>
+</div>
+</div>
+<div>
+     <h2>Linked Events</h2>
+     <% @links.each do |link| %>
+     <% linked_event = Event.find_by(job_identification_number: link.linked_event_job_number) %>
+     <%= link_to "#{link.linked_event_job_number}", event_path(linked_event.id), :target => "_blank" if linked_event != nil  %>
+     <%= link_to raw("&#10006"), event_link_path(@event, link), data: { confirm: 'Are you sure you want to delete this link?' }, :method => :delete, :class => 'delete-button' %><br>
+     <% end %>
+     <div class="padding">
+          <%= form_for [@event, @linked_event] do |f| %>
+          <p><strong><%= f.label :job_identification_number %>:</strong><%= f.number_field :linked_event_job_number %></p>
+          <div class="button-holder">
+               <p><%= f.submit "Create", :class => "add button" %></p>
           </div>
+          <% end %>
      </div>
+</div>
 
 </div>

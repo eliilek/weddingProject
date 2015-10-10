@@ -5,6 +5,7 @@ class BookingsController < ApplicationController
 		@booking = Booking.new
 		@event = Event.find(params[:event_id])
 		@band = Band.find(params[:band_id])
+		@planning = params[:planning]
 	end
 
 	def create
