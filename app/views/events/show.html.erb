@@ -44,11 +44,14 @@
 			<%= link_to 'Create Notification', new_event_notification_path(@event), :class=> "add button-inner"%>
 		</div>
      </div>
-<% if @event.final_date != nil %>
+     <%= form_tag(event_path, :method => "get") do %>
+               <%= date_field "event", "final_date" %>
+               <%= submit_tag 'Search' %>
+     <% end %>
      <h2>Band Availability</h2>
      <div class="object2">
-			<% if @event.bookings_only.length == 0 %>
-				<table style="border:none">
+	<% if @event.bookings_only.length == 0 %>
+	<table style="border:none">
      <tr>
           <th>Band Name</th>
           <th>Job ID #</th>
@@ -79,9 +82,8 @@
           <% end %>
      <% end %>
 </table>
-                    <% end%>
-                                   <% if @event.bookings.length > 0 %>
-                    <h2>Booking Information</h2>
+     <% if @event.bookings.length > 0 %>
+          <h2>Booking Information</h2>
                     <table style="border:none">
                          <tr>
                               <th>Band</th>
