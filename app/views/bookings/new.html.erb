@@ -12,7 +12,7 @@
 
 <p><strong><%= f.label :type %>:</strong><%= f.select(:kind, options_for_select([["HOLD", "HOLD"],["BOOKED", "BOOKED"]])) %></p>
 <div class="button-holder"
-<p><%= f.submit :class => "button" %></p>
+<p><%= f.submit "Create", :class => "button" %></p>
 <% end %>
 </div>
 </div>
