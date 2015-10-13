@@ -8,15 +8,23 @@
        <div class="object3">
          <ul>
              <li>
-               <strong>Tentative Dates/Final Date:</strong>
-          </li>
+               <% if @event.final_date == nil or @event.final_date == "" %>
+                  <strong>Planning Date:</strong>
+              <% else %>
+                <strong>Final Date:</strong>
+              <% end %>
+              </li>
           <li><strong>Venue:</strong></li>
           <li><strong>Referred By:</strong></li>
           <li><strong>Number of Guests:</strong></li>
      </ul>
      <ul class="second-ul">
         <li>
-           <%= @event.planning_date %>/<%= @event.final_date.strftime("%A, %m/%d/%Y") unless @event.final_date == nil or @event.final_date == "" %>
+           <% if @event.final_date == nil or @event.final_date == "" %>
+  <%= @event.planning_date %>
+<% else %>
+  <%= @event.final_date.strftime("%A, %m/%d/%Y") %>
+<% end %>
       </li>
       <li>
        <%if @event.venue == "" or @event.venue == nil%>
@@ -159,7 +167,7 @@
     <ul>
         <li><strong>Start Time:</strong></li>
         <li><strong>End Time:</strong></li>
-        <li><strong>Continuous:</strong> </li>
+        <li><strong>Breaks:</strong> </li>
         <li><strong>Contract Price:</strong></li>
         <li><strong>Overtime Price:</strong></li>
         <li><strong>Musicians:</strong></li>

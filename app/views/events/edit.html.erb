@@ -13,20 +13,6 @@
 
 	<p><strong><%= f.label :venue, :class=>"event" %></strong> <%= f.text_field :venue %></p><br>
 
-	<p><strong><%= f.label :contract_signer_first_name, :class=>"event" %></strong> <%= f.text_field :client_first_name %></p>
-
-	<p><strong><%= f.label :contract_signer_last_name, :class=>"event" %></strong> <%= f.text_field :client_last_name %></p>
-
-	<p><strong><%= f.label :contract_signer_address_1, :class=>"event" %></strong> <%= f.text_field :address_one %></p>
-
-	<p><strong><%= f.label :contract_signer_address_2, :class=>"event" %></strong> <%= f.text_field :address_two %></p>
-
-	<p><strong><%= f.label :contract_signer_city, :class=>"event" %></strong> <%= f.text_field :city %></p>
-
-	<p><strong><%= f.label :contract_signer_state, :class=>"event" %></strong> <%= f.text_field :state %></p>
-
-	<p><strong><%= f.label :contract_signer_zip, :class=>"event" %></strong> <%= f.text_field :zip %></p></br>
-
 	<p><strong><%= f.label :primary_contact, :class=>"event" %></strong> <%= f.text_field :primary_contact %></p>
 
 	<p><strong><%= f.label :primary_contact_title, :class=>"event" %></strong> <%= f.text_field :primary_contact_title %></p>
@@ -53,7 +39,7 @@
 	<p><strong><%= f.label :third_contact_phone, :class=>"event" %></strong> <%= f.text_field :third_contact_phone %></p>
 
 
-	<p><strong><%= f.label :third_contact_email, :class=>"event" %></strong> <%= f.text_field :third_contact_email %></p></br></br></br></br></br>
+	<p><strong><%= f.label :third_contact_email, :class=>"event" %></strong> <%= f.text_field :third_contact_email %></p></br>
 
 	<p><strong><%= f.label :fourth_contact, :class=>"event" %></strong> <%= f.text_field :fourth_contact %></p>
 	<p><strong><%= f.label :fourth_contact_title, :class=>"event" %></strong> <%= f.text_field :fourth_contact_title %></p>
@@ -62,22 +48,34 @@
 	<p><strong><%= f.label :fourth_contact_phone, :class=>"event" %></strong> <%= f.text_field :fourth_contact_phone %></p>
 
 
-	<p><strong><%= f.label :fourth_contact_email, :class=>"event" %></strong> <%= f.text_field :fourth_contact_email %></p>
-
-
+	<p><strong><%= f.label :fourth_contact_email, :class=>"event" %></strong> <%= f.text_field :fourth_contact_email %></p></br>
 
 	<p><strong><%= f.label :planner_name, :class=>"event" %></strong>
 		<%= f.text_field :planner_name %></p>
 	<p><strong><%= f.label :planner_email, :class=>"event" %></strong>
 		<%= f.text_field :planner_email %></p>
 	<p><strong><%= f.label :planner_phone, :class=>"event" %></strong>
-		<%= f.text_field :planner_phone %></p><br>
+		<%= f.text_field :planner_phone %></p><br></br></br></br>
 
 	<p><strong><%= f.label :inquiry_date, :class=>"event" %></strong> <%= f.date_field :inquiry_date, :value => @event.inquiry_date %></p>
 
 	<p><strong><%= f.label :referred_by, :class=>"event" %></strong> <%= f.text_field :referred_by %></p>
 
 	<p><strong><%= f.label :guests, :class=>"event" %></strong> <%= f.number_field :guests %></p><br>
+
+	<p><strong><%= f.label :contract_signer_first_name, :class=>"event" %></strong> <%= f.text_field :client_first_name %></p>
+
+	<p><strong><%= f.label :contract_signer_last_name, :class=>"event" %></strong> <%= f.text_field :client_last_name %></p>
+
+	<p><strong><%= f.label :contract_signer_address_1, :class=>"event" %></strong> <%= f.text_field :address_one %></p>
+
+	<p><strong><%= f.label :contract_signer_address_2, :class=>"event" %></strong> <%= f.text_field :address_two %></p>
+
+	<p><strong><%= f.label :contract_signer_city, :class=>"event" %></strong> <%= f.text_field :city %></p>
+
+	<p><strong><%= f.label :contract_signer_state, :class=>"event" %></strong> <%= f.text_field :state %></p>
+
+	<p><strong><%= f.label :contract_signer_zip, :class=>"event" %></strong> <%= f.text_field :zip %></p></br>
 
 	<p><strong><%= f.label :start_time, :class=>"event" %></strong> <%= f.text_field :start_time %></p>
 
@@ -99,9 +97,9 @@
 	<p><strong><%= f.label :notes, :class=>"event" %></strong>
 		<%= f.text_area :notes, value: @event.notes %></p>
 
-	<p><strong><%= f.label :continuous, :class=>"event" %></strong> <%= f.select(:continuous, options_for_select([["CONTINUOUS", "CONTINUOUS"],["HALF-CONTINUOUS", "HALF-CONTINUOUS"], ["NON-CONTINUOUS", "NON-CONTINUOUS"]])) %></p>
+	<p><strong><%= f.label :breaks, :class=>"event" %></strong> <%= f.select(:continuous, options_for_select([["CONTINUOUS", "CONTINUOUS"],["HALF-CONTINUOUS", "HALF-CONTINUOUS"], ["NON-CONTINUOUS", "NON-CONTINUOUS"]],:selected => @event.continuous)) %></p>
 
-	<p><strong><%= f.label :status, :class=>"event" %></strong> <%= f.select(:status, options_for_select([["FIRST CONTACT", "FIRST CONTACT"],["CALLED BACK", "CALLED BACK"],["PROPOSAL GENERATED", "PROPOSAL GENERATED"],["SALES MEETING SCHEDULED", "SALES MEETING SCHEDULED"], ["CONTRACT GENERATED", "CONTRACT GENERATED"], ["DEFINITE", "DEFINITE"], ["RELEASED", "RELEASED"], ["RELEASED-BAB", "RELEASED-BAB"], ["RELEASED-BADJ", "RELEASED-BADJ"]], :selected => @event.status)) %></p>
+	<p><strong><%= f.label :status, :class=>"event" %></strong> <%= f.select(:status, options_for_select([["FIRST CONTACT", "FIRST CONTACT"],["CALLED BACK", "CALLED BACK"],["PROPOSAL NEEDED", "PROPOSAL NEEDED"],["PROPOSAL GENERATED", "PROPOSAL GENERATED"],["SALES MEETING SCHEDULED", "SALES MEETING SCHEDULED"],["CONTRACT NEEDED", "CONTRACT NEEDED"], ["CONTRACT GENERATED", "CONTRACT GENERATED"], ["DEFINITE", "DEFINITE"], ["RELEASED", "RELEASED"], ["RELEASED-BAB", "RELEASED-BAB"], ["RELEASED-BADJ", "RELEASED-BADJ"]], :selected => @event.status)) %></p>
 
 	<div class="button-holder">
 		<p><%= f.submit :class => "button-inner" %></p>
