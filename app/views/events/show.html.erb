@@ -271,21 +271,17 @@
     <h2>Contacts</h2>
     <ul>
 
-        <li><strong>Contract Signer:</strong></li>
-        <li><strong>Contract Signer Title:</strong></li>
-        <li><strong>Contract Signer Email:</strong> </li>
-        <li><strong>Contract Signer Phone:</strong></li>
-        <li><strong>Address 1:</strong></li>
-        <li><strong>Address 2:</strong></li>
-        <li><strong>City:</strong></li>
-        <li><strong>State:</strong></li>
-        <li><strong>Zip:</strong></li>
+        <li><strong>Primary Contact:</strong></li>
+        <li><strong>Primary Contact Title:</strong></li>
+        <li><strong>Primary Contact Email:</strong> </li>
+        <li><strong>Primary Contact Phone:</strong></li>
         <br>
-
-        <li><strong>Secondary Contact:</strong></li>
-        <li><strong>Secondary Contact Title:</strong></li>
-        <li><strong>Secondary Contact Email :</strong> </li>
-        <li><strong>Secondary Contact Phone:</strong></li><br>
+        <% if @event.secondary_contact != "" && @event.secondary_contact != nil %>
+          <li><strong>Secondary Contact:</strong></li>
+          <li><strong>Secondary Contact Title:</strong></li>
+          <li><strong>Secondary Contact Email :</strong> </li>
+          <li><strong>Secondary Contact Phone:</strong></li><br>
+        <% end %>
 
         <% if @event.third_contact != "" && @event.third_contact != nil %>
 
@@ -307,73 +303,48 @@
         <% end %>
         <li><strong>Planner Name:</strong></li>
         <li><strong>Planner Email:</strong> </li>
-        <li><strong>Planner Phone:</strong></li>
+        <li><strong>Planner Phone:</strong></li></br>
+        <% if @event.address_one != nil && @event.address_one != "" %>
+            <li><strong>Contract Signer:</strong></li>
+            <li><strong>Address 1:</strong></li>
+            <li><strong>Address 2:</strong></li>
+            <li><strong>City:</strong></li>
+            <li><strong>State:</strong></li>
+            <li><strong>Zip:</strong></li>
+        <% end %>
    </ul>
    <ul class="second-ul">
-        <li><%if @event.primary_contact == "" or @event.primary_contact == nil%>
-        </br>
+
+    <li>
+        <%if @event.primary_contact == "" or @event.primary_contact == nil%>
+            </br>
         <% else %>
-        <%= @event.primary_contact %>
+            <%= @event.primary_contact %>
         <% end %>
    </li>
    <li>
-     <%if @event.primary_contact_title == "" or @event.primary_contact_title == nil%>
+        <%if @event.primary_contact_title == "" or @event.primary_contact_title == nil%>
+            </br>
+        <% else %>
+            <%= @event.primary_contact_title %>
+        <% end %>
+    </li>
+    <li>
+        <%if @event.primary_contact_email == "" or @event.primary_contact_email == nil%>
+            </br>
+        <% else %>
+            <%= mail_to(@event.primary_contact_email) %>
+        <% end %>
+    </li>
+    <li>
+        <%if @event.primary_contact_phone == "" or @event.primary_contact_phone == nil%>
+            </br>
+        <% else %>
+            <%= @event.primary_contact_phone %>
+        <% end %>
+    </li>
 </br>
-<% else %>
-<%= @event.primary_contact_title %>
-<% end %>
-</li>
-<li>
-   <%if @event.primary_contact_email == "" or @event.primary_contact_email == nil%>
-</br>
-<% else %>
-<%= mail_to(@event.primary_contact_email) %>
-<% end %>
-</li>
-<li>
-     <%if @event.primary_contact_phone == "" or @event.primary_contact_phone == nil%>
-</br>
-<% else %>
-<%= @event.primary_contact_phone %>
-<% end %>
-</li>
-<li>
-     <%if @event.address_one == "" or @event.address_one == nil%>
-</br>
-<% else %>
-<%= @event.address_one %>
-<% end %>
-</li>
-<li>
-     <%if @event.address_two == "" or @event.address_two == nil%>
-</br>
-<% else %>
-<%= @event.address_two %>
-<% end %>
-</li>
-<li>
-     <%if @event.city == "" or @event.city == nil%>
-</br>
-<% else %>
-<%= @event.city %>
-<% end %>
-</li>
-<li>
-     <%if @event.state == "" or @event.state == nil%>
-</br>
-<% else %>
-<%= @event.state %>
-<% end %>
-</li>
-<li>
-     <%if @event.zip == "" or @event.zip == nil%>
-</br>
-<% else %>
-<%= @event.zip %>
-<% end %>
-</li>
-</br>
-
+<% if @event.secondary_contact != "" && @event.secondary_contact != nil %>
 <li><%if @event.secondary_contact == "" or @event.secondary_contact == nil%>
 </br>
 <% else %>
@@ -402,6 +373,7 @@
 <% end %>
 </li>
 </br>
+<% end %>
 <% if @event.third_contact != "" && @event.third_contact != nil %>
 <li><%if @event.third_contact == "" or @event.third_contact == nil%>
 </br>
@@ -483,7 +455,47 @@
 <% else %>
 <%= @event.planner_phone %>
 <% end %>
-</li>
+</li></br>
+    <% if @event.address_one != nil && @event.address_one != "" %>
+        <li>
+            <%= @event.client_first_name %> <%= @event.client_last_name %>
+        </li>
+        <li>
+            <%if @event.address_one == "" or @event.address_one == nil%>
+                </br>
+            <% else %>
+                <%= @event.address_one %>
+            <% end %>
+        </li>
+        <li>
+            <%if @event.address_two == "" or @event.address_two == nil%>
+                </br>
+            <% else %>
+                <%= @event.address_two %>
+            <% end %>
+        </li>
+        <li>
+            <%if @event.city == "" or @event.city == nil%>
+                </br>
+            <% else %>
+                <%= @event.city %>
+            <% end %>
+        </li>
+        <li>
+            <%if @event.state == "" or @event.state == nil%>
+                </br>
+            <% else %>
+                <%= @event.state %>
+            <% end %>
+        </li>
+        <li>
+            <%if @event.zip == "" or @event.zip == nil%>
+                </br>
+            <% else %>
+                <%= @event.zip %>
+            <% end %>
+        </li>
+    <% end %>
 </ul>
 </div>
 <div>
