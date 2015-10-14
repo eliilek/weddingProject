@@ -18,6 +18,9 @@ class EventsController < ApplicationController
 		@links = Link.where("event_id = #{@event.id}")
 		if params[:event]
 			@date_param = params[:event][:final_date]
+		elsif params[:planning]
+			@date_param = params[:planning]
+	
 		end
 	end
 

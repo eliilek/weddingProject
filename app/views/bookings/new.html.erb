@@ -11,8 +11,9 @@
 
 
 <p><strong><%= f.label :type %>:</strong><%= f.select(:kind, options_for_select([["HOLD", "HOLD"],["BOOKED", "BOOKED"]])) %></p>
+<%= hidden_field_tag 'planning', @planning %>
 <p style="color:red"><strong>Remember to delete holds when creating a booking</strong></p>
-<div class="button-holder"
+<div class="button-holder">
 <p><%= f.submit "Create", :class => "button" %></p>
 <% end %>
 </div>

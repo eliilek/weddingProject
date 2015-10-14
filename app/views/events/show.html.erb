@@ -86,6 +86,7 @@
           </tr>
           <% if band.holds(group_time).length > 0 %>
           <% band.holds(group_time).each do |hold| %>
+            <% if hold.event_id != @event.id %>
           <tr>
                <td></td>
                <td><%= link_to hold.event.job_identification_number, event_path(hold.event_id) %></td>
@@ -93,6 +94,7 @@
                <td><%= hold.event.venue %></td>
                <td><%= hold.event.status %></td>
           </tr>
+          <% end %>
           <% end %>
           <% end %>
           <% end %>
@@ -162,78 +164,78 @@
      <%= link_to 'Upload Document', new_event_document_path(@event), :class=> "add button-inner"%>
 </div>
 </div>
-<div>
-    <h2>Contract Details</h2>
-    <ul>
-        <li><strong>Start Time:</strong></li>
-        <li><strong>End Time:</strong></li>
-        <li><strong>Breaks:</strong> </li>
-        <li><strong>Contract Price:</strong></li>
-        <li><strong>Overtime Price:</strong></li>
-        <li><strong>Musicians:</strong></li>
-        <li><strong>Vocalists:</strong></li>
-        <li><strong>Sold By:</strong></li>
-   </ul>
-   <ul>
-        <li>
-            <%if @event.start_time == "" or @event.start_time == nil%>
-       </br>
-       <% else %>
-       <%= @event.start_time %>
-       <% end %>
-  </li>
-  <li>
-       <%if @event.end_time == "" or @event.end_time == nil%>
-  </br>
-  <% else %>
-  <%= @event.end_time %>
-  <% end %>
-</li>
-<li>
-  <%if @event.continuous == "" or @event.continuous == nil%>
-</br>
-<% else %>
-<%= @event.continuous %>
-<% end %>
-</li>
-<li>
-  <%if @event.contract_price == "" or @event.contract_price == nil%>
-</br>
-<% else %>
-<%= @event.contract_price %>
-<% end %>
-</li>
-<li>
-  <%if @event.ot_price == "" or @event.ot_price == nil%>
-</br>
-<% else %>
-<%= @event.ot_price %>
-<% end %>
-</li>
-<li>
-  <%if @event.number_of_musicians == "" or @event.number_of_musicians == nil%>
-</br>
-<% else %>
-<%= @event.number_of_musicians %>
-<% end %>
-</li>
-<li>
-  <%if @event.number_of_vocalists == "" or @event.number_of_vocalists == nil%>
-</br>
-<% else %>
-<%= @event.number_of_vocalists %>
-<% end %>
-</li>
-<li>
-  <%if @event.sold_by == "" or @event.sold_by == nil%>
-</br>
-<% else %>
-<%= @event.sold_by %>
-<% end %>
-</li>
+    <div>
+        <h2>Contract Details</h2>
+        <ul>
+            <li><strong>Start Time:</strong></li>
+            <li><strong>End Time:</strong></li>
+            <li><strong>Breaks:</strong> </li>
+            <li><strong>Contract Price:</strong></li>
+            <li><strong>Overtime Price:</strong></li>
+            <li><strong>Musicians:</strong></li>
+            <li><strong>Vocalists:</strong></li>
+            <li><strong>Sold By:</strong></li>
+       </ul>
+       <ul>
+            <li>
+                <%if @event.start_time == "" or @event.start_time == nil%>
+                    </br>
+               <% else %>
+                    <%= @event.start_time %>
+               <% end %>
+          </li>
+          <li>
+               <%if @event.end_time == "" or @event.end_time == nil%>
+                    </br>
+                <% else %>
+                    <%= @event.end_time %>
+                <% end %>
+            </li>
+            <li>
+                <%if @event.continuous == "" or @event.continuous == nil%>
+                    </br>
+                <% else %>
+                    <%= @event.continuous %>
+                <% end %>
+            </li>
+            <li>
+                <%if @event.contract_price == "" or @event.contract_price == nil%>
+                    </br>
+                <% else %>
+                    <%= @event.contract_price %>
+                <% end %>
+            </li>
+            <li>
+                <%if @event.ot_price == "" or @event.ot_price == nil%>
+                    </br>
+                <% else %>
+                    <%= @event.ot_price %>
+                <% end %>
+            </li>
+            <li>
+                <%if @event.number_of_musicians == "" or @event.number_of_musicians == nil%>
+                    </br>
+                <% else %>
+                    <%= @event.number_of_musicians %>
+                <% end %>
+            </li>
+            <li>
+                <%if @event.number_of_vocalists == "" or @event.number_of_vocalists == nil%>
+                    </br>
+                <% else %>
+                    <%= @event.number_of_vocalists %>
+                <% end %>
+            </li>
+            <li>
+                <%if @event.sold_by == "" or @event.sold_by == nil%>
+                    </br>
+                <% else %>
+                    <%= @event.sold_by %>
+                <% end %>
+            </li>
 
-</ul>
-</div>
+        </ul>
+    </div>
 
 </div>
 <div class="right-inner">

@@ -9,10 +9,11 @@ class BookingsController < ApplicationController
 	end
 
 	def create
+		@planning = params[:planning]
 		@event = Event.find(params[:event_id])
 		@booking = @event.bookings.new(booking_params)
 		if @booking.save 
-			redirect_to event_path(@event) 
+			redirect_to event_path(@event, :planning => @planning) 
 		end
 	end
 
