@@ -102,7 +102,7 @@
 	<p><strong><%= f.label :status, :class=>"event" %></strong> <%= f.select(:status, options_for_select([["FIRST CONTACT", "FIRST CONTACT"],["CALLED BACK", "CALLED BACK"],["PROPOSAL NEEDED", "PROPOSAL NEEDED"],["PROPOSAL GENERATED", "PROPOSAL GENERATED"],["SALES MEETING SCHEDULED", "SALES MEETING SCHEDULED"],["CONTRACT NEEDED", "CONTRACT NEEDED"], ["CONTRACT GENERATED", "CONTRACT GENERATED"], ["DEFINITE", "DEFINITE"], ["RELEASED", "RELEASED"], ["RELEASED-BAB", "RELEASED-BAB"], ["RELEASED-BADJ", "RELEASED-BADJ"]], :selected => @event.status)) %></p>
 
 	<div class="button-holder">
-		<p><%= f.submit :class => "button-inner" %></p>
+		<p><%= f.submit :class => "button-inner", :value => "Submit" %></p>
 	</div>
 		<% end %>
 	</div>

@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
  html,body{
     height:100%;
     font-family: arial;
@@ -21,6 +22,7 @@
     background: #fdfaf6;
 
 }
+
 
 
 p {
@@ -45,6 +47,7 @@ p {
  background:#939393;
  position: fixed;
 }
+
 .main {
   margin-left:11em;
   width: 100%;
@@ -461,3 +464,32 @@ div.form-columns{
     height: 2em;
     
   }
+
+  @media all and (max-width: 1025px) and (min-width: 600px) {
+    .left {
+        width: 5em;
+    }
+    .left .button {
+        width: 4.5em;
+        margin: 1px;
+        padding: 1px;
+    }
+    .main {
+        margin-left: 5em;
+        font-size: 12px;
+    }
+    div.form-columns{
+        height:50%;
+    }
+
+    .left-inner {
+        float:left;
+        width:80%;
+    }
+    .right-inner {
+        float: left;
+        width:80%;
+    }
+
+
+}

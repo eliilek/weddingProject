@@ -273,33 +273,33 @@
     <h2>Contacts</h2>
     <ul>
 
-        <li><strong>Primary Contact:</strong></li>
-        <li><strong>Primary Contact Title:</strong></li>
-        <li><strong>Primary Contact Email:</strong> </li>
-        <li><strong>Primary Contact Phone:</strong></li>
+        <li class="truncate"><strong>Primary Contact:</strong></li>
+        <li class="truncate"><strong>Primary Contact Title:</strong></li>
+        <li class="truncate"><strong>Primary Contact Email:</strong> </li>
+        <li class="truncate"><strong>Primary Contact Phone:</strong></li>
         <br>
         <% if @event.secondary_contact != "" && @event.secondary_contact != nil %>
-          <li><strong>Secondary Contact:</strong></li>
-          <li><strong>Secondary Contact Title:</strong></li>
-          <li><strong>Secondary Contact Email :</strong> </li>
-          <li><strong>Secondary Contact Phone:</strong></li><br>
+          <li class="truncate"><strong>Secondary Contact:</strong></li>
+          <li class="truncate"><strong>Secondary Contact Title:</strong></li>
+          <li class="truncate"><strong>Secondary Contact Email :</strong> </li>
+          <li class="truncate"><strong>Secondary Contact Phone:</strong></li><br>
         <% end %>
 
         <% if @event.third_contact != "" && @event.third_contact != nil %>
 
-        <li><strong>Third Contact:</strong></li>
-        <li><strong>Third Contact Title:</strong></li>
-        <li><strong>Third Contact Email:</strong> </li>
-        <li><strong>Third Contact Phone:</strong></li>
+        <li class="truncate"><strong>Third Contact:</strong></li>
+        <li class="truncate"><strong>Third Contact Title:</strong></li>
+        <li class="truncate"><strong>Third Contact Email:</strong> </li>
+        <li class="truncate"><strong>Third Contact Phone:</strong></li>
         <br>
 
         <% end %>
         <% if @event.fourth_contact != "" && @event.fourth_contact != nil %>
 
-        <li><strong>Fourth Contact:</strong></li>
-        <li><strong>Fourth Contact Title:</strong></li>
-        <li><strong>Fourth Contact Email:</strong> </li>
-        <li><strong>Fourth Contact Phone:</strong></li>
+        <li class="truncate"><strong>Fourth Contact:</strong></li>
+        <li class="truncate"><strong>Fourth Contact Title:</strong></li>
+        <li class="truncate"><strong>Fourth Contact Email:</strong> </li>
+        <li class="truncate"><strong>Fourth Contact Phone:</strong></li>
         <br>
 
         <% end %>
@@ -529,10 +529,7 @@
       </div>
       <% end %>
  </div>
-</div>
-</div>
-<div>
-     <h2>Linked Events</h2>
+  <h2>Linked Events</h2>
      <% @links.each do |link| %>
      <% linked_event = Event.find_by(job_identification_number: link.linked_event_job_number) %>
      <%= link_to "#{link.linked_event_job_number}", event_path(linked_event.id), :target => "_blank" if linked_event != nil  %>
@@ -547,5 +544,7 @@
           <% end %>
      </div>
 </div>
+</div>
+
 
 </div>
