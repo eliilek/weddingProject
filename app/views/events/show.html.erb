@@ -538,6 +538,7 @@
       <p><strong><%= f.label :date %>:</strong><%= f.date_field :date, :value=>Date.today %></p>
       <p><strong><%= f.label :notes %>:</strong></p>
       <p> <%= f.text_area :notes, :cols => 40, :rows => 15 %></p>
+      <p><strong><%= f.label "Show to Band Leader" %></strong> <%= f.check_box :show_to %> </p>
       <div class="button-holder">
            <p><%= f.submit "Create", :class => "add button" %></p>
       </div>

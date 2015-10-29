@@ -25,7 +25,7 @@ class ContactsController < ApplicationController
 	private
 
 	def contact_params
-		params.require(:contact).permit(:event_id, :notes, :date)
+		params.require(:contact).permit(:event_id, :notes, :date, :show_to)
 	end
 
 end
