@@ -57,7 +57,7 @@ class EventsController < ApplicationController
 	private
 
 	def event_params
-		params.require(:event).permit(:contract_sent, :client_first_name, :client_last_name, :planning_date, :final_date, :job_identification_number, :status, :primary_contact, :secondary_contact, :primary_contact_phone, :secondary_contact_phone, :primary_contact_email, :secondary_contact_email, :guests, :inquiry_date, :event_type, :referred_by, :venue, :third_contact, :third_contact_phone, :third_contact_email, :fourth_contact, :fourth_contact_phone, :fourth_contact_email, :start_time, :end_time, :continuous, :contract_price, :ot_price, :sold_by, :number_of_musicians, :number_of_vocalists, :hours, :notes, :planner_name, :planner_email, :planner_phone, :primary_contact_title, :secondary_contact_title, :third_contact_title, :fourth_contact_title, :address_one, :address_two, :city, :state, :zip )
+		params.require(:event).permit(:contract_sent, :client_first_name, :client_last_name, :planning_date, :final_date, :job_identification_number, :status, :primary_contact, :secondary_contact, :primary_contact_phone, :secondary_contact_phone, :primary_contact_email, :secondary_contact_email, :guests, :inquiry_date, :event_type, :referred_by, :venue, :third_contact, :third_contact_phone, :third_contact_email, :fourth_contact, :fourth_contact_phone, :fourth_contact_email, :start_time, :end_time, :continuous, :contract_price, :ot_price, :sold_by, :number_of_musicians, :number_of_vocalists, :hours, :notes, :planner_name, :planner_email, :planner_phone, :primary_contact_title, :secondary_contact_title, :third_contact_title, :fourth_contact_title, :address_one, :address_two, :city, :state, :zip, :company )
 	end
 
 end

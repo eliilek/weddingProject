@@ -1,8 +1,8 @@
 <div class="content-container">
-	<h1>
-		<%= @event.client_first_name %>
-		<%= @event.client_last_name %>'s Event
-	</h1>
+    <h1>
+        <%= @event.client_first_name %>
+        <%= @event.client_last_name %>'s Event
+    </h1>
    <div class="left-inner">
        <h2>Info Cont.</h2>
        <div class="object3">
@@ -46,7 +46,7 @@
 <% else %>
 <%= @event.guests %>
 <% end %>
-</li>     	
+</li>       
 </ul>
 <div class="button-holder">
   <%= link_to 'Create Notification', new_event_notification_path(@event), :class=> "add button-inner"%>
@@ -58,7 +58,7 @@
 <%= submit_tag 'Search' %>
 <% end %>
 <div class="object2">
-	<% if @event.bookings_only.length == 0 %>
+    <% if @event.bookings_only.length == 0 %>
      <% if (@date_param != nil && @date_param != "") or (@event.final_date != nil && @event.final_date != "") %>
      <h2>Band Availability
       <% if @event.final_date != nil && @event.final_date != ""%>
@@ -283,6 +283,7 @@
         <li class="truncate"><strong>Primary Contact Title:</strong></li>
         <li class="truncate"><strong>Primary Contact Email:</strong> </li>
         <li class="truncate"><strong>Primary Contact Phone:</strong></li>
+        <li class="truncate"><strong>Company:</strong></li>
         <br>
         <% if @event.secondary_contact != "" && @event.secondary_contact != nil %>
           <li class="truncate"><strong>Secondary Contact:</strong></li>
@@ -349,6 +350,13 @@
             </br>
         <% else %>
             <%= @event.primary_contact_phone %>
+        <% end %>
+    </li>
+    <li>
+        <%if @event.company == "" or @event.company == nil%>
+            </br>
+        <% else %>
+            <%= @event.company %>
         <% end %>
     </li>
 </br>
@@ -550,7 +558,4 @@
           <% end %>
      </div>
 </div>
-</div>
-
-
 </div>
