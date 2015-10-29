@@ -1,6 +1,10 @@
 <div class="content">
 	<% if @bands_param %>
-		<h1><%= @band.name %> Events</h1>
+		<% if @bands_param.to_i == 5 %>
+			<h1>Ken Arlen Evolution Orchestra Events</h1>
+		<% else %>
+			<h1><%= @band.name %> Events</h1>
+		<% end %>
 	</br>
 	<% else %>
 		<h1>Events Calendar </h1>
@@ -8,7 +12,8 @@
 	<% end %>
 	
 		<%= form_tag(bands_path, :method => "get") do %>
-			<%= select_tag "band_id", options_from_collection_for_select(Band.all, "id", "name") %>
+
+			<%= select_tag "band_id", options_from_collection_for_select(Searchable.all, "id", "name") %>
 		<%= submit_tag 'Search' %>
 		<% end %>
 	</br>
@@ -22,6 +27,8 @@
 			<th>Client Name, Venue, Link</th>
 			<% if !@bands_param %>
 				<th>Band</th>
+			<% elsif @bands_param.to_i == 5 %>
+				<th>Band Leader</th>
 			<% end %>
 		</tr>
 		</thead>
@@ -36,7 +43,7 @@
 	  <% @saturdays.each do |saturday_date| %>
 			<% saturday_events = [] %>
 			<% @events.each do |event|%>
-				<% if event.final_date == saturday_date and event.status != "RELEASED" and event.status != "RELEASED-BAB" and event.status != "RELEASED-BADJ" %>
+				<% if event.show_on(saturday_date) && event.status != "RELEASED" and event.status != "RELEASED-BAB" and event.status != "RELEASED-BADJ" %>
 					<% saturday_events << event %>
 					<% end %>
 				<% end %>
@@ -46,6 +53,8 @@
 					<td></td>
 					<td></td>
 					<% if !@bands_param %>
+						<td></td>
+					<% elsif @bands_param.to_i == 5 %>
 						<td></td>
 					<% end %>
 				</tr>
@@ -79,11 +88,12 @@
 						<% end %>
 					<% else %>
 						<% event.bookings.each do |booking| %>
-							<% if @bands_param && (booking.band_id == @bands_param.to_i || (((booking.band_id == 1 && @bands_param.to_i == 2) || (booking.band_id == 2 && @bands_param.to_i == 1)) && booking.kind == "BOOKED"))%>
+
+							<% if @bands_param && (((@bands_param.to_i == 5 && (booking.band_id == 5 || booking.band_id == 6 )) || booking.band_id == @bands_param.to_i) && booking.kind == "BOOKED")%>
 								<% x = true %>
 
 							<% end %>
-							<% if !@bands_param || (booking.band.id == @bands_param.to_i && booking.kind != "BOOKED") %>
+							<% if !@bands_param || (@bands_param.to_i == 5 && (booking.band_id == 5 || booking.band_id == 6) && booking.kind != "BOOKED") || (booking.band.id == @bands_param.to_i && booking.kind != "BOOKED") %>
 								<% if booking.kind == "BOOKED" %>
 									<tr style="background:green;">
 								<% else %>
@@ -109,6 +119,8 @@
 								<td>
 									<%= booking.band.name %>
 								</td>
+								<% elsif @bands_param.to_i == 5 %>
+									<td><%=booking.band.band_leader%></td>
 								<% end %>
 								</tr>
 								<% end %>

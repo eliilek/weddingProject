@@ -54,5 +54,17 @@ class Event < ActiveRecord::Base
     	end
     end
 
+    def show_on(time)
+    	if self.final_date && self.final_date == time
+    		return true
+    	end
+    	self.bookings.each do |booking|
+    		if booking.date == time
+    			return true
+    		end
+    	end
+    	false
+    end
+
 end
 

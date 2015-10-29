@@ -41,4 +41,24 @@ b.name = "Ken Arlen Evolution Orchestra(Ken Arlen)"
 b.band_leader = "Ken Arlen"
 b.save!
 
+b = Searchable.new
+b.name = "Velocity"
+b.save!
+
+b = Searchable.new
+b.name = "Entourage"
+b.save!
+
+b = Searchable.new
+b.name = "Front of House"
+b.save!
+
+b = Searchable.new
+b.name = "Indigo"
+b.save!
+
+b = Searchable.new
+b.name = "Ken Arlen Evolution Orchestra"
+b.save!
+
 
