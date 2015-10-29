@@ -55,7 +55,7 @@
 				<td> <%= event.client_first_name%> <%= event.client_last_name %></td>
 				<td> <%= event.status %></td>
 				<% if event.final_date != "" && event.final_date != nil %>
-					<td> <%= event.final_date.strftime("%A, %m/%d/%Y") %></td>
+					<td> <pre><%= event.final_date.strftime("%m/%d/%Y %n%A") %></pre></td>
 				<% else %>
 					<td> <%= event.final_date %></td>
 				<% end %>

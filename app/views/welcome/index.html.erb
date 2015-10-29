@@ -19,7 +19,7 @@
 							<td><%= event.job_identification_number %></td>
 							<td><%= event.client_first_name %> <%= event.client_last_name %></td>
 							<td><%= event.status %></td>
-							<td><%= event.final_date.strftime("%A, %m/%d/%Y") unless event.final_date == nil || event.final_date == ""%></td>
+							<td><pre><%= event.final_date.strftime("%m/%d/%Y %n%A") unless event.final_date == nil || event.final_date == ""%></pre></td>
 							<td><%= event.venue %>	
 							<!-- <td><%= distance_of_time_in_words(event.updated_at, Time.now) %></td> -->
 							<td><%= link_to 'View', event_path(event)%>

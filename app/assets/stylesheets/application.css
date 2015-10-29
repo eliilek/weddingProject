@@ -491,5 +491,10 @@ div.form-columns{
         width:80%;
     }
 
+}
+
+pre {
+    font-size: 18px;
+    font-family: arial;
 
 }

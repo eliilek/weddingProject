@@ -17,7 +17,6 @@
 	<table class="t02 sortable" id="mytable" style="width:75%" >
 		<thead>
 		<tr>
-			<th>Day</th>
 			<th>Date</th>
 			<th>Status</th>
 			<th>Client Name, Venue, Link</th>
@@ -43,8 +42,7 @@
 				<% end %>
 			<% if saturday_events.length == 0 %>
 				<tr>
-					<td> <%= saturday_date.strftime("%A") %></td>
-					<td> <%= saturday_date.strftime("%m/%d/%Y") %></td>
+					<td> <pre><%= saturday_date.strftime("%m/%d/%Y %n%A") %></pre></td>
 					<td></td>
 					<td></td>
 					<% if !@bands_param %>
@@ -60,10 +58,8 @@
 							<tr>
 								<% if already_shown == true %>
 									<td></td>
-									<td></td>
 								<% else %>
-									<td> <%= saturday_date.strftime("%A") %> </td>
-									<td> <%= saturday_date.strftime("%m/%d/%Y") %></td>
+									<td> <pre><%= saturday_date.strftime("%m/%d/%Y %n%A") %></pre></td>
 									<% already_shown = true %>
 								<% end %>
 								<td> <%= event.status %></td>
@@ -95,10 +91,8 @@
 								<% end %>
 								<% if already_shown == true %>
 									<td></td>
-									<td></td>
 								<% else %>
-									<td> <%= saturday_date.strftime("%A") %> </td>
-									<td> <%= saturday_date.strftime("%m/%d/%Y") %></td>
+									<td> <pre><%= saturday_date.strftime("%m/%d/%Y %n%A") %></pre></td>
 									<% already_shown = true %>
 								<% end %>
 								<td><%= event.status%> </td>
@@ -123,8 +117,7 @@
 					<% end %>
 					<% if x == false && @real_saturdays.include?(saturday_date) && @bands_param %>
 						<tr>
-							<td> <%= saturday_date.strftime("%A") %></td>
-							<td> <%= saturday_date.strftime("%m/%d/%Y") %></td>
+							<td> <pre><%= saturday_date.strftime("%m/%d/%Y %n%A") %></pre></td>
 							<td></td>
 							<td></td>
 							<% if !@bands_param %>
