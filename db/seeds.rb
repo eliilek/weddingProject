@@ -11,13 +11,13 @@ user.password = '8888michael'
 user.save!
 
 b = Band.new
-b.name = "Ken Arlen Evolution Orchestra(Caitlin Simone)"
-b.band_leader = "Caitlin Simone"
+b.name = "Velocity"
+b.band_leader = "Erik Martinez"
 b.save!
 
 b = Band.new
-b.name = "Ken Arlen Evolution Orchestra(Ken Arlen)"
-b.band_leader = "Ken Arlen"
+b.name = "Entourage"
+b.band_leader = "Leslie Hunt"
 b.save!
 
 b = Band.new
@@ -30,12 +30,15 @@ b.name = "Indigo"
 b.band_leader = "Dan Nicholson"
 b.save!
 
+
 b = Band.new
-b.name = "Entourage"
-b.band_leader = "Leslie Hunt"
+b.name = "Ken Arlen Evolution Orchestra(Caitlin Simone)"
+b.band_leader = "Caitlin Simone"
 b.save!
 
 b = Band.new
-b.name = "Velocity"
-b.band_leader = "Erik Martinez"
+b.name = "Ken Arlen Evolution Orchestra(Ken Arlen)"
+b.band_leader = "Ken Arlen"
 b.save!
+
+

@@ -36,6 +36,10 @@
 <br>
 
 <h2> All Active Events</h2>
+<div class="button-holder">
+	<%= link_to "New Event", new_event_path, :class=>'add button-inner' %>
+</div>
+</br>
 <table class="t02 sortable" id="mytable">
 	<thead>
 	<tr>
@@ -67,7 +71,4 @@
 </tbody>
 </table>
 <br>
-<div class="button-holder">
-	<%= link_to "New Event", new_event_path, :class=>'add button-inner' %>
-</div>
 </div>

@@ -7,15 +7,15 @@ class Booking < ActiveRecord::Base
 
 	def book_other_evolution
 		if self.event_id != nil
-			if self.band.id == 1 && self.kind == "BOOKED"
-				other_band = Band.find(2)
+			if self.band.id == 5 && self.kind == "BOOKED"
+				other_band = Band.find(6)
 				b = Booking.new
 				b.band = other_band
 				b.date = self.date
 				b.kind = "BOOKED"
 				b.save
-			elsif self.band.id == 2 && self.kind == "BOOKED"
-				other_band = Band.find(1)
+			elsif self.band.id == 6 && self.kind == "BOOKED"
+				other_band = Band.find(5)
 				b = Booking.new
 				b.band = other_band
 				b.date = self.date
@@ -27,11 +27,11 @@ class Booking < ActiveRecord::Base
 
 	def destroy_other_evolution
 		if self.event_id != nil
-			if self.band.id == 1 && self.kind == "BOOKED"
-				booking = Booking.find_by(["band_id = ? and date = ?", 2, self.date])
+			if self.band.id == 5 && self.kind == "BOOKED"
+				booking = Booking.find_by(["band_id = ? and date = ?", 6, self.date])
 				Booking.destroy(booking.id)
-			elsif self.band.id == 2 && self.kind == "BOOKED"
-				booking = Booking.find_by(["band_id = ? and date = ?", 1, self.date])
+			elsif self.band.id == 6 && self.kind == "BOOKED"
+				booking = Booking.find_by(["band_id = ? and date = ?", 5, self.date])
 				Booking.destroy(booking.id)
 			end
 		end

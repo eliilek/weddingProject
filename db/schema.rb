@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150925191144) do
+ActiveRecord::Schema.define(version: 20151029164308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20150925191144) do
     t.string   "secondary_contact_phone"
     t.string   "primary_contact_email"
     t.string   "secondary_contact_email"
-    t.integer  "guests"
+    t.text     "guests"
     t.date     "inquiry_date"
     t.string   "event_type"
     t.string   "referred_by"
