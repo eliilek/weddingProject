@@ -60,7 +60,13 @@
 <div class="object2">
 	<% if @event.bookings_only.length == 0 %>
      <% if (@date_param != nil && @date_param != "") or (@event.final_date != nil && @event.final_date != "") %>
-     <h2>Band Availability</h2>
+     <h2>Band Availability
+      <% if @event.final_date != nil && @event.final_date != ""%>
+        (<%= @event.final_date.strftime("%A, %m/%d/%Y") %>)
+      <% else %>
+        (<%= Date.parse(@date_param).strftime("%A, %m/%d/%Y") %>)
+      <% end %>
+     </h2>
 
      <table style="border:none">
           <tr>

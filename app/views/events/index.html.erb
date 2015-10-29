@@ -53,7 +53,7 @@
 	</thead>
 	<tbody>
 	<% @events.each do |event| %>
-		<% if event.status == "FIRST CONTACT" || event.status == "CALLED BACK" || event.status == "PROPOSAL GENERATED" || event.status == "SALES MEETING SCHEDULED" || event.status == "CONTRACT GENERATED" || event.status == "DEFINITE" %>
+		<% if event.status == "FIRST CONTACT" || event.status == "CALLED BACK" || event.status == "PROPOSAL GENERATED" || event.status == "SALES MEETING SCHEDULED" || event.status == "CONTRACT GENERATED" || event.status == "DEFINITE" || event.status == "CONTRACT NEEDED" || event.status == "PROPOSAL NEEDED" %>
 			<tr>
 				<td> <%= event.job_identification_number %></td>
 				<td> <%= event.client_first_name%> <%= event.client_last_name %></td>

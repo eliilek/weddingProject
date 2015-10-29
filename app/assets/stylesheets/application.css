@@ -490,6 +490,9 @@ div.form-columns{
         float: left;
         width:80%;
     }
+    .login {
+        padding-left: 2em;
+    }
 
 }
 
