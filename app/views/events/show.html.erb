@@ -1,6 +1,6 @@
 <% if @event.final_date != nil && @event.final_date != "" %>
      <% group_time = @event.final_date %>
-<% else %>
+<% elsif @date_param %>
      <% group_time = Date.parse(@date_param) %>
 <% end %>
 <div class="content-container">
