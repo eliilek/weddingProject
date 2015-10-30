@@ -1,3 +1,8 @@
+<% if @event.final_date != nil && @event.final_date != "" %>
+     <% group_time = @event.final_date %>
+<% else %>
+     <% group_time = Date.parse(@date_param) %>
+<% end %>
 <div class="content-container">
     <h1>
         <%= @event.client_first_name %>
@@ -67,6 +72,12 @@
         (<%= Date.parse(@date_param).strftime("%A, %m/%d/%Y") %>)
       <% end %>
      </h2>
+     <% @restrictions.each do |restriction| %>
+        <% if restriction.is_there_restriction?(group_time)%>
+          <p style="color:red;"><%= restriction.band.name %> - <%= restriction.notes %></p></br>
+
+        <% end %>
+      <% end %>
 
      <table style="border:none">
           <tr>
@@ -76,11 +87,6 @@
                <th>Venue</th>
                <th>Status</th>
           </tr>
-          <% if @event.final_date != nil && @event.final_date != "" %>
-               <% group_time = @event.final_date %>
-          <% else %>
-               <% group_time = Date.parse(@date_param) %>
-          <% end %>
           <% @bands.each do |band| %>
           <% if band.is_free?(group_time, @event) %>
           <tr>

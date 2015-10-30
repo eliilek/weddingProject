@@ -16,6 +16,7 @@ class EventsController < ApplicationController
 		@contact = Contact.new
 		@linked_event = Link.new
 		@links = Link.where("event_id = #{@event.id}")
+		@restrictions = Restriction.all
 		if params[:event]
 			@date_param = params[:event][:final_date]
 		elsif params[:planning]

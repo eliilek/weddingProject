@@ -26,5 +26,9 @@ class Band < ActiveRecord::Base
 		total_hold = self.bookings.select {|booking| booking.kind == "HOLD"}
 		total_hold.select {|booking| booking.date == check_date}
 	end
+
+	def what_am_i
+		return self
+	end
 	
 end

@@ -10,6 +10,9 @@
 		<h1>Events Calendar </h1>
 	</br>
 	<% end %>
+		<div class="button-holder">
+  			<%= link_to 'Create Restriction', new_restriction_path, :class=> "add button-inner"%>
+		</div></br>
 	
 		<%= form_tag(bands_path, :method => "get") do %>
 
@@ -30,6 +33,7 @@
 			<% elsif @bands_param.to_i == 5 %>
 				<th>Band Leader</th>
 			<% end %>
+			<th>Restrictions</th>
 		</tr>
 		</thead>
 		<% @saturdays.each do |saturday_date| %>
@@ -42,11 +46,17 @@
 			<% @saturdays.sort! %>
 	  <% @saturdays.each do |saturday_date| %>
 			<% saturday_events = [] %>
+			<% saturday_restrictions = [] %>
 			<% @events.each do |event|%>
 				<% if event.show_on(saturday_date) && event.status != "RELEASED" and event.status != "RELEASED-BAB" and event.status != "RELEASED-BADJ" %>
 					<% saturday_events << event %>
 					<% end %>
 				<% end %>
+			<% @restrictions.each do |restriction| %>
+				<% if restriction.is_there_restriction?(saturday_date) && (!@bands_param || (@bands_param.to_i == 5 && (restriction.band_id == 5 || restriction.band_id == 6)) || (@bands_param.to_i == restriction.band_id)) %>
+					<% saturday_restrictions << restriction %>
+				<% end %>
+			<% end %>
 			<% if saturday_events.length == 0 %>
 				<tr>
 					<td> <pre><%= saturday_date.strftime("%m/%d/%Y %n%A") %></pre></td>
@@ -57,6 +67,15 @@
 					<% elsif @bands_param.to_i == 5 %>
 						<td></td>
 					<% end %>
+					<% if saturday_restrictions.length == 0 %>
+						<td></td>
+					<% else %>
+						<td>
+						<% saturday_restrictions.each do |restriction| %>
+							<%= restriction.band.name %> - <%= restriction.notes %></br>
+						<% end %>
+						</td>
+					<% end %>
 				</tr>
 				<% else %>
 				<% x = false %>
@@ -64,7 +83,11 @@
 				<% saturday_events.each do |event| %>
 					<% if event.band == nil or event.band == "" %>
 						<% unless @bands_param %>
-							<tr>
+							<% style_str = "" %>
+								<% if event.status == "SALES MEETING SCHEDULED" %>
+									<% style_str += "font-weight:bold" %>
+								<% end %>
+									<tr style=<%=style_str%>>
 								<% if already_shown == true %>
 									<td></td>
 								<% else %>
@@ -84,6 +107,15 @@
 								<% if !@bands_param %>
 									<td> No Booking </td>
 								<% end %>
+								<% if saturday_restrictions.length == 0 %>
+									<td></td>
+								<% else %>
+								<td>
+								<% saturday_restrictions.each do |restriction| %>
+									<%= restriction.band.name %> - <%= restriction.notes %></br>
+								<% end %>
+								</td>
+								<% end %>
 							</tr>
 						<% end %>
 					<% else %>
@@ -94,11 +126,14 @@
 
 							<% end %>
 							<% if !@bands_param || (@bands_param.to_i == 5 && (booking.band_id == 5 || booking.band_id == 6) && booking.kind != "BOOKED") || (booking.band.id == @bands_param.to_i && booking.kind != "BOOKED") %>
+								<% style_str = "" %>
 								<% if booking.kind == "BOOKED" %>
-									<tr style="background:green;">
-								<% else %>
-									<tr>
+									<% style_str += "background:green;" %>
 								<% end %>
+								<% if event.status == "SALES MEETING SCHEDULED" %>
+									<% style_str += "font-weight:bold" %>
+								<% end %>
+									<tr style=<%=style_str%>>
 								<% if already_shown == true %>
 									<td></td>
 								<% else %>
@@ -122,6 +157,15 @@
 								<% elsif @bands_param.to_i == 5 %>
 									<td><%=booking.band.band_leader%></td>
 								<% end %>
+								<% if saturday_restrictions.length == 0 %>
+									<td></td>
+								<% else %>
+									<td>
+									<% saturday_restrictions.each do |restriction| %>
+									<%= restriction.band.name %> - <%= restriction.notes %></br>
+									<% end %>
+									</td>
+									<% end %>
 								</tr>
 								<% end %>
 							<% end %>
