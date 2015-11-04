@@ -85,7 +85,10 @@
 						<% unless @bands_param %>
 							<% style_str = "" %>
 								<% if event.status == "SALES MEETING SCHEDULED" %>
-									<% style_str += "font-weight:bold" %>
+									<% style_str += "font-weight:bold;" %>
+								<% end %>
+								<% if event.bookings.length > 1 %>
+									<% style_str += "font-style: italic;" %>
 								<% end %>
 									<tr style=<%=style_str%>>
 								<% if already_shown == true %>
@@ -136,7 +139,10 @@
 									<% style_str += "background:green;" %>
 								<% end %>
 								<% if event.status == "SALES MEETING SCHEDULED" %>
-									<% style_str += "font-weight:bold" %>
+									<% style_str += "font-weight:bold;" %>
+								<% end %>
+								<% if event.bookings.length > 1 %>
+									<% style_str += "font-style:italic;" %>
 								<% end %>
 									<tr style=<%=style_str%>>
 								<% if already_shown == true %>
