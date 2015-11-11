@@ -59,7 +59,7 @@
   <%if @event.sales_meeting_time == "" or @event.sales_meeting_time == nil%>
 </br>
 <% else %>
-<%= @event.sales_meeting_time %>
+<%= @event.sales_meeting_time.strftime("%A, %m/%d/%Y") %>
 <% end %>
 </li>
 
