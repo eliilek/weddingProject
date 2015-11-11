@@ -17,10 +17,24 @@ class ContactsController < ApplicationController
 		end
 	end
 
+	def edit
+		@contact = Contact.find(params[:id])
+	end
+
+	def update
+		@contact = Contact.find(params[:id])
+		@event = @contact.event
+    	if @contact.update_attributes(contact_params)
+     		redirect_to event_path(@event)
+     	end
+    end
+
 	def destroy
 		Contact.find(params[:id]).destroy
 		redirect_to :back
 	end
+
+
 
 	private
 

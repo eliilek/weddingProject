@@ -549,6 +549,9 @@
       <p><strong>Date:</strong> <%= contact.date.strftime("%m/%d/%Y") %></p>
       <p><strong>Notes:</strong></p>
       <p><%= contact.notes %></p>
+      <%= form_for [@event, contact], html: {method: "put"} do |f| %>
+        <p><strong><%= f.label "Show to Bandleader" %> <%= f.check_box :show_to %> </strong><%= f.submit "Update"%></p> 
+      <% end %>
       <% counter -= 1 %>
       <% end %>
       <% end %>
@@ -557,7 +560,7 @@
       <p><strong><%= f.label :date %>:</strong><%= f.date_field :date, :value=>Date.today %></p>
       <p><strong><%= f.label :notes %>:</strong></p>
       <p> <%= f.text_area :notes, :cols => 40, :rows => 15 %></p>
-      <p><strong><%= f.label "Show to Band Leader" %></strong> <%= f.check_box :show_to %> </p>
+      <p><strong><%= f.label "Show to Bandleader" %></strong> <%= f.check_box :show_to %> </p>
       <div class="button-holder">
            <p><%= f.submit "Create", :class => "add button" %></p>
       </div>
