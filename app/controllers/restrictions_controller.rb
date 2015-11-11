@@ -7,7 +7,7 @@ class RestrictionsController < ApplicationController
 	def create
 		@restriction = Restriction.new(restriction_params)
 		if @restriction.save 
-			redirect_to root_path
+			redirect_to bands_path
 		else
 			@errors = "Please include a date"
 			redirect_to bands_path 
