@@ -7,9 +7,10 @@
 <p><strong><%= f.label :start_date %>:</strong> <%= f.date_field :start_date %></p></br>
 
 <p><strong><%= f.label :end_date %>:</strong> <%= f.date_field :end_date %></p></br>
+<% band = Band.all%>
 
 
-<p><strong><%= f.label :band %>:</strong><%= f.select(:band_id, options_from_collection_for_select(Band.all, "id", "name")) %></p>
+<p><strong><%= f.label :band %>:</strong><%= f.select(:band_id, options_from_collection_for_select(Band.all, "id", "name"), :include_blank => true) %></p>
 
 <div class="button-holder">
 <p><%= f.submit "Create", :class => "button", :value => "Submit" %></p>
