@@ -14,6 +14,11 @@ class RestrictionsController < ApplicationController
 		end
 	end
 
+	def destroy
+		Restriction.find(params[:id]).destroy
+		redirect_to bands_path
+	end
+
 
 	private
 
