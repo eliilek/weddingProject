@@ -10,7 +10,7 @@ class RestrictionsController < ApplicationController
 			redirect_to root_path
 		else
 			@errors = "Please include a date"
-			redirect_to root_path 
+			redirect_to bands_path 
 		end
 	end
 
