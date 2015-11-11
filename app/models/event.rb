@@ -54,16 +54,20 @@ class Event < ActiveRecord::Base
     	end
     end
 
-    def show_on(time)
+    def show_on(time, band=0)
     	if self.final_date && self.final_date == time
     		return true
     	end
     	self.bookings.each do |booking|
     		if booking.date == time
-    			return true
+				if band == 0
+					return true
+				elsif booking.band_id == band
+					return true
+				end
     		end
     	end
-    	false
+    	return false
     end
 
 end
