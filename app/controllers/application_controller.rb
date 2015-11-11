@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     		d += 1
     	end
     	arr = []
-    	while arr.length < 54
+    	while d.year < Date.today.year + 2
     		arr << d
     		d += 7
     	end
