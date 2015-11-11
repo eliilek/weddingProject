@@ -22,6 +22,9 @@
           <li><strong>Venue:</strong></li>
           <li><strong>Referred By:</strong></li>
           <li><strong>Number of Guests:</strong></li>
+          <% if @event.sales_meeting_time != nil && @event.sales_meeting_time != ""%>
+            <li><strong>Meeting Date:</strong></li>
+          <% end %>
      </ul>
      <ul class="second-ul">
         <li>
@@ -51,7 +54,17 @@
 <% else %>
 <%= @event.guests %>
 <% end %>
-</li>       
+</li>
+<li>
+  <%if @event.sales_meeting_time == "" or @event.sales_meeting_time == nil%>
+</br>
+<% else %>
+<%= @event.sales_meeting_time %>
+<% end %>
+</li>
+
+</br>
+
 </ul>
 <div class="button-holder">
   <%= link_to 'Create Notification', new_event_notification_path(@event), :class=> "add button-inner"%>
