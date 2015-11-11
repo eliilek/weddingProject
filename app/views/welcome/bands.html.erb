@@ -195,8 +195,11 @@
 							<td></td>
 							<% if !@bands_param %>
 								<td></td>
+								<% elsif @bands_param.to_i == 5  %>
+									<td></td>
 							<% end %>
 							<td></td>
+
 						</tr>
 					<% end %>
 			<% end %>
