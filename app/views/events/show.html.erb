@@ -87,7 +87,7 @@
      </h2>
      <% @restrictions.each do |restriction| %>
         <% if restriction.is_there_restriction?(group_time)%>
-          <p style="color:red;"><%= Band.find(restriction.band_id).name if restriction.band_id %> - <%= restriction.notes %></p></br>
+          <p style="color:red;"><%= Band.find(restriction.band_id).name + "-" if restriction.band_id %> <%= restriction.notes %></p></br>
 
         <% end %>
       <% end %>
