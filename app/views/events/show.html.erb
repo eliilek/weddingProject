@@ -112,13 +112,20 @@
           <% if band.holds(group_time).length > 0 %>
           <% band.holds(group_time).each do |hold| %>
             <% if hold.event_id != @event.id %>
-          <tr>
-               <td></td>
-               <td><%= link_to hold.event.job_identification_number, event_path(hold.event_id) %></td>
-               <td><%= hold.event.client_first_name %> <%= hold.event.client_last_name %></td>
-               <td><%= hold.event.venue %></td>
-               <td><%= hold.event.status %></td>
-          </tr>
+            <% style_str = "" %>
+              <% if hold.event.status == "SALES MEETING SCHEDULED" %>
+                <% style_str += "font-weight:bold;" %>
+              <% end %>
+              <% if hold.event.bookings.length > 1 %>
+                <% style_str += "font-style:italic;" %>
+              <% end %>
+                <tr style=<%=style_str%>>
+                  <td></td>
+                  <td><%= link_to hold.event.job_identification_number, event_path(hold.event_id) %></td>
+                  <td><%= hold.event.client_first_name %> <%= hold.event.client_last_name %></td>
+                  <td><%= hold.event.venue %></td>
+                  <td><%= hold.event.status %></td>
+                </tr>
           <% end %>
           <% end %>
           <% end %>
@@ -550,7 +557,7 @@
       <p><strong>Notes:</strong></p>
       <p><%= contact.notes %></p>
       <%= form_for [@event, contact], html: {method: "put"} do |f| %>
-        <p><strong><%= f.label "Show to Bandleader" %> <%= f.check_box :show_to %> </strong><%= f.submit "Update"%></p> 
+        <p><strong><%= f.label "Show to Bandleader" %> <%= f.check_box :show_to %> </strong><%= f.submit "Update"%></p>
       <% end %>
       <% counter -= 1 %>
       <% end %>
