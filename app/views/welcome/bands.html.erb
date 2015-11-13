@@ -13,14 +13,14 @@
 		<div class="button-holder">
   			<%= link_to 'Create Restriction', new_restriction_path, :class=> "add button-inner"%>
 		</div></br>
-	
+
 		<%= form_tag(bands_path, :method => "get") do %>
 
 			<%= select_tag "band_id", options_from_collection_for_select(Searchable.all, "id", "name") %>
 		<%= submit_tag 'Search' %>
 		<% end %>
 	</br>
-	
+
 
 	<table class="t02 sortable" id="mytable" style="width:75%" >
 		<thead>
@@ -110,11 +110,11 @@
 
 								</td>
 								<td>
-									<%= event.client_first_name %> <%= event.client_last_name %>, 
+									<%= event.client_first_name %> <%= event.client_last_name %>,
 									<% if event.venue == nil or event.venue == ""%>
-									No Venue Scheduled, 
-									<% else %> 
-									<%= event.venue %>, 
+									No Venue Scheduled,
+									<% else %>
+									<%= event.venue %>,
 									<% end %>
 									<%= link_to "View", event_path(event)%>
 								</td>
@@ -135,7 +135,7 @@
 					<% else %>
 						<% event.bookings.each do |booking| %>
 
-							<% if @bands_param && (((@bands_param.to_i == 5 && (booking.band_id == 5 || booking.band_id == 6 )) || booking.band_id == @bands_param.to_i) && booking.kind == "BOOKED")%>
+							<% if @bands_param && (((@bands_param.to_i == 5 && (booking.band_id == 5 || booking.band_id == 6 )) || booking.band_id == @bands_param.to_i))%>
 								<% x = true %>
 
 							<% end %>
@@ -159,11 +159,11 @@
 								<% end %>
 								<td><%= event.status%> </td>
 								<td>
-								<%= event.client_first_name %> <%= event.client_last_name %>, 
+								<%= event.client_first_name %> <%= event.client_last_name %>,
 								<% if event.venue == nil or event.venue == ""%>
-								No Venue Scheduled, 
-								<% else %> 
-								<%= event.venue %>, 
+								No Venue Scheduled,
+								<% else %>
+								<%= event.venue %>,
 								<% end %>
 								<%= link_to "View", event_path(event) %>
 								</td>
@@ -206,4 +206,3 @@
 		<% end %>
 	</table>
 </div>
-
