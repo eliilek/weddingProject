@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
 	validates :client_first_name, presence: true
 	validates :client_last_name, presence: true
-	validates :job_identification_number, uniqueness: true, on: :create 
+	validates :job_identification_number, uniqueness: true, on: :create
 	has_many :contacts
 	has_many :documents
 	has_many :notifications
@@ -18,14 +18,14 @@ class Event < ActiveRecord::Base
 		numbers_to_string = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 		if (search_split & numbers_to_string).empty? == false
 			search = search.to_i
-			return where("job_identification_number = #{search}")			
+			return where("job_identification_number = #{search}")
 		else
 			return where(['client_first_name LIKE ? OR client_last_name LIKE ? OR status LIKE ?', "%#{search.capitalize}%", "%#{search.capitalize}%","%#{search.upcase}%"])
 		end
 	end
 
 	def bookings_only
-		self.bookings.select {|booking| booking.kind == "BOOKED"}	
+		self.bookings.select {|booking| booking.kind == "BOOKED"}
 	end
 
 	def band
@@ -43,7 +43,7 @@ class Event < ActiveRecord::Base
 		self.sales_meeting_box = true
 		end
 	end
-	
+
 	def deal_with_blank_client
     	if self.client_first_name == "" and self.client_last_name == ""
     		name_array = primary_contact.split(" ")
@@ -62,7 +62,7 @@ class Event < ActiveRecord::Base
     		if booking.date == time
 				if band == 0
 					return true
-				elsif booking.band_id == band
+				elsif booking.band_id == band || (booking.band_id == 6 and band == 5)
 					return true
 				end
     		end
@@ -71,4 +71,3 @@ class Event < ActiveRecord::Base
     end
 
 end
-
