@@ -16,6 +16,8 @@
 		<th>Job Number</th>
 		<th>Contract Signer</th>		
 		<th>Status</th>
+		<th>Final Date</th>
+		<th>Venue</th>
 		<th>Link</th>
 	</tr>
 	</thead>
@@ -24,7 +26,13 @@
 		<td> <%= result.job_identification_number %></td>
 		<td> <%= result.client_first_name%> <%= result.client_last_name %></td>
 		<td> <%= result.status %></td>
-		<td> <%= link_to "View", event_path(result.id) %>
+		<% if result.final_date != "" && result.final_date != nil %>
+			<td> <pre><%= result.final_date.strftime("%m/%d/%Y %n%A") %></pre></td>
+		<% else %>
+			<td> <%= result.final_date %></td>
+		<% end %>
+		<td> <%= result.venue %></td>
+		<td> <%= link_to "View", event_path(result.id) %></td>
 	</tr>
 	  <% end %>
 	</table>
