@@ -458,14 +458,14 @@
      <%if @event.fourth_contact_title == "" or @event.fourth_contact_title == nil%>
 </br>
 <% else %>
-<%= mail_to(@event.fourth_contact_title) %>
+<%= @event.fourth_contact_title %>
 <% end %>
 </li>
 <li>
      <%if @event.fourth_contact_email == "" or @event.fourth_contact_email == nil%>
 </br>
 <% else %>
-<%= @event.fourth_contact_email %>
+<%= mail_to(@event.fourth_contact_email) %>
 <% end %>
 </li>
 <li>
