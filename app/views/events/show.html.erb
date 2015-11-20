@@ -295,7 +295,12 @@
   <%= @event.event_type %>
   <% end %>
 </li>
-<li><%= @event.status %></li>
+<li><%= @event.status %>
+  <% if @event.status == "SALES MEETING SCHEDULED" %>
+    </br>
+    <%= @event.sales_meeting_time.strftime("%A, %m/%d/%Y") %>
+  <% end %>
+</li>
 </ul>
 <div class="button-holder">
   <%= link_to 'Edit Details', edit_event_path(@event), :class=> "edit button-inner"%>
