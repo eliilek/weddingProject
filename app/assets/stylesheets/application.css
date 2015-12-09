@@ -508,3 +508,42 @@ pre {
     display:block;
 
 }
+
+@media print {
+    .left, .button-holder, .object2, .contact, .linked, .search {
+        display:none;
+    }
+    body {
+        overflow: visible;
+    }
+    .main {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: visible;
+    }
+    .left-inner {
+        width: 50%;
+    }
+    .right-inner {
+        width: 50%;
+    }
+    .content-container {
+        width: 100%;
+        padding: 0;
+        margin:0;
+        overflow: visible;
+    }
+    .object3 {
+        width: 100%;
+    }
+    .padding {
+        padding: 0;
+    }
+    p {
+    font-size: 14px;
+    } 
+    li {
+    font-size: 14px;
+    }
+}

@@ -71,10 +71,12 @@
 </div>
 </div>
 </br>
-<%= form_tag(event_path, :method => "get") do %>
-<%= date_field "event", "final_date", value: @date_param %>
-<%= submit_tag 'Search' %>
-<% end %>
+<div class="search">
+  <%= form_tag(event_path, :method => "get") do %>
+    <%= date_field "event", "final_date", value: @date_param %>
+    <%= submit_tag 'Search' %>
+  <% end %>
+</div>
 <div class="object2">
     <% if @event.bookings_only.length == 0 %>
      <% if (@date_param != nil && @date_param != "") or (@event.final_date != nil && @event.final_date != "") %>
@@ -306,7 +308,7 @@
   <%= link_to 'Edit Details', edit_event_path(@event), :class=> "edit button-inner"%>
 </div>
 </div>
-<div class="object4">
+<div class="object4" style="page-break-after:always;">
     <h2>Contacts</h2>
     <ul>
 
@@ -568,16 +570,19 @@
       <% end %>
       <% end %>
       <br>
-      <%= form_for [@event, @contact] do |f| %>
-      <p><strong><%= f.label :date %>:</strong><%= f.date_field :date, :value=>Date.today %></p>
-      <p><strong><%= f.label :notes %>:</strong></p>
-      <p> <%= f.text_area :notes, :cols => 40, :rows => 15 %></p>
-      <p><strong><%= f.label "Show to Bandleader" %></strong> <%= f.check_box :show_to %> </p>
-      <div class="button-holder">
-           <p><%= f.submit "Create", :class => "add button" %></p>
+      <div class="contact">
+        <%= form_for [@event, @contact] do |f| %>
+        <p><strong><%= f.label :date %>:</strong><%= f.date_field :date, :value=>Date.today %></p>
+        <p><strong><%= f.label :notes %>:</strong></p>
+        <p> <%= f.text_area :notes, :cols => 40, :rows => 15 %></p>
+        <p><strong><%= f.label "Show to Bandleader" %></strong> <%= f.check_box :show_to %> </p>
+        <div class="button-holder">
+             <p><%= f.submit "Create", :class => "add button" %></p>
+        </div>
+        <% end %>
       </div>
-      <% end %>
  </div>
+ <div class='linked'>
   <h2>Linked Events</h2>
      <% @links.each do |link| %>
      <% linked_event = Event.find_by(job_identification_number: link.linked_event_job_number) %>
@@ -592,5 +597,6 @@
           </div>
           <% end %>
      </div>
+   </div>
 </div>
 </div>
