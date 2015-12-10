@@ -541,21 +541,21 @@ pre {
         padding: 0;
     }
     p {
-    font-size: 14px;
+    font-size: 12px;
     } 
     li {
-    font-size: 14px;
+    font-size: 12px;
     }
     h2 {
-        font-size: 15px;
+        font-size: 13px;
         padding: 5px;
         margin:5px;
     }
     th {
-        font-size: 14px;
+        font-size: 12px;
     }
     h1 {
-        font-size: 16px;
+        font-size: 14px;
     }
     a {
         color: black;
