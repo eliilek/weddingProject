@@ -18,7 +18,7 @@
 				<td> <%= event.job_identification_number %></td>
 				<td> <%= event.client_first_name%> <%= event.client_last_name %></td>
 				<td> <%= event.status %></td>
-				<td> <%= event.sales_meeting_time.strftime("%A, %m/%d/%Y") %></td>
+				<td> <%= event.sales_meeting_time.strftime("%A, %m/%d/%Y") if event.sales_meeting_time %></td>
 				<td> <%= event.sold_by %> </td>
 				<% if event.final_date != "" && event.final_date != nil %>
 					<td> <%= event.final_date.strftime("%A, %m/%d/%Y") %></td>
