@@ -510,7 +510,7 @@ pre {
 }
 
 @media print {
-    .left, .button-holder, .object2, .contact, .linked, .search {
+    .left, .button-holder, .contact, .linked, .search, .details {
         display:none;
     }
     body {
@@ -545,5 +545,19 @@ pre {
     } 
     li {
     font-size: 14px;
+    }
+    h2 {
+        font-size: 15px;
+        padding: 5px;
+        margin:5px;
+    }
+    th {
+        font-size: 14px;
+    }
+    h1 {
+        font-size: 16px;
+    }
+    a {
+        color: black;
     }
 }
