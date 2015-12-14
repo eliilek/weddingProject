@@ -49,7 +49,7 @@
 			<% saturday_restrictions = [] %>
 			<% @events.each do |event|%>
 				<% if @bands_param %>
-					<% temp_event_show = event.show_on(saturday_date, @bands_param) %>
+					<% temp_event_show = event.show_on(saturday_date, @bands_param.to_i) %>
 				<% else %>
 					<% temp_event_show = event.show_on(saturday_date) %>
 				<% end %>
