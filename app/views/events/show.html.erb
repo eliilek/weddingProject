@@ -317,12 +317,21 @@
         <li class="truncate"><strong>Primary Contact Email:</strong> </li>
         <li class="truncate"><strong>Primary Contact Phone:</strong></li>
         <li class="truncate"><strong>Company:</strong></li>
+        <li class="print"><strong>Contact 1:</strong></li>
+        <li class="print"><strong>Contact 1 Title:</strong></li>
+        <li class="print"><strong>Contact 1 Email:</strong> </li>
+        <li class="print"><strong>Contact 1 Phone:</strong></li>
+        <li class="print"><strong>Company:</strong></li>
         <br>
         <% if @event.secondary_contact != "" && @event.secondary_contact != nil %>
           <li class="truncate"><strong>Secondary Contact:</strong></li>
           <li class="truncate"><strong>Secondary Contact Title:</strong></li>
           <li class="truncate"><strong>Secondary Contact Email :</strong> </li>
-          <li class="truncate"><strong>Secondary Contact Phone:</strong></li><br>
+          <li class="truncate"><strong>Secondary Contact Phone:</strong></li>
+          <li class="print"><strong>Contact 2:</strong></li>
+          <li class="print"><strong>Contact 2 Title:</strong></li>
+          <li class="print"><strong>Contact 2 Email :</strong> </li>
+          <li class="print"><strong>Contact 2 Phone:</strong></li><br>
         <% end %>
 
         <% if @event.third_contact != "" && @event.third_contact != nil %>
@@ -331,6 +340,10 @@
         <li class="truncate"><strong>Third Contact Title:</strong></li>
         <li class="truncate"><strong>Third Contact Email:</strong> </li>
         <li class="truncate"><strong>Third Contact Phone:</strong></li>
+        <li class="print"><strong>Contact 3:</strong></li>
+        <li class="print"><strong>Contact 3 Title:</strong></li>
+        <li class="print"><strong>Contact 3 Email:</strong> </li>
+        <li class="print"><strong>Contact 3 Phone:</strong></li>
         <br>
 
         <% end %>
@@ -340,6 +353,10 @@
         <li class="truncate"><strong>Fourth Contact Title:</strong></li>
         <li class="truncate"><strong>Fourth Contact Email:</strong> </li>
         <li class="truncate"><strong>Fourth Contact Phone:</strong></li>
+        <li class="print"><strong>Contact 4:</strong></li>
+        <li class="print"><strong>Contact 4 Title:</strong></li>
+        <li class="print"><strong>Contact 4 Email:</strong> </li>
+        <li class="print"><strong>Contact 4 Phone:</strong></li>
         <br>
 
         <% end %>
