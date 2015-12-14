@@ -1,8 +1,15 @@
 class WelcomeController < ApplicationController
   def index
   	# @custom_notifications = Notification.all
- 	@notifications_check = Event.where(["updated_at <= ?", 3.days.ago])
- 	@notifications = Notification.all
+  @no_date_events = Event.where(["final_date IS NULL AND updated_at <= ?", 3.days.ago])
+  @ordered_events = Event.where(["final_date IS NOT NULL AND updated_at <= ?", 3.days.ago]).order('final_date ASC')
+ 	@notifications_check = @no_date_events + @ordered_events
+
+ 	notifications = Notification.all
+  non_nil = notifications.reject {|notification| notification.find_event.final_date == nil}
+  are_nil = notifications.reject {|notification| notification.find_event.final_date != nil}
+  sort_non_nil = non_nil.sort_by { |notification| notification.find_event.final_date }
+  @notifications = are_nil + sort_non_nil
   end
 
   def meetings
