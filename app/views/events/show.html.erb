@@ -300,7 +300,7 @@
 <li><%= @event.status %>
   <% if @event.status == "SALES MEETING SCHEDULED" %>
     </br>
-    <%= @event.sales_meeting_time.strftime("%A, %m/%d/%Y") %>
+    <%= @event.sales_meeting_time.strftime("%A, %m/%d/%Y") if @event.sales_meeting_time %>
   <% end %>
 </li>
 </ul>
