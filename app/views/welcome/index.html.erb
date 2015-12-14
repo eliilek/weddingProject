@@ -1,36 +1,6 @@
 <div class='content'>
 		<h1>Administration Panel</h1>
-		<h2>Automatic Notifications</h2>
-		<% if @notifications_check.length == 0 %>
-			<p>There are no automatic notifications<p>
-		<% else %>
-			<table class="t02 sortable">
-				<tr>
-					<th>Job Number</th>
-					<th>Client Name</th>		
-					<th>Status</th>
-					<th>Final Date</th>
-					<th>Venue</th>
-					<th>Link</th>
-				</tr>
-				<% @notifications_check.each do |event| %>
-					<% if event.updated_at <= 3.days.ago and event.notifications.length == 0 and event.status != "RELEASED" and event.status != "RELEASED-BAB" and event.status != "RELEASED-BADJ" and event.status != "DEFINITE" and event.status != "KEY CONTACT"  %>
-						<tr>
-							<td><%= event.job_identification_number %></td>
-							<td><%= event.client_first_name %> <%= event.client_last_name %></td>
-							<td><%= event.status %></td>
-							<td><pre><%= event.final_date.strftime("%m/%d/%Y %n%A") unless event.final_date == nil || event.final_date == ""%></pre></td>
-							<td><%= event.venue %>	
-							<!-- <td><%= distance_of_time_in_words(event.updated_at, Time.now) %></td> -->
-							<td><%= link_to 'View', event_path(event)%>
-							</td>
-						</tr>
-					<% end %>
-				<% end %>
-			</table>
-		<% end %>
-	</div>
-	<div class="content">
+		<div class="content">
 	<h2>Custom Notifications</h2>
 	<% if @notifications.length == 0 %>
 		<p>There are no custom notifications<p>
@@ -68,6 +38,37 @@
 		<% end %>
 	</table>
 	<% end %>
+	</div>
+	<div class="content">
+		<h2>Automatic Notifications</h2>
+		<% if @notifications_check.length == 0 %>
+			<p>There are no automatic notifications<p>
+		<% else %>
+			<table class="t02 sortable">
+				<tr>
+					<th>Job Number</th>
+					<th>Client Name</th>		
+					<th>Status</th>
+					<th>Final Date</th>
+					<th>Venue</th>
+					<th>Link</th>
+				</tr>
+				<% @notifications_check.each do |event| %>
+					<% if event.updated_at <= 3.days.ago and event.notifications.length == 0 and event.status != "RELEASED" and event.status != "RELEASED-BAB" and event.status != "RELEASED-BADJ" and event.status != "DEFINITE" and event.status != "KEY CONTACT"  %>
+						<tr>
+							<td><%= event.job_identification_number %></td>
+							<td><%= event.client_first_name %> <%= event.client_last_name %></td>
+							<td><%= event.status %></td>
+							<td><pre><%= event.final_date.strftime("%m/%d/%Y %n%A") unless event.final_date == nil || event.final_date == ""%></pre></td>
+							<td><%= event.venue %>	
+							<!-- <td><%= distance_of_time_in_words(event.updated_at, Time.now) %></td> -->
+							<td><%= link_to 'View', event_path(event)%>
+							</td>
+						</tr>
+					<% end %>
+				<% end %>
+			</table>
+		<% end %>
 	</div>
 </div>
 
