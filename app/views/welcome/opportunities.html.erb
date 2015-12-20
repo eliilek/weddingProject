@@ -1,1 +1,77 @@
+<div class="content">
+<h1>Events</h1>
 
+<h2>Search</h2>
+
+<%= form_tag(opportunities_path, :method => "get", id: "search-form") do %>
+	<%= text_field_tag :search, params[:search], placeholder: "Search Events" %>
+	<%= submit_tag "Search" %>
+<% end %>
+
+<% if @opp.present?%>
+	<br>
+  <table class="t02 sortable" id="mytable">
+	<thead>
+	<tr>
+		<th>Job Number</th>
+		<th>Contract Signer</th>		
+		<th>Status</th>
+		<th>Final Date</th>
+		<th>Venue</th>
+		<th>Link</th>
+	</tr>
+	</thead>
+  <% @opp.each do |result| %>
+	<tr>
+		<td> <%= result.job_identification_number %></td>
+		<td> <%= result.client_first_name%> <%= result.client_last_name %></td>
+		<td> <%= result.status %></td>
+		<% if result.final_date != "" && result.final_date != nil %>
+			<td> <pre><%= result.final_date.strftime("%m/%d/%Y %n%A") %></pre></td>
+		<% else %>
+			<td> <%= result.final_date %></td>
+		<% end %>
+		<td> <%= result.venue %></td>
+		<td> <%= link_to "View", event_path(result.id) %></td>
+	</tr>
+	  <% end %>
+	</table>
+<% else %>
+	<br>
+  <p>There are no posts containing the term(s) <%= params[:search] %>.</p>
+<% end %>
+
+<br>
+
+<h2> All Active Events</h2>
+</br>
+<table class="t02 sortable" id="mytable">
+	<thead>
+	<tr>
+		<th>Job Number</th>
+		<th>Contract Signer</th>		
+		<th>Status</th>
+		<th>Final Date</th>
+		<th>Venue</th>
+		<th>Link</th>
+	</tr>
+	</thead>
+	<tbody>
+	<% @events.each do |event| %>
+			<tr>
+				<td> <%= event.job_identification_number %></td>
+				<td> <%= event.client_first_name%> <%= event.client_last_name %></td>
+				<td> <%= event.status %></td>
+				<% if event.final_date != "" && event.final_date != nil %>
+					<td> <pre><%= event.final_date.strftime("%m/%d/%Y %n%A") %></pre></td>
+				<% else %>
+					<td> <%= event.final_date %></td>
+				<% end %>
+				<td> <%= event.venue %></td>
+				<td> <%= link_to "View", event_path(event.id) %></td>
+			</tr>
+	<% end %>
+</tbody>
+</table>
+<br>
+</div>

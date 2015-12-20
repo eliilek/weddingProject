@@ -33,4 +33,11 @@ class WelcomeController < ApplicationController
     end
     @bookings = good_bookings 
   end
+
+  def opportunities
+    @events = Event.where("status = ?", "OPPORTUNITY")
+    if params[:search]
+      @opp = Event.where("status = ?", "OPPORTUNITY").search(params[:search]).order("created_at DESC")
+    end
+  end
 end
