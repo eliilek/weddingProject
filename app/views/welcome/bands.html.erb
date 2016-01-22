@@ -54,7 +54,7 @@
 					<% temp_event_show = event.show_on(saturday_date) %>
 				<% end %>
 
-				<% if temp_event_show && event.status != "RELEASED" and event.status != "RELEASED-BAB" and event.status != "RELEASED-BADJ" %>
+				<% if temp_event_show && event.status != "RELEASED" and event.status != "BAB" and event.status != "BADJ" && event.status != "RELEASED-$$$" and event.status != "BAB-$$$" and event.status != "BADJ-$$$" && event.status != "RELEASED-BAB" and event.status != "RELEASED-BADJ" and event.status != "RELEASED-FULLY RELEASED" %>
 					<% saturday_events << event %>
 					<% end %>
 				<% end %>
