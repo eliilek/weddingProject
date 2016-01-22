@@ -27,7 +27,7 @@ class WelcomeController < ApplicationController
     bookings = Booking.order('date')
     good_bookings = []
     bookings.each do |booking|
-      if booking.event != nil and booking.event != "" and booking.event.status != "RELEASED" and booking.event.status != "BAB" and booking.event.status != "BADJ" and booking.event.status != "RELEASED-$$$" and booking.event.status != "BAB-$$$" and booking.event.status != "BADJ-$$$" and booking.event.status != "RELEASED-FULLY BOOKED" && event.status != "RELEASED-BAB" and event.status != "RELEASED-BADJ" and good_bookings.exclude?(booking.date)
+      if booking.event != nil and booking.event != "" and booking.event.status != "RELEASED" and booking.event.status != "BAB" and booking.event.status != "BADJ" and booking.event.status != "RELEASED-$$$" and booking.event.status != "BAB-$$$" and booking.event.status != "BADJ-$$$" and booking.event.status != "RELEASED-FULLY BOOKED" && bookingevent.status != "RELEASED-BAB" and booking.event.status != "RELEASED-BADJ" and good_bookings.exclude?(booking.date)
         good_bookings << booking.date
       end
     end
