@@ -46,9 +46,13 @@ class Event < ActiveRecord::Base
 
 	def deal_with_blank_client
     	if self.client_first_name == "" and self.client_last_name == ""
-    		name_array = primary_contact.split(" ")
+    		if self.primary_contact == "" or self.primary_contact == nil
+    			self.primary_contact = "Client of " + self.planner_company
+    		end
+	    	name_array = self.primary_contact.split(" ")
     		first_name = name_array[0]
-    		second_name = name_array[-1]
+    		name_array.shift
+    		second_name = name_array.join(" ")
     		self.client_first_name = first_name
     		self.client_last_name = second_name
     	end

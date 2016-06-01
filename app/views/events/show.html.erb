@@ -362,7 +362,8 @@
         <% end %>
         <li><strong>Planner Name:</strong></li>
         <li><strong>Planner Email:</strong> </li>
-        <li><strong>Planner Phone:</strong></li></br>
+        <li><strong>Planner Phone:</strong></li>
+        <li><strong>Planner Company:</strong></li></br>
         <% if @event.address_one != nil && @event.address_one != "" %>
             <li><strong>Contract Signer:</strong></li>
             <li><strong>Address 1:</strong></li>
@@ -520,6 +521,13 @@
 </br>
 <% else %>
 <%= @event.planner_phone %>
+<% end %>
+</li>
+<li>
+    <%if @event.planner_company == "" or @event.planner_company == nil%>
+</br>
+<% else %>
+<%= @event.planner_company %>
 <% end %>
 </li></br>
     <% if @event.address_one != nil && @event.address_one != "" %>
