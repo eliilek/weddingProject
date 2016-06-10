@@ -45,15 +45,21 @@ class Event < ActiveRecord::Base
 	end
 
 	def deal_with_blank_client
-    	if self.primary_contact == "" or self.primary_contact == nil
-    		self.primary_contact = "Client of " + self.planner_company
+		if self.client_first_name == "" or self.client_first_name == nil
+    		if self.primary_contact == "" or self.primary_contact == nil
+    			if self.planner_company == "" or self.planner_company == nil
+    				self.primary_contact = "Client of " + self.planner_name
+    			else
+	    			self.primary_contact = "Client of " + self.planner_company
+	    		end
+    		end
+	    	name_array = self.primary_contact.split(" ")
+    		first_name = name_array[0]
+    		name_array.shift
+    		second_name = name_array.join(" ")
+    		self.client_first_name = first_name
+    		self.client_last_name = second_name
     	end
-	    name_array = self.primary_contact.split(" ")
-    	first_name = name_array[0]
-    	name_array.shift
-    	second_name = name_array.join(" ")
-    	self.client_first_name = first_name
-    	self.client_last_name = second_name
     end
 
     def show_on(time, band=0)
