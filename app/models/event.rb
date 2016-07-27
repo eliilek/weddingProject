@@ -10,8 +10,23 @@ class Event < ActiveRecord::Base
 	before_save :check_sales_meeting_box
 	has_many :links
 	before_validation :deal_with_blank_client
+	before_validation :clean_phone_numbers
 
 
+	def clean_phone_numbers
+		if self.primary_contact_phone != "" and self.primary_contact_phone != nil
+			self.primary_contact_phone = self.primary_contact_phone.scan(/[0-9]/).join
+		end
+		if self.secondary_contact_phone != "" and self.secondary_contact_phone != nil
+			self.secondary_contact_phone = self.secondary_contact_phone.scan(/[0-9]/).join
+		end
+		if self.third_contact_phone != "" and self.third_contact_phone != nil
+			self.third_contact_phone = self.third_contact_phone.scan(/[0-9]/).join
+		end
+		if self.fourth_contact_phone != "" and self.fourth_contact_phone != nil
+			self.fourth_contact_phone = self.fourth_contact_phone.scan(/[0-9]/).join
+		end
+	end
 
 	def self.search(search)
 		search_split = search.split("")
