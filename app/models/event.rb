@@ -26,6 +26,8 @@ class Event < ActiveRecord::Base
 		if self.fourth_contact_phone != "" and self.fourth_contact_phone != nil
 			self.fourth_contact_phone = self.fourth_contact_phone.scan(/[0-9]/).join
 		end
+		if self.planner_phone != "" and self.planner_phone != nil
+			self.planner_phone = self.planner_phone.scan(/[0-9]/).join
 	end
 
 	def self.search(search)
