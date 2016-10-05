@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
 	has_many :notifications
 	has_many :bookings
 	has_many :bands, through: :bookings
+	has_many :discounts
 	before_save :check_sales_meeting_box
 	has_many :links
 	before_validation :deal_with_blank_client
