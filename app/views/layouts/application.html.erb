@@ -16,7 +16,7 @@
 		<%= link_to 'Meetings', meetings_path, :class=> "button" %>
 		<br><br>
 		<%= form_tag(events_path, :method => "get", id: "job_id_search-form") do %>
-		<%= text_field_tag :job_id_search, params[:job_id_search], placeholder: "Goto Job ID" %>
+		<%= text_field_tag :job_id_search, params[:job_id_search], placeholder: "Go To Job ID" %>
 		<%= submit_tag "Find Job", :class=> "button" %>
 		<% end %>
 		<br>
