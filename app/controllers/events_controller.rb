@@ -1,6 +1,12 @@
 class EventsController < ApplicationController
 
 	def index
+		if params[:job_id_search]
+				@event = Event.find_by(job_identification_number: params[:job_id_search])
+				if @event
+					redirect_to event_path(@event)
+				end
+		end
 		@no_date_events = Event.where("final_date IS NULL AND status != ?", "DEFINITE")
 		@ordered_events = Event.where("final_date IS NOT NULL AND status != ?", "DEFINITE").order('final_date ASC')
 		@events = @no_date_events + @ordered_events
@@ -22,7 +28,7 @@ class EventsController < ApplicationController
 			@date_param = params[:event][:final_date]
 		elsif params[:planning]
 			@date_param = params[:planning]
-	
+
 		end
 	end
 
@@ -37,7 +43,7 @@ class EventsController < ApplicationController
 
 	def create
 		@event = Event.new(event_params)
-		if @event.save 
+		if @event.save
 			redirect_to event_path(@event)
 		else
 			redirect_to new_event_path
@@ -63,4 +69,3 @@ class EventsController < ApplicationController
 	end
 
 end
-
