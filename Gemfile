@@ -26,6 +26,7 @@ gem "paperclip", "~> 4.3"
 gem 'faker'
 gem 'rails-simple-search'
 gem 'aws-sdk', '< 2.0'
+gem 'nokogiri', '1.6.8'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt'
