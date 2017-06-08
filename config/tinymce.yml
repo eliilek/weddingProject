@@ -2,7 +2,4 @@ menubar: false
 toolbar: false
 branding: false
 statusbar: false
-height: 50
 resize: false
-max_height: 50
-width: 200

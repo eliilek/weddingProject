@@ -597,7 +597,7 @@
       <%= link_to raw("&#10006"), event_contact_path(@event, contact), data: { confirm: 'Are you sure you want to delete this contact?' }, :method => :delete, :class => 'delete-button' %></p>
       <p><strong>Date:</strong> <%= contact.date.strftime("%m/%d/%Y") %></p>
       <p><strong>Notes:</strong></p>
-      <p><%= contact.notes %></p>
+      <p><%= contact.notes.html_safe %></p>
       <%= form_for [@event, contact], html: {method: "put"} do |f| %>
         <p><strong><%= f.label "Show to Bandleader" %> <%= f.check_box :show_to %> </strong><%= f.submit "Update"%></p>
       <% end %>
@@ -609,13 +609,14 @@
         <%= form_for [@event, @contact] do |f| %>
         <p><strong><%= f.label :date %>:</strong><%= f.date_field :date, :value=>Date.today %></p>
         <p><strong><%= f.label :notes %>:</strong></p>
-        <p> <%= f.text_area :notes, :cols => 40, :rows => 15 %></p>
+        <p> <%= f.text_area :notes, :class => "tinymce", :cols => 40, :rows => 15 %></p>
         <p><strong><%= f.label "Show to Bandleader" %></strong> <%= f.check_box :show_to %> </p>
         <div class="button-holder">
              <p><%= f.submit "Create", :class => "add button" %></p>
         </div>
         <% end %>
       </div>
+      <%= tinymce %>
  </div>
  <div class='linked'>
   <h2>Linked Events</h2>
