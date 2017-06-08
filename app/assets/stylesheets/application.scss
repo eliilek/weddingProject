@@ -55,7 +55,7 @@ p {
   background: #fdfaf6;
   overflow: auto;
 }
-.button {        
+.button {
     display: inline-block;
     white-space: nowrap;
     background-color: #ccc;
@@ -73,7 +73,7 @@ p {
     width: 65%;
 }
 
-.button-inner {        
+.button-inner {
     display: inline-block;
     white-space: nowrap;
     background-color: #ccc;
@@ -89,7 +89,7 @@ p {
     box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
     width: 65%;
 }
-.button-inner {        
+.button-inner {
     display: inline-block;
     white-space: nowrap;
     background-color: #ccc;
@@ -107,9 +107,9 @@ p {
 }
 
 .button-inner:hover {
-    background-color: #ddd;        
+    background-color: #ddd;
     background-image: linear-gradient(top, #fafafa, #ddd);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fafafa', EndColorStr='#dddddd');        
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fafafa', EndColorStr='#dddddd');
 }
 
 .button-inner:active {
@@ -121,12 +121,12 @@ p {
 .button-inner:focus {
     outline: 0;
     background: #fafafa;
-}    
+}
 
 .button-inner:before {
     background: #ccc;
     background: rgba(0,0,0,.1);
-    float: left;        
+    float: left;
     width: 1em;
     text-align: center;
     font-size: 1.5em;
@@ -134,13 +134,13 @@ p {
     padding: 0 .2em;
     box-shadow: 1px 0 0 rgba(0,0,0,.5), 2px 0 0 rgba(255,255,255,.5);
     border-radius: .15em 0 0 .15em;
-    pointer-events: none;        
+    pointer-events: none;
 }
 
 .button:hover {
-    background-color: #ddd;        
+    background-color: #ddd;
     background-image: linear-gradient(top, #fafafa, #ddd);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fafafa', EndColorStr='#dddddd');        
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fafafa', EndColorStr='#dddddd');
 }
 
 .button:active {
@@ -152,12 +152,12 @@ p {
 .button:focus {
     outline: 0;
     background: #fafafa;
-}    
+}
 
 .button:before {
     background: #ccc;
     background: rgba(0,0,0,.1);
-    float: left;        
+    float: left;
     width: 1em;
     text-align: center;
     font-size: 1.5em;
@@ -165,7 +165,7 @@ p {
     padding: 0 .2em;
     box-shadow: 1px 0 0 rgba(0,0,0,.5), 2px 0 0 rgba(255,255,255,.5);
     border-radius: .15em 0 0 .15em;
-    pointer-events: none;        
+    pointer-events: none;
 }
 
 /* Hexadecimal entities for the icons */
@@ -175,23 +175,23 @@ p {
 }
 
 .edit:before {
-    content: "\270E";        
+    content: "\270E";
 }
 
 .delete:before {
-    content: "\2718";        
+    content: "\2718";
 }
 
 .save:before {
-    content: "\2714";        
+    content: "\2714";
 }
 
 .email:before {
-    content: "\2709";        
+    content: "\2709";
 }
 
 .like:before {
-    content: "\2764";        
+    content: "\2764";
 }
 
 .next:before {
@@ -286,7 +286,7 @@ section#loginBox {
 /*FORM*/
 form.minimal label {
     display: block;
-    margin: 6px 0;  
+    margin: 6px 0;
 }
 
 form.minimal input[type="text"],
@@ -305,7 +305,7 @@ form.minimal textarea {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, 'lucida grande', tahoma, verdana, arial, sans-serif;
     font-size: 14px;
     margin: 6px 0 12px 0;
-    padding: 8px;   
+    padding: 8px;
     text-shadow: 0 1px 1px rgba(255, 255, 255, 1);
     width: 90%;
 
@@ -321,7 +321,7 @@ form.minimal input[type="number"]:focus,
 form.minimal input[type="search"]:focus,
 form.minimal input[type="password"]:focus,
 form.minimal textarea:focus,
-form.minimal select:focus { 
+form.minimal select:focus {
     border-color: #4195fc;
     -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #4195fc;
     -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #4195fc;
@@ -335,7 +335,7 @@ form.minimal input[type="number"]:invalid:focus,
 form.minimal input[type="search"]:invalid:focus,
 form.minimal input[type="password"]:invalid:focus,
 form.minimal textarea:invalid:focus,
-form.minimal select:invalid:focus { 
+form.minimal select:invalid:focus {
     border-color: rgb(248,66,66);
     -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px rgb(248,66,66);
     -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px rgb(248,66,66);
@@ -348,6 +348,7 @@ form.minimal select:invalid:focus {
 
 .content {
     padding: 20px;
+    box-sizing: border-box;
 }
 
 .t01 {
@@ -387,7 +388,12 @@ label.event{
   float: left;
   text-align: left;
   margin-right: 0.5em;
-  display: block
+  display: block;
+  font-weight: bold;
+}
+
+.mce-tinymce.mce-container {
+  float: left;
 }
 
 .communications-stuff {
@@ -419,13 +425,13 @@ width: 13em;
     float:right;
     width:50%;
     height:100%;
-    overflow: auto; 
+    overflow: auto;
     height:100%;
 }
 
 .right-inner{
     padding-top: 20px;
-    margin-right: 50%; 
+    margin-right: 50%;
     height:100%;
     overflow: auto;
     min-height:100%;
@@ -453,16 +459,24 @@ ul {
     padding: 1em;
 }
 
-div.form-columns{
-  -moz-column-count: 2;
-  -webkit-column-count: 2;
-  column-count: 2;
-  height: 40em;
+  div.form-columns form {
+      -moz-column-count: 2;
+      -webkit-column-count: 2;
+      column-count: 2;
+      height: 40em;
+
+      p {
+        &:after {
+          content: "";
+          clear: both;
+          display: block;
+        }
+      }
   }
 
   .bands-tr {
     height: 2em;
-    
+
   }
 
   @media all and (max-width: 1025px) and (min-width: 600px) {
@@ -545,7 +559,7 @@ pre {
     }
     p {
     font-size: 12px;
-    } 
+    }
     li {
     font-size: 12px;
     }
