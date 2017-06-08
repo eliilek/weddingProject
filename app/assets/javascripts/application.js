@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require tinymce
 //= require_tree .
 var stIsIE = /*@cc_on!@*/false;
 

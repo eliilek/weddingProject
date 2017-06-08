@@ -102,7 +102,7 @@
 		<%= f.date_field :sales_meeting_time %></p>
 
 	<p><strong><%= f.label :notes, :class=>"event" %></strong>
-		<%= f.text_area :notes, value: @event.notes %></p>
+		<%= f.text_area :notes, :class => "tinymce", value: @event.notes %></p>
 
 	<p><strong><%= f.label :breaks, :class=>"event" %></strong> <%= f.select(:continuous, options_for_select([["CONTINUOUS", "CONTINUOUS"],["HALF-CONTINUOUS", "HALF-CONTINUOUS"], ["NON-CONTINUOUS", "NON-CONTINUOUS"]],:selected => @event.continuous)) %></p>
 
@@ -114,7 +114,8 @@
 		<% end %>
 	</div>
 	<div class="content">
-	<textarea cols="50" rows="5">
+	<textarea class="tinymce" cols="50" rows="5">
 	</textarea>
+	<!--<$= tinymce %>-->
 	</div>
 </div>
