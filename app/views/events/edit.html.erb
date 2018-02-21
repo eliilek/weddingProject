@@ -19,6 +19,8 @@
 
 	<p><%= f.label :primary_contact_phone, :class=>"event" %> <%= f.text_field :primary_contact_phone %></p>
 
+	<p><%= f.label :primary_contact_alternate_phone, :class=>"event" %> <%= f.text_field :primary_contact_alternate_phone %></p>
+
 	<p><%= f.label :primary_contact_email, :class=>"event" %> <%= f.text_field :primary_contact_email %></p>
 
 	<p><%= f.label :company, :class=>"event" %> <%= f.text_field :company %></p><br>
@@ -52,6 +54,12 @@
 
 	<p><%= f.label :fourth_contact_email, :class=>"event" %> <%= f.text_field :fourth_contact_email %></p></br>
 
+	<p><%= f.label :inquiry_date, :class=>"event" %> <%= f.date_field :inquiry_date, :value => @event.inquiry_date %></p>
+
+	<p><%= f.label :referred_by, :class=>"event" %> <%= f.text_field :referred_by %></p>
+
+	<p><%= f.label :number_of_guests, :class=>"event" %> <%= f.text_field :guests %></p><br></br>
+
 	<p><%= f.label :planner_name, :class=>"event" %>
 		<%= f.text_field :planner_name %></p>
 	<p><%= f.label :planner_email, :class=>"event" %>
@@ -59,13 +67,7 @@
 	<p><%= f.label :planner_phone, :class=>"event" %>
 		<%= f.text_field :planner_phone %></p>
 	<p><%= f.label :planner_company, :class=>"event" %>
-		<%= f.text_field :planner_company %></p><br></br>
-
-	<p><%= f.label :inquiry_date, :class=>"event" %> <%= f.date_field :inquiry_date, :value => @event.inquiry_date %></p>
-
-	<p><%= f.label :referred_by, :class=>"event" %> <%= f.text_field :referred_by %></p>
-
-	<p><%= f.label :number_of_guests, :class=>"event" %> <%= f.text_field :guests %></p><br>
+		<%= f.text_field :planner_company %></p><br>
 
 	<p><%= f.label :contract_signer_first_name, :class=>"event" %> <%= f.text_field :client_first_name %></p>
 
@@ -114,7 +116,5 @@
 		<% end %>
 	</div>
 	<div class="content">
-	<textarea class="tinymce" cols="50" rows="5">
-	</textarea>
 	</div>
 </div>

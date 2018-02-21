@@ -326,11 +326,13 @@
         <li class="truncate"><strong>Primary Contact Title:</strong></li>
         <li class="truncate"><strong>Primary Contact Email:</strong> </li>
         <li class="truncate"><strong>Primary Contact Phone:</strong></li>
+        <li class="truncate"><strong>Primary Contact Second Phone:</strong></li>
         <li class="truncate"><strong>Company:</strong></li>
         <li class="print"><strong>Contact 1:</strong></li>
         <li class="print"><strong>Contact 1 Title:</strong></li>
         <li class="print"><strong>Contact 1 Email:</strong> </li>
         <li class="print"><strong>Contact 1 Phone:</strong></li>
+        <li class="print"><strong>Contact 1 2 Phone:</strong></li>
         <li class="print"><strong>Company:</strong></li>
         <br>
         <% if @event.secondary_contact != "" && @event.secondary_contact != nil %>
@@ -411,6 +413,13 @@
             </br>
         <% else %>
             <%= @event.primary_contact_phone %>
+        <% end %>
+    </li>
+    <li>
+        <%if @event.primary_contact_alternate_phone == "" or @event.primary_contact_alternate_phone == nil%>
+            </br>
+        <% else %>
+            <%= @event.primary_contact_alternate_phone %>
         <% end %>
     </li>
     <li>

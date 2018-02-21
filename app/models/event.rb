@@ -74,11 +74,16 @@ class Event < ActiveRecord::Base
 				end
 				if self.company == "" or self.company == nil
 					name_array = self.primary_contact.split(" ")
-		    	first_name = name_array[0]
-		    	name_array.shift
-		    	second_name = name_array.join(" ")
-		    	self.client_first_name = first_name
-		    	self.client_last_name = second_name
+					if name_array.length == 1
+						self.client_first_name = name_array[0]
+						self.client_last_name = "-"
+					else
+		    		first_name = name_array[0]
+		    		name_array.shift
+		    		second_name = name_array.join(" ")
+		    		self.client_first_name = first_name
+		    		self.client_last_name = second_name
+					end
 				else
 					self.client_first_name = self.company + " -"
 					self.client_last_name = self.primary_contact
